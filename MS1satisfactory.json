@@ -1,0 +1,42 @@
+{
+	"characters": [
+		{
+			"name": "Aang",
+			"type": "Avatar",
+			"stats": {
+				"health": 100,
+				"power": 1,
+				"speed": 1,
+				"evasiveness": 1},
+			"description":"hes da   Avatar broo0o",
+			"moves": [
+				{
+					"id": 1,
+					"move name": "Air blast",
+					"description": "Aang shoots a powerful blast of air from his staff",
+					"damage": 15,
+					"pp" : 10
+				}
+			]
+		},
+		{
+			"name": "Zuko",
+			"type": "Fire",
+			"stats": {
+				"health": 69,
+				"power": 1,
+				"speed": 1,
+				"evasiveness": 1},
+			"description":"DISGRACED PRINCE RAWRRR XD",
+			"moves": [
+				{
+					"id": 1, 
+					"move name": "Fire ball",
+					"description": "Aang shoots a powerful blast of air from his staff",
+					"damage": 15,
+					"pp" : 10
+				}
+			]
+		}
+	]
+}
