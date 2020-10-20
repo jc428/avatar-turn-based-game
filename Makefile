@@ -16,3 +16,6 @@ test:
 
 play:
 	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
+
+clean:
+	ocamlbuild -clean
