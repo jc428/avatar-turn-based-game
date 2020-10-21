@@ -27,14 +27,16 @@ type character = {
 type t = {
   characters : character list;
 }
-
+(*)
 let character_of_json j = {
   cname = j |> member "name" |> to_string;
   description = j |> member "description" |> to_string;
-  exits = j |> member "exits" |> to_list |> List.map exit_of_json
+  isplayer = j |> member "isplayer" |> to_bool;
+
 }
 
-let from_json json = 
+let from_json file_name = 
+  json = Yojson.Basic.from_file (file_name ^ ".json")
   {
     characters = json |> member "characters" |> to_list |> List.map character_of_json;
-  }
+  }*)
