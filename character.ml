@@ -29,7 +29,7 @@ type t = {
 }
 
 let to_element = function
-  | "Air" -> Air
+  | "Air" -> Air 
   | "Fire" -> Fire 
   | "Earth" -> Earth
   | "Water" -> Water 
@@ -49,11 +49,17 @@ let character_of_json j = {
   c_element = j |> member "element" |> to_string |> to_element;
   stats = j |> member "stats" |> stats_of_json;
   moves = j |> member "moves" |> to_list |> List.map moves_of_json
-
 }
 
 let from_json file_name = 
   let json = Yojson.Basic.from_file (file_name ^ ".json") in
   {
-    characters = json |> member "characters" |> to_list |> List.map character_of_json;
+    characters = json 
+    |> member "characters" 
+    |> to_list 
+    |> List.map character_of_json
   }
+
+let rec get_names_helper 
+
+let get_names t = get_names_helper [] t.rooms 

@@ -36,7 +36,7 @@
 					"id": 1, 
 					"move name": "Fire ball",
 					"element": "Fire",
-					"description": "Aang shoots a powerful blast of air from his staff",
+					"description": "Zuko shoots a powerful blast of fire",
 					"damage": 15,
 					"pp" : 10
 				}
