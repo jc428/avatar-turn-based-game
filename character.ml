@@ -60,6 +60,6 @@ let from_json file_name =
     |> List.map character_of_json
   }
 
-let rec get_names_helper 
+(* let rec get_names_helper 
 
-let get_names t = get_names_helper [] t.rooms 
+let get_names t = get_names_helper [] t.rooms  *)
