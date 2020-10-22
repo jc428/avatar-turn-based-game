@@ -9,7 +9,6 @@
 (* The abstract type of valyes representing an episode *)
 type t
 
-
 type name = string
 
 type stats
