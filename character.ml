@@ -79,13 +79,13 @@ let from_json file_name =
     |> List.map character_of_json
   }
 
-let get_names (ep : t) : name list =
+let get_names (ch : t) : name list =
   let rec helper (c_list : character list) acc = 
     match c_list with 
     | c :: t -> helper t (c.c_name :: acc)
     | _ -> acc
   in
-  List.rev (helper ep.characters [])
+  List.rev (helper ch.characters [])
 
 (* helper for getting a character record *)
 let rec get_c_by_name c_list name = 
@@ -93,26 +93,26 @@ let rec get_c_by_name c_list name =
   | c :: t -> if c.c_name = name then c else get_c_by_name t name
   | [] -> raise (UnknownCharacter name)
 
-let get_c_element ep name = 
-  let character = get_c_by_name ep.characters name in
+let get_c_element ch name = 
+  let character = get_c_by_name ch.characters name in
   character.c_element
 
-let get_stats ep name = 
-  let character = get_c_by_name ep.characters name in
+let get_stats ch name = 
+  let character = get_c_by_name ch.characters name in
   character.stats
 
-let get_c_description ep name = 
-  let character = get_c_by_name ep.characters name in
+let get_c_description ch name = 
+  let character = get_c_by_name ch.characters name in
   character.c_description
 
-let get_moves ep name =
-  let character = get_c_by_name ep.characters name in
+let get_moves ch name =
+  let character = get_c_by_name ch.characters name in
   character.moves
 
-let get_move_by_id ep name id : move =
+let get_move_by_id ch name id : move =
   let rec helper move_list id = 
     match move_list with 
     | m :: t -> if m.id = id then m else helper t id
     | _ -> raise (UnknownMove id)
   in
-  helper (get_moves ep name) id
+  helper (get_moves ch name) id
