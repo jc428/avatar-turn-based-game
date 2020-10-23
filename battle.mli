@@ -8,15 +8,15 @@
 
 type t
 
-val init : Character.t -> t
+val init_battle : Characters.t -> t
 
-val get_current_stats : t -> Character.name -> Character.stats
+val get_player_health : t -> Characters.name -> float
 
-val get_current_health : t -> Character.name -> float
+val get_enemy_health : t -> Characters.name -> float
 
-val get_current_pp : t -> Character.name -> int
+val get_current_pp : t -> Characters.name -> int
 
 (** The type representing the result of an attempted movement. *)
-type result = Legal of t | Illegal
+type result = Legal of t | IllegalInvalidMove | IllegalNoPP
 
 val make_move : string -> t -> result
