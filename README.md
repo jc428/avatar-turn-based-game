@@ -1,2 +1,2 @@
 # avatar-turn-based-game
-changeeeeeee is coming 4uuuuuu
+all JSON storymode episode files' first character in the character list must be the player character
