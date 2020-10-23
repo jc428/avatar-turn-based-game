@@ -67,8 +67,14 @@ let characters_tests =
   get_names_test "aang zuko charas" ms1 ["Aang"; "Zuko"];
   get_c_element_test "aang element" "Aang" ms1 Avatar;
   get_c_element_test "zuko element" "Zuko" ms1 Fire;
-  get_stats_test "aang element" "Aang" ms1 {
+  get_stats_test "aang stats" "Aang" ms1 {
     health = 100.0;
+    power =  1.0;
+    speed = 1.0;
+    evasiveness = 1.0;
+  };
+  get_stats_test "zuko stats" "Zuko" ms1 {
+    health = 69.0;
     power =  1.0;
     speed = 1.0;
     evasiveness = 1.0;
