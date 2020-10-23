@@ -35,6 +35,7 @@ let pp_list pp_elt lst =
     in loop 0 "" lst
   in "[" ^ pp_elts lst ^ "]"
 
+  (** start of Characters test *)
   let get_names_test 
   (name: string)
   (ch : Characters.t)
@@ -50,32 +51,48 @@ name >:: (fun _ ->
   (expected_output : element) : test = 
 test_name >:: (fun _ -> 
     assert_equal expected_output (get_c_element ch character_name))
+  
+  let get_stats_test 
+  (test_name: string)
+  (character_name: name)
+  (ch : Characters.t)
+  (expected_output : stats) : test = 
+test_name >:: (fun _ -> 
+    assert_equal expected_output (get_stats ch character_name))
 
 let ms1 = from_json "MS1satisfactory"
 
 let characters_tests =
 [
   get_names_test "aang zuko charas" ms1 ["Aang"; "Zuko"];
+  get_c_element_test "aang element" "Aang" ms1 Avatar;
+  get_c_element_test "zuko element" "Zuko" ms1 Fire;
+  get_stats_test "aang element" "Aang" ms1 {
+    health = 100.0;
+    power =  1.0;
+    speed = 1.0;
+    evasiveness = 1.0;
+  };
 ]
 
 (* start of battle tests*)
 
 let ch = Characters.from_json "MS1satisfactory"
-let bat = Battle.init_battle ch
+(* let bat = Battle.init_battle ch *)
 
-let make_move_test name battle move expected_output: test =
+(* let make_move_test name battle move expected_output: test =
   name >:: (fun _ ->
-      assert_equal expected_output (make_move battle move))
+      assert_equal expected_output (make_move battle move)) *)
 
-let battle_tests =
+(*let battle_tests =
   [
     make_move_test "illegal move" bat "cockbending"  IllegalInvalidMove;
-  ]
+  ]*)
 
 let suite =
   "test suite for final proj"  >::: List.flatten [
     characters_tests;
-    battle_tests;
+    (*battle_tests;*)
   ]
 
 let _ = run_test_tt_main suite

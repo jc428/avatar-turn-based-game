@@ -1,4 +1,4 @@
-open Characters
+(*open Characters
 
 type battle = {
   characters : t;
@@ -48,4 +48,4 @@ let make_move battle move =
 else
   set_new_player_health
     set_new_enemy_health
-    set_new_pp *)
+    set_new_pp *) *)

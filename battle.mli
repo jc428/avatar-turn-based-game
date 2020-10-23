@@ -6,7 +6,7 @@
    and functions that cause the state to change.
 *)
 
-type t
+(***** type t
 
 val init_battle : Characters.t -> t
 
@@ -19,4 +19,4 @@ val get_current_pp : t -> Characters.name -> int
 (** The type representing the result of an attempted movement. *)
 type result = Legal of t | IllegalInvalidMove | IllegalNoPP
 
-val make_move : string -> t -> result
+val make_move : string -> t -> result *****)
