@@ -3,6 +3,8 @@ type name = string
 type element = Fire | Earth | Water | Air | Avatar | Bruh
 exception UnknownCharacter of name
 
+type description = string
+
 type move = {
   id: int;
   is_super: bool;

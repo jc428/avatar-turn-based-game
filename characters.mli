@@ -25,8 +25,8 @@ type description = string
 (* all characters at most have 4 moves**)
 type move = {
   id: int;
-  m_name : name;
   is_super: bool;
+  m_name : name;
   m_element : element;
   m_description: string;
   damage: float;
@@ -60,4 +60,4 @@ val get_c_description : t -> name -> description
 val get_moves : t -> name -> move list
 
 (* [get_move_by_id] returns a record representing a move from a move id. *)
-val get_move_by_id : t -> move list -> move
+val get_move_by_id : t -> name -> int -> move
