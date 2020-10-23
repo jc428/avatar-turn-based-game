@@ -1,4 +1,4 @@
-MODULES= main battle character
+MODULES= main battle characters
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 TEST=test.byte

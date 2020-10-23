@@ -60,6 +60,31 @@ test_name >:: (fun _ ->
 test_name >:: (fun _ -> 
     assert_equal expected_output (get_stats ch character_name))
 
+  let get_moves_test 
+(test_name: string)
+(character_name: name)
+(ch : Characters.t)
+(expected_output : move list) : test = 
+test_name >:: (fun _ -> 
+  assert_equal expected_output (get_moves ch character_name))
+
+  let get_c_description_test 
+  (test_name: string)
+  (character_name: name)
+  (ch : Characters.t)
+  (expected_output : string) : test = 
+test_name >:: (fun _ -> 
+    assert_equal expected_output (get_c_description ch character_name))
+
+  let get_move_by_id_test 
+(test_name: string)
+(character_name: name)
+(ch : Characters.t)
+(id: int)
+(expected_output : move) : test = 
+test_name >:: (fun _ -> 
+  assert_equal expected_output (get_move_by_id ch character_name id))
+
 let ms1 = from_json "MS1satisfactory"
 
 let characters_tests =
@@ -79,6 +104,27 @@ let characters_tests =
     speed = 1.0;
     evasiveness = 1.0;
   };
+  get_moves_test "aang moves" "Aang" ms1 [{
+    id = 1;
+    is_super =  false;
+    m_name = "Air blast";
+    m_element = Air;
+    m_description = "Aang shoots a powerful blast of air from his staff";
+    damage = 15.;
+    pp = 10;
+  }];
+
+  get_moves_test "zuko moves" "Zuko" ms1 [{
+    id = 1;
+    is_super =  false;
+    m_name = "Fire ball";
+    m_element = Fire;
+    m_description = "Zuko shoots a powerful blast of fire";
+    damage = 15.0;
+    pp = 10;
+  }];
+  get_c_description_test "zuko desc" "Zuko" ms1 "DISGRACED PRINCE RAWRRR XD";
+  get_c_description_test "aang desc" "Aang" ms1 "hes da   Avatar broo0o";
 ]
 
 (* start of battle tests*)
