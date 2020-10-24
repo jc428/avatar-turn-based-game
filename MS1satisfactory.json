@@ -19,7 +19,7 @@
           "element": "Air",
           "description": "Aang shoots a powerful blast of air from his staff",
           "damage": 15.0,
-          "pp": 10
+          "pp": 1
         }
       ]
     },

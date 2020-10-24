@@ -45,7 +45,7 @@ let get_current_pp ba name move_id =
   then
     (get_p_move_by_id ba name move_id).pp
   else
-    failwith "name not found"
+    failwith "name does not belong to player or enemy"
 
 let set_new_health ba user_name (user_move_id : int) : float =
   if user_name = (my_list_hd (get_names ba.characters)) then
@@ -65,7 +65,7 @@ let set_new_pp ba name move_id =
   then
     (get_current_pp ba name move_id) - 1
   else
-    failwith "name not found"
+    failwith "name does not belong to player or enemy"
 
 type result = Legal of t | IllegalInvalidMove | IllegalNoPP
 

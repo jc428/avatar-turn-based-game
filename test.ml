@@ -111,7 +111,7 @@ let characters_tests =
         m_element = Air;
         m_description = "Aang shoots a powerful blast of air from his staff";
         damage = 15.;
-        pp = 10;
+        pp = 1;
       }];
 
     get_moves_test "zuko moves" "Zuko" ms1 [{
@@ -138,6 +138,8 @@ let extract legal =
 let ba = init_battle ms1 
 let ba2_raw = make_move ba "Aang" 1
 let ba2 = extract ba2_raw
+let ba3_raw = make_move ba "Aang" 1
+let ba3 = extract ba3_raw
 
 let get_current_health_test 
     (name : string) 
@@ -182,19 +184,33 @@ let battle_tests =
   [
     get_current_health_test "initial health Aang" ba "Aang" 100.0;
     get_current_health_test "initial health Zuko" ba "Zuko" 69.0;
+    "name does not exist" >:: 
+    (fun _ -> assert_raises 
+        (Failure "name does not belong to player or enemy") 
+        (fun () -> get_current_health ba "Borat"));
 
-    get_current_pp_test "initial pp of Aang move 1" ba "Aang" 1 10;
-    get_current_pp_test "initial pp of Zuko move 1" ba "Zuko" 1 10;
+    get_current_pp_test "initial pp of Aang move 1" ba "Aang" 1 1;
+    "name does not exist" >:: 
+    (fun _ -> assert_raises 
+        (Failure "name does not belong to player or enemy") 
+        (fun () -> get_current_pp ba "Borat" 1));
 
     set_new_health_test "Aang attacks Zuko w/ move 1" ba "Aang" 1 54.0;
     set_new_health_test "Zuko attacks Aang w/ move 1" ba "Zuko" 1 85.0;
+    "name does not exist" >:: 
+    (fun _ -> assert_raises 
+        (Failure "name does not belong to player or enemy") 
+        (fun () -> set_new_health ba "Borat" 1));
 
-    set_new_pp_test "Aang uses move 1" ba "Aang" 1 9;
-    set_new_pp_test "Zuko uses move 1" ba "Zuko" 1 9;
+    set_new_pp_test "Aang uses move 1" ba "Aang" 1 0;
+    "name does not exist" >:: 
+    (fun _ -> assert_raises 
+        (Failure "name does not belong to player or enemy") 
+        (fun () -> set_new_pp ba "Borat" 1));
 
     get_current_health_test "post-move health Aang" ba2 "Aang" 100.0;
     get_current_health_test "post-move health Zuko" ba2 "Zuko" 54.0;
-    get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 9;
+    get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 0;
   ]
 
 let suite =
