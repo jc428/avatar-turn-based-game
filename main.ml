@@ -112,7 +112,8 @@ let play_battle str =
 let select_battle () = 
   print_endline "\n Select one of the following: \n 
                  1. MS1 \n 
-                 2. Quit  \n";
+                 2. MS1multimove \n 
+                 3. Quit  \n";
   let rec select_battle_r () = 
     match (read_int_opt ()) with
     | None -> begin
@@ -122,9 +123,10 @@ let select_battle () =
         select_battle_r ()
       end
     | Some 1 -> play_battle "MS1satisfactory10pp"
-    | Some 2 -> begin
-        print_endline "\nSee you next time!";
-        exit 0
+    | Some 2 -> play_battle "MS1multiplemoves"
+    | Some 3 -> begin
+      print_endline "\nSee you next time!";
+      exit 0
       end
     | Some i -> begin
         print_string "\nNot a valid option! \
