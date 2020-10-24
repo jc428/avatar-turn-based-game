@@ -211,6 +211,14 @@ let battle_tests =
     get_current_health_test "post-move health Aang" ba2 "Aang" 100.0;
     get_current_health_test "post-move health Zuko" ba2 "Zuko" 54.0;
     get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 0;
+    "aang move 69 should not exist" >:: (fun _ -> 
+    assert_equal
+      (make_move ba3 "Aang" 69) 
+      (IllegalInvalidMove));
+    "aang can't do move 1 cuz no pp" >:: (fun _ -> 
+    assert_equal
+      (make_move ba3 "Aang" 1) 
+      (IllegalNoPP));
   ]
 
 let suite =
