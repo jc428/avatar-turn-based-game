@@ -128,7 +128,16 @@ let characters_tests =
   ]
 
 (* start of battle tests*)
+let extract legal = 
+  match legal with 
+  | Legal t -> t
+  | IllegalInvalidMove -> raise (Failure "IllegalInvalidMove")
+  | IllegalNoPP -> raise (Failure "IllegalNoPP")
+
+
 let ba = init_battle ms1 
+let ba2_raw = make_move ba "Aang" 1
+let ba2 = extract ba2_raw
 
 let get_current_health_test 
     (name : string) 
@@ -136,7 +145,8 @@ let get_current_health_test
     (name : name)
     (expected_output : float) : test = 
   name >:: (fun _ -> 
-      assert_equal expected_output (get_current_health ba name))
+      assert_equal expected_output (get_current_health ba name)
+        ~printer: string_of_float)
 
 let get_current_pp_test 
     (name : string) 
@@ -145,14 +155,46 @@ let get_current_pp_test
     (move_id : int)
     (expected_output : int) : test = 
   name >:: (fun _ -> 
-      assert_equal expected_output (get_current_pp ba name move_id))
+      assert_equal expected_output (get_current_pp ba name move_id)
+        ~printer: string_of_int)
+
+let set_new_health_test
+    (name : string) 
+    (ba : battle)
+    (user_name : name)
+    (user_move_id : int)
+    (expected_output : float) : test = 
+  name >:: (fun _ -> 
+      assert_equal expected_output (set_new_health ba user_name user_move_id)
+        ~printer: string_of_float) 
+
+let set_new_pp_test
+    (name : string) 
+    (ba : battle)
+    (name : name)
+    (move_id : int)
+    (expected_output : int) : test = 
+  name >:: (fun _ -> 
+      assert_equal expected_output (set_new_pp ba name move_id)
+        ~printer: string_of_int)
 
 let battle_tests =
   [
-    get_current_health_test "initial health Zuko" ba "Zuko" 69.0;
     get_current_health_test "initial health Aang" ba "Aang" 100.0;
+    get_current_health_test "initial health Zuko" ba "Zuko" 69.0;
 
     get_current_pp_test "initial pp of Aang move 1" ba "Aang" 1 10;
+    get_current_pp_test "initial pp of Zuko move 1" ba "Zuko" 1 10;
+
+    set_new_health_test "Aang attacks Zuko w/ move 1" ba "Aang" 1 54.0;
+    set_new_health_test "Zuko attacks Aang w/ move 1" ba "Zuko" 1 85.0;
+
+    set_new_pp_test "Aang uses move 1" ba "Aang" 1 9;
+    set_new_pp_test "Zuko uses move 1" ba "Zuko" 1 9;
+
+    get_current_health_test "post-move health Aang" ba2 "Aang" 100.0;
+    get_current_health_test "post-move health Zuko" ba2 "Zuko" 54.0;
+    get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 9;
   ]
 
 let suite =

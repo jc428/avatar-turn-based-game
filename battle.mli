@@ -13,10 +13,13 @@ val init_battle : Characters.t -> battle
 val get_current_health : battle -> Characters.name -> float
 
 val get_current_pp : battle -> Characters.name -> int -> int
-(* val get_enemy_health : t -> Characters.name -> float
+
+val set_new_health : battle -> Characters.name -> int -> float
+
+val set_new_pp : battle -> Characters.name -> int -> int 
 
 
-   (** The type representing the result of an attempted movement. *)
-   type result = Legal of t | IllegalInvalidMove | IllegalNoPP
+(** The type representing the result of an attempted movement. *)
+type result = Legal of battle | IllegalInvalidMove | IllegalNoPP
 
-   val make_move : string -> t -> result *)
+val make_move : battle -> Characters.name -> int -> result
