@@ -12,11 +12,11 @@ type t
 type name = string
 
 type stats = {
-   health: float;
-   power: float;
-   speed: float;
-   evasiveness: float
- }
+  health: float;
+  power: float;
+  speed: float;
+  evasiveness: float
+}
 
 type element = Fire | Earth | Water | Air | Avatar | Bruh
 
@@ -40,11 +40,11 @@ exception UnknownCharacter of name
 exception UnknownMove of int
 
 (* [from_json] takes input of the JSON file name to load (DO NOT INCLUDE 
-'.json') and returns an instance of t*)
+   '.json') and returns an instance of t*)
 val from_json : string -> t
 
 (*[get_names] also guarantees that the first index of the returned name list is 
-always the player character e.g. Aang*)
+  always the player character e.g. Aang*)
 val get_names : t -> name list
 
 (* [get_element] is the type of character,*)
@@ -60,4 +60,4 @@ val get_c_description : t -> name -> description
 val get_moves : t -> name -> move list
 
 (* [get_move_by_id] returns a record representing a move from a move id. *)
-val get_move_by_id : t -> name -> int -> move
+val get_move_by_id : t -> string -> int -> move

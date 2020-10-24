@@ -1,4 +1,4 @@
-(** 
+(* 
    Representation of dynamic battle.
 
    This module represents the state of an adventure as it is being played,
@@ -6,17 +6,17 @@
    and functions that cause the state to change.
 *)
 
-(***** type t
+type battle
 
-val init_battle : Characters.t -> t
+val init_battle : Characters.t -> battle
 
-val get_player_health : t -> Characters.name -> float
+val get_current_health : battle -> Characters.name -> float
 
-val get_enemy_health : t -> Characters.name -> float
+val get_current_pp : battle -> Characters.name -> int -> int
+(* val get_enemy_health : t -> Characters.name -> float
 
-val get_current_pp : t -> Characters.name -> int
 
-(** The type representing the result of an attempted movement. *)
-type result = Legal of t | IllegalInvalidMove | IllegalNoPP
+   (** The type representing the result of an attempted movement. *)
+   type result = Legal of t | IllegalInvalidMove | IllegalNoPP
 
-val make_move : string -> t -> result *****)
+   val make_move : string -> t -> result *)
