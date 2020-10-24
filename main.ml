@@ -168,7 +168,8 @@ let play_sp_game () =
   let read filename =
     let ic = open_in filename in
     let rec process_line () =
-      let line = try input_line ic with End_of_file -> raise DoneWithAscii
+      let line = try input_line ic 
+      with End_of_file -> raise DoneWithAscii
       in
          print_endline line;
          process_line ();
@@ -183,7 +184,8 @@ let main () =
   let read filename =
     let ic = open_in filename in
     let rec process_line () =
-      let line = try input_line ic with End_of_file -> raise DoneWithAscii
+      let line = try input_line ic 
+      with End_of_file -> raise DoneWithAscii
       in
          print_endline line;
          process_line ();
