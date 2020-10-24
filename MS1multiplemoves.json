@@ -1,0 +1,68 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "hes da   Avatar broo0o",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 15.0,
+          "pp": 10
+        },
+        {
+          "id": 2,
+          "name": "Tornado whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Zuko",
+      "element": "Fire",
+      "isplayer": false,
+      "stats": {
+        "health": 69.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "DISGRACED PRINCE RAWRRR XD",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Fire ball",
+          "issuper": false,
+          "element": "Fire",
+          "description": "Zuko shoots a powerful blast of fire",
+          "damage": 15.0,
+          "pp": 10
+        },
+        {
+          "id": 2,
+          "name": "Fire breath",
+          "issuper": false,
+          "element": "Fire",
+          "description": "Zuko harnesses his inner dragon, unleashing a breath of fire",
+          "damage": 8.0,
+          "pp": 25
+        }
+      ]
+    }
+  ]
+}

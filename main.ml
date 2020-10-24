@@ -1,3 +1,5 @@
+exception DoneWithAscii
+
 let play_mp_game () =
   ()
 
@@ -163,11 +165,31 @@ let start_episode () =
   start_episode_r ()
 
 let play_sp_game () =
+  let read filename =
+    let ic = open_in filename in
+    let rec process_line () =
+      let line = try input_line ic with End_of_file -> raise DoneWithAscii
+      in
+         print_endline line;
+         process_line ();
+  in process_line ()
+  in
+  try read "ascii-aang-non-battle.txt" with DoneWithAscii ->
   start_episode ()
 
 
 (** [main()] prompts for the game to play, then starts it. *)
 let main () = 
+  let read filename =
+    let ic = open_in filename in
+    let rec process_line () =
+      let line = try input_line ic with End_of_file -> raise DoneWithAscii
+      in
+         print_endline line;
+         process_line ();
+  in process_line () 
+  in
+  try read "ascii-game-title.txt" with DoneWithAscii ->
   ANSITerminal.(print_string [blue]
                   "\n\nWelcome to the Avatar the Last Air Bender \
                    - a text based game\n");
