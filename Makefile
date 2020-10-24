@@ -1,4 +1,4 @@
-MODULES= main battle characters
+MODULES= main battle characters author
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 TEST=test.byte
@@ -19,3 +19,6 @@ play:
 
 clean:
 	ocamlbuild -clean
+
+zip: 
+	zip avatar.zip *.ml *.json _tags Makefile
