@@ -19,13 +19,13 @@ let init_battle ch = {
 let my_list_hd lst = 
   match lst with
   | h :: t -> h 
-  | _ -> failwith "bruh"
+  | _ -> failwith "bruh this input shit is either empty or scuffed idk"
 
 let rec my_list_taili lst = 
   match lst with
   | h :: [] -> h
   | h :: t -> my_list_taili t
-  | _ -> failwith "bruh"
+  | _ -> failwith "bruh this input shit is either empty or scuffed idk"
 
 let get_current_health (ba : battle) name = 
   if name = (my_list_hd (get_names ba.characters)) then ba.player_health
