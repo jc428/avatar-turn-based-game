@@ -22,7 +22,7 @@ let health_str battle name =
 
 let print_battle_state battle ch1 ch2 = 
   print_string ("\nPlayer health: " ^ (health_str battle ch1));
-  print_string ("\nOpponent health: " ^ (health_str battle ch2))
+  print_string ("\nOpponent health: " ^ (health_str battle ch2) ^ "\n")
 
 let winner battle ch1 ch2 = 
   if (health battle ch1 <= 0.) then ch2
@@ -50,44 +50,59 @@ let play_battle str =
   print_string ("\n\n Player starting health: " ^ (health_str battle player));
   print_string ("\n Opponent starting health: " ^ (health_str battle enemy));
   let rec fight battle_st =
-    print_string "\n Player's turn- make a move!";
-    print_moves (Characters.get_moves characters player);
-    print_string "\n|>>";
-    match (read_int_opt ())with
-    | None -> begin
-        print_string "\nPlease enter one of the moves listed above as a \
-                      number (i.e. 1) \n";
-        print_string "|>>";
-        fight battle_st
-      end
-    | Some i -> begin
-        match Battle.make_move battle_st player i with
-        | Legal battle_nxt -> begin
-            let winner = winner battle player enemy in
-            if winner = "" then begin
-              print_battle_state battle_nxt player enemy;
-              fight battle_nxt
+    let player_turn btl = 
+      let enemy_turn btl =
+        let battle_nxt =
+          match Battle.make_move btl enemy 1 with
+          | Legal battle_nxt -> battle_nxt
+          | IllegalInvalidMove -> btl
+          | IllegalNoPP -> btl
+        in
+        print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
+                      (Characters.get_move_by_id characters enemy 1).m_name);
+        print_battle_state battle_nxt player enemy;
+        fight battle_nxt
+      in
+      print_string "\n Player's turn- make a move!";
+      print_moves (Characters.get_moves characters player);
+      print_string "\n|>>";
+      match (read_int_opt ())with
+      | None -> begin
+          print_string "\nPlease enter one of the moves listed above as a \
+                        number (i.e. 1) \n";
+          print_string "|>>";
+          fight battle_st
+        end
+      | Some i -> begin
+          match Battle.make_move battle_st player i with
+          | Legal battle_nxt -> begin
+              let winner = winner battle_nxt player enemy in
+              if (winner = "") then begin
+                print_battle_state battle_nxt player enemy;
+                enemy_turn battle_nxt
+              end
+              else if (winner = player) then
+                print_string ("\n You've defeated " ^ enemy ^ "!" ^
+                              "\n" ^ "Congratulations!")
+              else
+                print_string ("\n RIP " ^ enemy ^ " has beaten you." ^ 
+                              "\n" ^ "Better luck next time!")
             end
-            else if winner = player then
-              print_string ("\n You've defeated " ^ enemy ^ "!" ^
-                            "\n" ^ "Congratulations!")
-            else
-              print_string ("\n" ^ enemy ^ " has beaten you." ^ 
-                            "\n" ^ "Better luck next time!")
-          end
-        | IllegalInvalidMove -> begin
-            print_string "\nNot a valid move! Try one of the moves \
-                          listed above!\n";
-            print_string "|>>";
-            fight battle_st
-          end
-        | IllegalNoPP -> begin
-            print_string "\nYou've exhausted this move! Try another move \
-                          listed above!\n";
-            print_string "|>>";
-            fight battle_st
-          end
-      end
+          | IllegalInvalidMove -> begin
+              print_string "\nNot a valid move! Try one of the moves \
+                            listed above!\n";
+              print_string "|>>";
+              fight battle_st
+            end
+          | IllegalNoPP -> begin
+              print_string "\nYou've exhausted this move! Try another move \
+                            listed above!\n";
+              print_string "|>>";
+              fight battle_st
+            end
+        end
+    in
+    player_turn battle_st
   in 
   fight battle
 
@@ -104,7 +119,7 @@ let select_battle () =
         print_string "|>>";
         select_battle_r ()
       end
-    | Some 1 -> play_battle "MS1satisfactory"
+    | Some 1 -> play_battle "MS1satisfactory10pp"
     | Some 2 -> begin
         print_endline "\nSee you next time!";
         exit 0
