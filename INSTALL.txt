@@ -1,1 +1,2 @@
-How to install and build system
+Installation instructions
+None

@@ -16,8 +16,6 @@ let init_battle ch = {
   player_moves = (get_moves ch (List.hd (get_names ch)));
 }
 
-(* let health_helper =
-   failwith "todo" *)
 let my_list_hd lst = 
   match lst with
   | h :: t -> h 
@@ -34,10 +32,18 @@ let get_current_health (ba : battle) name =
   else if name = (my_list_taili (get_names ba.characters)) then ba.enemy_health
   else failwith "name does not belong to player or enemy"
 
+let get_p_move_by_id (ba:battle) name id : move =
+  let rec helper move_list id = 
+    match move_list with 
+    | m :: t -> if m.id = id then m else helper t id
+    | _ -> raise (UnknownMove id)
+  in
+  helper ba.player_moves id
+
 let get_current_pp ba name move_id =
   if List.mem name (get_names ba.characters)
   then
-    (Characters.get_move_by_id ba.characters name move_id).pp
+    (get_p_move_by_id ba name move_id).pp
   else
     failwith "name not found"
 
