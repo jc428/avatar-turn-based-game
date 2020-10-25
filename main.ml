@@ -9,7 +9,8 @@ let rec print_moves (moves:Characters.move list) =
   | [] -> ()
   | h :: t -> begin
       print_string ("\n" ^ (string_of_int h.id) ^ ". " ^ (h.m_name) ^
-                    " Damage: " ^ (string_of_float h.damage)
+                    " Damage: " ^ (string_of_float h.damage) ^
+                    " PP: " ^ (string_of_int h.pp)
                     ^ "\n" ^ h.m_description);
       print_moves t
     end
