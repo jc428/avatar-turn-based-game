@@ -1,2 +1,2 @@
 Installation instructions
-None
+1. Please run "opam install core" in your command line

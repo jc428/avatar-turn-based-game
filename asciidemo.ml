@@ -1,11 +1,12 @@
-#require "core"
-open Core
+exception DoneWithAscii
 
-let line_helper line =
-  printf "%s \n" line
+let read filename =
+  let ic = open_in filename in
+  let rec process_line () =
+    let line = try input_line ic with End_of_file -> raise DoneWithAscii
+    in
+       print_endline line;
+       process_line ();
+in process_line ()
 
-(* try read with input "aang-non-battle.txt" *)
-let read file =
-    let f = file in
-      let lines = In_channel.read_lines f in
-        List.iter ~f: line_helper lines
+let () = try read "aang-non-battle.txt" with DoneWithAscii -> ()

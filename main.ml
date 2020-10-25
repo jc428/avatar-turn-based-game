@@ -1,3 +1,5 @@
+exception DoneWithAscii
+
 let play_mp_game () =
   ()
 
@@ -111,7 +113,8 @@ let play_battle str =
 let select_battle () = 
   print_endline "\n Select one of the following: \n 
                  1. MS1 \n 
-                 2. Quit  \n";
+                 2. MS1multimove \n 
+                 3. Quit  \n";
   let rec select_battle_r () = 
     match (read_int_opt ()) with
     | None -> begin
@@ -121,9 +124,10 @@ let select_battle () =
         select_battle_r ()
       end
     | Some 1 -> play_battle "MS1satisfactory10pp"
-    | Some 2 -> begin
-        print_endline "\nSee you next time!";
-        exit 0
+    | Some 2 -> play_battle "MS1multiplemoves"
+    | Some 3 -> begin
+      print_endline "\nSee you next time!";
+      exit 0
       end
     | Some i -> begin
         print_string "\nNot a valid option! \
@@ -164,11 +168,33 @@ let start_episode () =
   start_episode_r ()
 
 let play_sp_game () =
+  let read filename =
+    let ic = open_in filename in
+    let rec process_line () =
+      let line = try input_line ic 
+      with End_of_file -> raise DoneWithAscii
+      in
+         print_endline line;
+         process_line ();
+  in process_line ()
+  in
+  try read "ascii-aang-non-battle.txt" with DoneWithAscii ->
   start_episode ()
 
 
 (** [main()] prompts for the game to play, then starts it. *)
 let main () = 
+  let read filename =
+    let ic = open_in filename in
+    let rec process_line () =
+      let line = try input_line ic 
+      with End_of_file -> raise DoneWithAscii
+      in
+         print_endline line;
+         process_line ();
+  in process_line () 
+  in
+  try read "ascii-game-title.txt" with DoneWithAscii ->
   ANSITerminal.(print_string [blue]
                   "\n\nWelcome to the Avatar the Last Air Bender \
                    - a text based game\n");
