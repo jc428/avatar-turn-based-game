@@ -2,9 +2,11 @@
 open Sys
 open Yojson
 
+(* declares type and sets json record value(s) *)
 let episode : [> `Assoc of (string * [> `String of string ]) list ] =
 `Assoc [("episode", `Int 1)]
 
+(* creates/overrides json save file in current directory *)
 let () = 
   Yojson.Basic.to_file "save_file.json" episode
 
