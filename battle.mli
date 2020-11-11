@@ -23,3 +23,8 @@ val set_new_pp : battle -> Characters.name -> int -> int
 type result = Legal of battle | IllegalInvalidMove | IllegalNoPP
 
 val make_move : battle -> Characters.name -> int -> result
+
+val update_moves : battle -> Characters.name -> int -> int 
+  -> Characters.move list
+
+val update_stats : battle -> Characters.name -> int  
