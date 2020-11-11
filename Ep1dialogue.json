@@ -1,0 +1,104 @@
+{
+  "battles": [
+    {
+      "id": 1,
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Sokka!",
+      "enemy text": [
+        "My first girlfriend turned into the moon. But I'm gonna turn you into dead meat!",
+        "Yeah, whatever. Get ready to lose, loser.",
+        "I'll get you next time.",
+        "Hah! Dead meat! I told you."
+      ],
+      "player text": [
+        "Bring it on, Sokka!",
+        "Sorry about your girlfriend, dude. That really sucks."
+      ],
+      "outro_win": "Congratulations, you defeated Sokka! You may proceed to the next battle.",
+      "outro_lose": "Sokka wins! Try again next time."
+    },
+    {
+      "id": 2,
+      "intro": "Welcome to your second battle. Prepare to meet your opponent: Momo!",
+      "enemy text": [
+        "nnggggggg ah kkkurrrr gllaaaa",
+        "eeeee kkkkirrr nggg ngggg rrrrallll"
+      ],
+      "player text": [
+        "Wow, sassy aren't you?",
+        "I'll go easy on you, little guy."
+      ],
+      "outro_win": "Congratulations, you defeated Momo! You may proceed to the next battle.",
+      "outro_lose": "Momo wins! Can't believe you lost to a lemur."
+    },
+    {
+      "id": 3,
+      "intro": "Welcome to your third battle. Prepare to meet your opponent: Toph!",
+      "enemy text": [
+        "The best part about being blind is I don't have to see your ugly face. Bleh.",
+        "Yeah, yeah. Why don't you cry about it. But wait til after I beat you."
+      ],
+      "player text": [
+        "Wait, how do you even know if I'm ugly if you're blind?",
+        "*Gasp!* That's so mean!"
+      ],
+      "outro_win": "Congratulations, you defeated Toph! You may proceed to the next battle.",
+      "outro_lose": "Toph wins!"
+    },
+    {
+      "id": 4,
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Appa!",
+      "enemy text": [
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Appa! You may proceed to the next battle.",
+      "outro_lose": "Appa wins!"
+    },
+    {
+      "id": 5,
+      "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Suki!",
+      "enemy text": [
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Suki! You may proceed to the next battle.",
+      "outro_lose": "Suki wins!"
+    },
+    {
+      "id": 6,
+      "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Katara!",
+      "enemy text": [
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Katara! You may proceed to the next battle.",
+      "outro_lose": "Katara wins!"
+    },
+    {
+      "id": 7,
+      "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Zuko!",
+      "enemy text": [
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Zuko! You may proceed to the next battle.",
+      "outro_lose": "Zuko wins!"
+    }
+  ]
+}
