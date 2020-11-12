@@ -24,7 +24,10 @@ type result = Legal of battle | IllegalInvalidMove | IllegalNoPP
 
 val make_move : battle -> Characters.name -> int -> result
 
+(* Updates a character's moveset by replacing an old move with a new one *)
 val update_moves : battle -> Characters.name -> int -> int 
   -> Characters.move list
 
-val update_stats : battle -> Characters.name -> int  
+(* Updates a character's stats by multiplying the value of a stat *)
+val update_stats : battle -> Characters.name -> string -> float 
+  -> Characters.stats

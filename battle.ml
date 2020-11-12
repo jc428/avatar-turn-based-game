@@ -104,8 +104,6 @@ let make_move ba name move_id =
       player_moves = change_pp ba name move_id
     }
 
-
-
 let update_moves battle name old_move_id new_move_id =
   let filtered_move_list = 
     List.filter (fun move -> move.id <> old_move_id) battle.player_moves in
@@ -121,12 +119,11 @@ let update_moves battle name old_move_id new_move_id =
   }
   in new_move_record :: filtered_move_list
 
-
-let update_stats name stat =
-  match stat with 
-  | "health" -> 
-  | "power" -> 
-  | "speed" ->
-  | "evasiveness" ->
-  | _ -> failwith "Error: this is not a valid stat"
-
+let update_stats battle name (stat : string) (mult : float) =
+  let stats = get_stats battle.characters name in 
+  match stat with
+  | "health" -> {stats with health = stats.health *. mult }
+  | "power" -> {stats with power = stats.power *. mult }
+  | "speed" -> {stats with speed = stats.speed *. mult }
+  | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
+  | _ -> failwith "Invalid stat"
