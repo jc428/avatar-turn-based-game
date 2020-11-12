@@ -180,6 +180,26 @@ let set_new_pp_test
       assert_equal expected_output (set_new_pp ba name move_id)
         ~printer: string_of_int)
 
+let update_moves_test
+    (test_name : string)
+    (battle : battle)
+    (name : Characters.name)
+    (old_move_id : int)
+    (new_move_id : int)
+    (expected_output : Characters.move list) : test =
+  test_name >:: (fun _ -> assert_equal expected_output
+                    (update_moves battle name old_move_id new_move_id))
+
+let update_stats_test
+    (test_name : string)
+    (battle : battle)
+    (name : Characters.name)
+    (stat : string)
+    (mult : float)
+    (expected_output : Characters.stats) : test =
+  test_name >:: (fun _ -> assert_equal expected_output
+                    (update_stats battle name stat mult))
+
 let battle_tests =
   [
     get_current_health_test "initial health Aang" ba "Aang" 100.0;
@@ -212,13 +232,17 @@ let battle_tests =
     get_current_health_test "post-move health Zuko" ba2 "Zuko" 54.0;
     get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 0;
     "aang move 69 should not exist" >:: (fun _ -> 
-    assert_equal
-      (make_move ba3 "Aang" 69) 
-      (IllegalInvalidMove));
+        assert_equal
+          (make_move ba3 "Aang" 69) 
+          (IllegalInvalidMove));
     "aang can't do move 1 cuz no pp" >:: (fun _ -> 
-    assert_equal
-      (make_move ba3 "Aang" 1) 
-      (IllegalNoPP));
+        assert_equal
+          (make_move ba3 "Aang" 1) 
+          (IllegalNoPP));
+
+    (* update_moves_test "swap move 1 with 5" ba "Aang" 1 5  *)
+
+    (* update_stats_test "multiply Aang health by 20%" ba "Aang" "health" 1.2  *)
   ]
 
 let suite =
