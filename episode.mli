@@ -5,17 +5,17 @@ type t
 
 val from_json : string -> t
 
-val set_current_battle : t -> int -> battle
+val set_current_battle : t -> int -> unit
 
 val intro : t -> string
 
-val next_enemy_dialogue: t -> string
+val enemy_line: t -> int -> string
 
 val player_dialogue: t -> string list
 
 val outro : t-> bool -> string
 
-val current_battle: t -> string
+val current_battle: t -> battle
 
 val move_to_next_battle: t -> bool
 

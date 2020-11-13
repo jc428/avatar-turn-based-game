@@ -1,13 +1,13 @@
 open Yojson.Basic.Util
 exception EndDialogue
 exception NoCurrentBattle
+exception InvalidBattle
 
 type battle =
   {
     id : int;
     intro: string;
-    enemy_dialogue : string list;
-    enemy_dialogue_i: int;
+    enemy_dialogue : string array;
     player_dialogue: string list;
     outro_win : string;
     outro_lose: string;
@@ -15,65 +15,56 @@ type battle =
   }
 
 type t = {
-  battles : battle list;
-  current_battle : battle option;
+  battles : battle array;
+  current_battle : int ref;
   num_battles_left : int;
   episode_done: bool;
 }
 
-let battle_of_json j = {
-  id = j |> member "id" |> to_int;
-  intro = j |> member "intro" |> to_string;
-  enemy_dialogue = j |> member "enemy text" |> to_list |> List.map to_string;
-  enemy_dialogue_i = 0;
-  player_dialogue = j |> member "player text" |>  to_list |> List.map to_string;
-  outro_win = j |> member "outro win" |> to_string;
-  outro_lose = j |> member "outro lose" |> to_string;
-  move_to_next_battle = false;
-}
+let battle_of_json j = 
+  let enemy_dialogue =
+    j |> member "enemy text" |> to_list |> List.map to_string
+    |> Array.of_list 
+  in
+  {
+    id = j |> member "id" |> to_int;
+    intro = j |> member "intro" |> to_string;
+    enemy_dialogue = enemy_dialogue;
+    player_dialogue = j |> member "player text" |>  to_list |> List.map to_string;
+    outro_win = j |> member "outro_win" |> to_string;
+    outro_lose = j |> member "outro_lose" |> to_string;
+    move_to_next_battle = false;
+  }
 
-let from_json file = 
-  let json_list  = Yojson.Basic.from_file file
+let from_json f_name = 
+  let json_list  = Yojson.Basic.from_file f_name
                    |> member "battles" |> to_list in 
   {
-    battles = json_list |> List.map battle_of_json;
-    current_battle = None;
+    battles = json_list |> List.map battle_of_json |> Array.of_list;
+    current_battle = ref 0;
     num_battles_left = List.length json_list ;
     episode_done = false;
   }
 
 let set_current_battle ep i = 
-  let rec helper = function
-    | [] -> failwith "No battles left"
-    | h :: t -> begin
-        if h.id = i then h
-        else helper t
-      end
-  in 
-  helper ep.battles
-
-let intro ep = 
-  match ep.current_battle with
-  | None -> raise NoCurrentBattle
-  | Some btl -> btl.intro
-
-let player_dialogue ep =
-  match ep.current_battle with
-  | None -> raise NoCurrentBattle
-  | Some btl -> btl.player_dialogue
-
-let next_enemy_dialogue ep =
-  ""
-
-let outro ep win = 
-  match ep.current_battle with
-  | None -> raise NoCurrentBattle
-  | Some btl -> if win then btl.outro_win else btl.outro_lose
+  if (i < Array.length ep.battles) then ep.current_battle := i
+  else raise InvalidBattle
 
 let current_battle ep =
-  match ep.current_battle with
-  | None -> raise NoCurrentBattle
-  | Some btl -> btl.id |> string_of_int
+  ep.battles.(!(ep.current_battle))
+
+let intro ep = 
+  (current_battle ep).intro
+
+let player_dialogue ep =
+  (current_battle ep).player_dialogue
+
+let enemy_line ep i =
+  (current_battle ep).enemy_dialogue.(i)
+
+let outro ep win = 
+  if win then (current_battle ep).outro_win
+  else (current_battle ep).outro_lose
 
 let move_to_next_battle ep =
   false
