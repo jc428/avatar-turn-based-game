@@ -136,6 +136,7 @@ let make_move ba name move_id =
       player_evasiveness = ba.player_evasiveness;
     }
 
+
 let update_moves battle name old_move_id new_move_id =
   let filtered_move_list = 
     List.filter (fun move -> move.id <> old_move_id) battle.player_moves in
@@ -159,6 +160,20 @@ let update_stats battle name (stat : string) (mult : float) =
   | "speed" -> {stats with speed = stats.speed *. mult }
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
+
+let battle_end ba name old_move_id new_move_id stat mult =
+  let new_stats = update_stats ba name stat mult in
+  let new_moves = update_moves ba name old_move_id new_move_id in
+  Legal {
+    characters = ba.characters;
+    player_health = new_stats.health;
+    enemy_health = ba.enemy_health;
+    player_moves = new_moves;
+    enemy_moves = ba.enemy_moves;
+    player_power = new_stats.power;
+    player_speed = new_stats.speed;
+    player_evasiveness = new_stats.evasiveness;
+  }
 
 let get_enemy_moves ba =
   ba.enemy_moves

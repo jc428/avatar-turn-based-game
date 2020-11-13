@@ -132,6 +132,10 @@ let play_battle str ep =
                 enemy_turn battle_nxt
               end
               else if (winner = player) then begin
+                (* suggest a new move for the player to learn *)
+                (* player selects move to replace (or not) *)
+                (* suggest stat categories for the player to upgrade *)
+                (* battle_end with user chosen values *)
                 print_enemy_line ep enemy 2;
                 print_string ("\n" ^ (Episode.outro ep true))
               end
