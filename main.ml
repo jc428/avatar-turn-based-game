@@ -81,6 +81,9 @@ let battle_intro player characters battle enemy ep =
   print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
 
 let play_battle str ep =
+  let ai_dummy_move ba =
+    Random.int (List.length (Battle.get_enemy_moves ba)) + 1
+  in
   let characters = Characters.from_json str in
   let battle = characters |> Battle.init_battle in 
   print_string "\n Starting battle... \n";
@@ -98,14 +101,15 @@ let play_battle str ep =
   let rec fight battle_st =
     let player_turn btl = 
       let enemy_turn btl =
+        let x = ai_dummy_move battle in
         let battle_nxt =
-          match Battle.make_move btl enemy 1 with
+          match Battle.make_move btl enemy x with
           | Legal battle_nxt -> battle_nxt
           | IllegalInvalidMove -> btl
           | IllegalNoPP -> btl
         in
         print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
-                      (Characters.get_move_by_id characters enemy 1).m_name);
+                      (Characters.get_move_by_id characters enemy x).m_name);
         print_battle_state battle_nxt player enemy;
         fight battle_nxt
       in

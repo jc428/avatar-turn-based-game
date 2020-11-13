@@ -140,6 +140,8 @@ let ba2_raw = make_move ba "Aang" 1
 let ba2 = extract ba2_raw
 let ba3_raw = make_move ba "Aang" 1
 let ba3 = extract ba3_raw
+let ba4_raw = make_move ba "Zuko" 1
+let ba4 = extract ba4_raw
 
 let get_current_health_test 
     (name : string) 
@@ -200,6 +202,12 @@ let update_stats_test
   test_name >:: (fun _ -> assert_equal expected_output
                     (update_stats battle name stat mult))
 
+let get_enemy_moves_test
+    (name : string)
+    (ba : battle)
+    (expected_output : Characters.move list) : test =
+  name >:: (fun _ -> assert_equal expected_output (get_enemy_moves ba))
+
 let battle_tests =
   [
     get_current_health_test "initial health Aang" ba "Aang" 100.0;
@@ -243,6 +251,25 @@ let battle_tests =
     (* update_moves_test "swap move 1 with 5" ba "Aang" 1 5  *)
 
     (* update_stats_test "multiply Aang health by 20%" ba "Aang" "health" 1.2  *)
+
+    get_enemy_moves_test "initial e moves" ba [{
+        id = 1;
+        is_super =  false;
+        m_name = "Fire ball";
+        m_element = Fire;
+        m_description = "Zuko shoots a powerful blast of fire";
+        damage = 15.0;
+        pp = 10;
+      }];
+    get_enemy_moves_test "e moves after 1 used" ba4 [{
+        id = 1;
+        is_super =  false;
+        m_name = "Fire ball";
+        m_element = Fire;
+        m_description = "Zuko shoots a powerful blast of fire";
+        damage = 15.0;
+        pp = 9;
+      }]
   ]
 
 let suite =

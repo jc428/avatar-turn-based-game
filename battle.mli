@@ -31,3 +31,5 @@ val update_moves : battle -> Characters.name -> int -> int
 (* Updates a character's stats by multiplying the value of a stat *)
 val update_stats : battle -> Characters.name -> string -> float 
   -> Characters.stats
+
+val get_enemy_moves : battle -> Characters.move list
