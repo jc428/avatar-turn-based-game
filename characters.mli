@@ -62,7 +62,8 @@ val get_c_description : t -> name -> description
 (* [get_moves] returns a list representing the moveset of character. *)
 val get_moves : t -> name -> move list
 
-(* [get_new_moves] returns a list representing the moveset of character. *)
+(* [get_new_moves] returns a list representing the new moves a character can 
+learn *)
 val get_new_moves : t -> move list
 
 (* [get_move_by_id] returns a record representing a move from a move id. *)
