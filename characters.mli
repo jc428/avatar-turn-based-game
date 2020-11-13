@@ -6,8 +6,11 @@
    data from JSON, querying the data, and loading a specific JSON file.
 *)
 
-(* The abstract type of valyes representing an episode *)
+(* The abstract type of values representing character data *)
 type t
+
+(* Abstract type representing a save file *)
+type t2
 
 type name = string
 
@@ -61,3 +64,16 @@ val get_moves : t -> name -> move list
 
 (* [get_move_by_id] returns a record representing a move from a move id. *)
 val get_move_by_id : t -> name -> int -> move
+
+(* [from_json_save] takes input of the JSON file name to load (DO NOT INCLUDE 
+'.json') and returns an instance of t*)
+val from_json_save : string -> t2
+
+(* [get_stats_save] are the stats for the player. *)
+val get_stats_save : t2 -> stats
+
+(* [get_moves_save] returns a list representing the moveset of character. *)
+val get_moves_save : t2 -> move list
+
+(* [get_move_by_id_save] returns a record representing a move from a move id. *)
+val get_move_by_id_save : t2 -> int -> move

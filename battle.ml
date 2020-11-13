@@ -18,7 +18,13 @@ let init_battle ch = {
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
-
+let init_battle_from_save (ch : Characters.t) (s : Characters.t2) = {
+  characters = ch;
+  player_health = (get_stats_save s).health;
+  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
+  player_moves = (get_moves_save s);
+  enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
+}
 
 let my_list_hd lst = 
   match lst with

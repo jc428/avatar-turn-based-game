@@ -10,6 +10,8 @@ type battle
 
 val init_battle : Characters.t -> battle
 
+val init_battle_from_save : Characters.t -> Characters.t2 -> battle
+
 val get_current_health : battle -> Characters.name -> float
 
 val get_current_pp : battle -> Characters.name -> int -> int
