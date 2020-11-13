@@ -8,11 +8,13 @@ open Yojson
 *)
 let episode =
 `List [(`Assoc [
-                  ("health", `Int 1); 
-                  ("power", `Int 1)
+                  ("health", `Float 100.0); 
+                  ("power", `Float 10.0);
+                  ("speed", `Float 10.0);
+                  ("evasiveness", `Float 10.0)
                 ]
         );
-        
+
         (`List [
                 `Assoc [
                         ("id", `Int 1);

@@ -18,6 +18,8 @@ let init_battle ch = {
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
+
+
 let my_list_hd lst = 
   match lst with
   | h :: t -> h 
