@@ -1,4 +1,3 @@
-(* writing to json file *)
 open Sys
 open Yojson
 open Battle
@@ -7,10 +6,10 @@ open Battle
 
    [> `Assoc of (string * [> `Assoc of (string * [> `String of string ]) list ]) list ] 
 *)
-let write ba = 
-  let episode =
+let write (ba : Battle.battle) : unit = 
+  let save =
     `List [(`Assoc [
-        ("health", `Float 100.0); 
+        ("health", `Float ); 
         ("power", `Float 10.0);
         ("speed", `Float 10.0);
         ("evasiveness", `Float 10.0)
@@ -57,10 +56,9 @@ let write ba =
          ]
        )
       ]
-  in
-  (* creates/overrides json save file in current directory *)
-  let () = 
-    Yojson.Basic.to_file "save_file.json" episode
+    in 
+    Yojson.Basic.to_file "save_file.json" save
+
 
 (* 
 

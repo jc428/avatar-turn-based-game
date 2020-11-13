@@ -152,8 +152,14 @@ let update_moves battle name old_move_id new_move_id =
   }
   in new_move_record :: filtered_move_list
 
-let update_stats battle name (stat : string) (mult : float) =
-  let stats = get_stats battle.characters name in 
+let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
+  let stats_helper battle name s = 
+    match s with
+    | None -> get_stats battle.characters name
+    | Some save -> get_stats_save save
+    | _ -> failwith "shouldnt happen"
+  in
+  let stats = stats_helper battle name s in
   let stat = String.lowercase_ascii stat in
   match stat with
   | "health" -> {stats with health = stats.health *. mult }
@@ -162,7 +168,7 @@ let update_stats battle name (stat : string) (mult : float) =
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
 
-let battle_end ba name old_move_id new_move_id stat mult : result =
+let battle_end ba name old_move_id new_move_id stat mult (s:t2 option): result =
   let check_valid_old_move (ba:battle) old_move_id : bool =
     let rec helper move_list old_move_id = 
       match move_list with 
@@ -185,7 +191,7 @@ let battle_end ba name old_move_id new_move_id stat mult : result =
   else if check_valid_stat stat = false then
     IllegalStat
   else
-    let new_stats = update_stats ba name stat mult in
+    let new_stats = update_stats ba name stat mult s in
     let new_moves = update_moves ba name old_move_id new_move_id in
     Legal {
       characters = ba.characters;
