@@ -1,6 +1,7 @@
 (** Representation of an episode in the single-player mode*)
 
 type battle
+
 type t
 
 val from_json : string -> t
