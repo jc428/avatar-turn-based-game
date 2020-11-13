@@ -1,0 +1,116 @@
+{
+  "battles": [
+    {
+      "id": 1,
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Ty Lee!",
+      "enemy text": [
+        "You know, you're kinda cute, Aang. Not cute enough to distract me from winning, though.",
+        "I'm out of your league, kiddo. Now let's fight!",
+        "Ugh, it's probably because I didn't wear pink today.",
+        "You should wear pink more; maybe it'll make you a better fighter."
+      ],
+      "player text": [
+        "Wait, I can't tell if you just called me cute or ugly.",
+        "You're very pretty <3 <3 <3 I like your hair <3 <3 <3 uwu"
+      ],
+      "outro_win": "Congratulations, you defeated Ty Lee! You may proceed to the next battle.",
+      "outro_lose": "Ty Lee wins! Try again next time."
+    },
+    {
+      "id": 2,
+      "intro": "Welcome to your second battle. Prepare to meet your opponent: Mai!",
+      "enemy text": [
+        "Why do I even have to fight you?",
+        "Ugh I'm so over this already. Let's go.",
+        "Whatever. Can I go home now?",
+        "You asked for it."
+      ],
+      "player text": [
+        "Uhhh, because we're enemies?",
+        "You're bad, I'm good--it just makes sense!"
+      ],
+      "outro_win": "Congratulations, you defeated Mai! You may proceed to the next battle.",
+      "outro_lose": "Mai wins! She doesn't seem to care, though."
+    },
+    {
+      "id": 3,
+      "intro": "Welcome to your third battle. Prepare to meet your opponent: Admiral Zhao!",
+      "enemy text": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Admiral Zhao! You may proceed to the next battle.",
+      "outro_lose": "Admiral Zhao wins! Better luck next time."
+    },
+    {
+      "id": 4,
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Iroh!",
+      "enemy text": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Iroh! You may proceed to the next battle.",
+      "outro_lose": "Iroh wins!"
+    },
+    {
+      "id": 5,
+      "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Combustion Man!",
+      "enemy text": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Combustion Man! You may proceed to the next battle.",
+      "outro_lose": "Combustion Man wins!"
+    },
+    {
+      "id": 6,
+      "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Fire Lord Ozai!",
+      "enemy text": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Fire Lord Ozai! You may proceed to the next battle.",
+      "outro_lose": "Fire Lord Ozai wins! She didn't really want to, though."
+    },
+    {
+      "id": 7,
+      "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Azula!",
+      "enemy text": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "player text": [
+        "",
+        ""
+      ],
+      "outro_win": "Congratulations, you defeated Azula! You may proceed to the next battle.",
+      "outro_lose": "Azula wins!"
+    }
+  ]
+}

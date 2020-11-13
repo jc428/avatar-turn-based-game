@@ -32,10 +32,58 @@ let winner battle ch1 ch2 =
   else if (health battle ch2 <= 0.) then ch1
   else ""
 
-let ai_dummy_move ba =
-  Random.int (List.length (Battle.get_enemy_moves ba)) + 1
+let print_player_dialogue ep = 
+  let rec helper c = function
+    | [] -> ()
+    | h :: t -> begin
+        print_string ("\n" ^ (string_of_int c) ^ ". " ^  h);
+        helper (c+1) t
+      end
+  in
+  helper 1 (Episode.player_dialogue ep);
+  print_string "\n|>>"
 
-let play_battle str =
+let player_response ep = 
+  print_player_dialogue ep;
+  let rec player_response_r () = 
+    match (read_int_opt ()) with
+    | None -> begin
+        print_string "\nPlease enter one of the options listed above as a \
+                      number (i.e. 1) \n";
+        print_string "|>>";
+        player_response_r ()
+      end
+    | Some i -> begin
+        if i < (Episode.player_dialogue ep |> List.length) then
+          print_string ""
+        else begin
+          print_string "\nNot a valid option! \
+                        Try one of the choices listed above. \n";
+          print_string "|>>";
+          player_response_r ()
+        end
+      end
+  in
+  player_response_r ()
+
+let print_enemy_line ep enemy i = 
+  print_string ("\n\n" ^ enemy ^ ": " ^ (Episode.enemy_line ep i) ^ "\n")
+
+let battle_intro player characters battle enemy ep =
+  print_string ("\n Playing as " ^ player ^
+                "\n" ^ (Characters.get_c_description characters player) ^
+                "\n\n against " ^ enemy ^
+                "\n" ^ (Characters.get_c_description characters enemy));
+  print_enemy_line ep enemy 0;
+  player_response ep;
+  print_enemy_line ep enemy 1;
+  print_string ("\n\n Player starting health: " ^ (health_str battle player));
+  print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
+
+let play_battle str ep =
+  let ai_dummy_move ba =
+    Random.int (List.length (Battle.get_enemy_moves ba)) + 1
+  in
   let characters = Characters.from_json str in
   let battle = characters |> Battle.init_battle in 
   print_string "\n Starting battle... \n";
@@ -49,12 +97,7 @@ let play_battle str =
     | [] -> ""
     | h :: t -> List.hd t
   in
-  print_string ("\n Playing as " ^ player ^
-                "\n" ^ (Characters.get_c_description characters player) ^
-                "\n\n against " ^ enemy ^
-                "\n" ^ (Characters.get_c_description characters enemy));
-  print_string ("\n\n Player starting health: " ^ (health_str battle player));
-  print_string ("\n Opponent starting health: " ^ (health_str battle enemy));
+  battle_intro player characters battle enemy ep;
   let rec fight battle_st =
     let player_turn btl = 
       let enemy_turn btl =
@@ -88,12 +131,14 @@ let play_battle str =
                 print_battle_state battle_nxt player enemy;
                 enemy_turn battle_nxt
               end
-              else if (winner = player) then
-                print_string ("\n You've defeated " ^ enemy ^ "!" ^
-                              "\n" ^ "Congratulations!")
-              else
-                print_string ("\n RIP " ^ enemy ^ " has beaten you." ^ 
-                              "\n" ^ "Better luck next time!")
+              else if (winner = player) then begin
+                print_enemy_line ep enemy 2;
+                print_string ("\n" ^ (Episode.outro ep true))
+              end
+              else begin
+                print_enemy_line ep enemy 3;
+                print_string ("\n" ^ (Episode.outro ep false))
+              end
             end
           | IllegalInvalidMove -> begin
               print_string "\nNot a valid move! Try one of the moves \
@@ -113,12 +158,16 @@ let play_battle str =
   in 
   fight battle
 
+let start_episode f = 
+  let ep = Episode.from_json f in
+  print_string ("\n " ^ (Episode.intro ep));
+  play_battle "MS1multiplemoves" ep
 
-let select_battle () = 
+let select_episode () = 
   print_endline "\n Select one of the following: \n 
-                 1. MS1 \n 
-                 2. MS1multimove \n 
-                 3. Quit  \n";
+                 1. Episode 1\n 
+                 2. Quit  \n";
+  print_string "|>>";         
   let rec select_battle_r () = 
     match (read_int_opt ()) with
     | None -> begin
@@ -127,9 +176,8 @@ let select_battle () =
         print_string "|>>";
         select_battle_r ()
       end
-    | Some 1 -> play_battle "MS1satisfactory10pp"
-    | Some 2 -> play_battle "MS1multiplemoves"
-    | Some 3 -> begin
+    | Some 1 -> start_episode "Ep1dialogue.json"
+    | Some 2 -> begin
         print_endline "\nSee you next time!";
         exit 0
       end
@@ -142,21 +190,21 @@ let select_battle () =
   in
   select_battle_r ()
 
-let start_episode () = 
+let start_sp () = 
   print_endline "\n Select one of the following: \n 
                  1. Start a new episode \n 
                  2. Resume last played episode. \n 
                  3. Quit  \n";
   print_string "|>>";
-  let rec start_episode_r () =
+  let rec start_sp_r () =
     match (read_int_opt ()) with
     | None -> begin
         print_string "\nPlease enter one of the options listed above as a \
                       number (i.e. 1) \n";
         print_string "|>>";
-        start_episode_r ()
+        start_sp_r ()
       end
-    | Some 1 -> select_battle ()
+    | Some 1 -> select_episode ()
     | Some 2 -> start_from_save ()
     | Some 3 -> begin
         print_endline "\nSee you next time!";
@@ -166,10 +214,10 @@ let start_episode () =
         print_string "\nNot a valid option! \
                       Try one of the choices listed above. \n";
         print_string "|>>";
-        start_episode_r ()
+        start_sp_r ()
       end
   in 
-  start_episode_r ()
+  start_sp_r ()
 
 let play_sp_game () =
   let read filename =
@@ -183,7 +231,7 @@ let play_sp_game () =
     in process_line ()
   in
   try read "ascii-aang-non-battle.txt" with DoneWithAscii ->
-    start_episode ()
+    start_sp ()
 
 
 (** [main()] prompts for the game to play, then starts it. *)
