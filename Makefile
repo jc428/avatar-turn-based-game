@@ -1,4 +1,4 @@
-MODULES= main battle characters authors
+MODULES= main battle characters authors save
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 TEST=test.byte
