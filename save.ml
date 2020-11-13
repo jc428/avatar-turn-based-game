@@ -6,10 +6,10 @@ open Battle
 
    [> `Assoc of (string * [> `Assoc of (string * [> `String of string ]) list ]) list ] 
 *)
-let write (ba : Battle.battle) : unit = 
+let write () : unit = 
   let save =
     `List [(`Assoc [
-        ("health", `Float ); 
+        ("health", `Float 10.0); 
         ("power", `Float 10.0);
         ("speed", `Float 10.0);
         ("evasiveness", `Float 10.0)

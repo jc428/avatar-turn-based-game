@@ -157,7 +157,6 @@ let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
     match s with
     | None -> get_stats battle.characters name
     | Some save -> get_stats_save save
-    | _ -> failwith "shouldnt happen"
   in
   let stats = stats_helper battle name s in
   let stat = String.lowercase_ascii stat in
@@ -168,7 +167,8 @@ let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
 
-let battle_end ba name old_move_id new_move_id stat mult (s:t2 option): result =
+let battle_end ba name old_move_id new_move_id stat mult 
+  (s:Characters.t2 option): result =
   let check_valid_old_move (ba:battle) old_move_id : bool =
     let rec helper move_list old_move_id = 
       match move_list with 

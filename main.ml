@@ -150,7 +150,7 @@ let play_battle str ep =
                 print_stats (Characters.get_stats characters player);
                 print_string "Enter a stat to upgrade: ";
                 let stat = read_line () in
-                let res = Battle.battle_end battle_st player old_move_id 5 stat 1.2 in
+                let res = Battle.battle_end battle_st player old_move_id 5 stat 1.2 None in
                 match res with
                 | Legal final_ba -> failwith "write_to_save unimplemented"
                 | IllegalInvalidMove -> 
