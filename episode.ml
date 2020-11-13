@@ -8,7 +8,7 @@ type battle =
     id : int;
     intro: string;
     enemy_dialogue : string array;
-    player_dialogue: string list;
+    player_dialogue: string array;
     outro_win : string;
     outro_lose: string;
     move_to_next_battle: bool;
@@ -30,7 +30,8 @@ let battle_of_json j =
     id = j |> member "id" |> to_int;
     intro = j |> member "intro" |> to_string;
     enemy_dialogue = enemy_dialogue;
-    player_dialogue = j |> member "player text" |>  to_list |> List.map to_string;
+    player_dialogue = j |> member "player text" |>  to_list
+                      |> List.map to_string |> Array.of_list;
     outro_win = j |> member "outro_win" |> to_string;
     outro_lose = j |> member "outro_lose" |> to_string;
     move_to_next_battle = false;
@@ -46,8 +47,9 @@ let from_json f_name =
     episode_done = false;
   }
 
+(** [i] is id of the battles*)
 let set_current_battle ep i = 
-  if (i < Array.length ep.battles) then ep.current_battle := i
+  if (i <= Array.length ep.battles) then ep.current_battle := (i-1)
   else raise InvalidBattle
 
 let current_battle ep =

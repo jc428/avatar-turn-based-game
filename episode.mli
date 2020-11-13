@@ -11,7 +11,7 @@ val intro : t -> string
 
 val enemy_line: t -> int -> string
 
-val player_dialogue: t -> string list
+val player_dialogue: t -> string array
 
 val outro : t-> bool -> string
 
