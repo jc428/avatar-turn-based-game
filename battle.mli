@@ -27,4 +27,6 @@ val make_move : battle -> Characters.name -> int -> result
 val update_moves : battle -> Characters.name -> int -> int 
   -> Characters.move list
 
-val update_stats : battle -> Characters.name -> int  
+val update_stats : battle -> Characters.name -> int 
+
+val get_enemy_moves : battle -> Characters.move list
