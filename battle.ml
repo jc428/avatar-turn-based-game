@@ -88,7 +88,7 @@ let set_new_pp ba name move_id =
   else
     failwith "name does not belong to player or enemy"
 
-type result = Legal of t | IllegalInvalidMove | IllegalNoPP
+type result = Legal of t | IllegalInvalidMove | IllegalNoPP | IllegalStat
 
 let change_pp ba name move_id : move list= 
   let filtered_move_list = 
@@ -154,6 +154,7 @@ let update_moves battle name old_move_id new_move_id =
 
 let update_stats battle name (stat : string) (mult : float) =
   let stats = get_stats battle.characters name in 
+  let stat = String.lowercase_ascii stat in
   match stat with
   | "health" -> {stats with health = stats.health *. mult }
   | "power" -> {stats with power = stats.power *. mult }
@@ -161,19 +162,41 @@ let update_stats battle name (stat : string) (mult : float) =
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
 
-let battle_end ba name old_move_id new_move_id stat mult =
-  let new_stats = update_stats ba name stat mult in
-  let new_moves = update_moves ba name old_move_id new_move_id in
-  Legal {
-    characters = ba.characters;
-    player_health = new_stats.health;
-    enemy_health = ba.enemy_health;
-    player_moves = new_moves;
-    enemy_moves = ba.enemy_moves;
-    player_power = new_stats.power;
-    player_speed = new_stats.speed;
-    player_evasiveness = new_stats.evasiveness;
-  }
+let battle_end ba name old_move_id new_move_id stat mult : result =
+  let check_valid_old_move (ba:battle) old_move_id : bool =
+    let rec helper move_list old_move_id = 
+      match move_list with 
+      | m :: t -> if m.id = old_move_id then true else helper t old_move_id
+      | _ -> false
+    in
+    helper ba.player_moves old_move_id
+  in
+  let check_valid_stat stat =
+    let lower_stat = String.lowercase_ascii stat in
+    match lower_stat with
+    | "health" -> true
+    | "power" -> true
+    | "speed" -> true
+    | "evasiveness" -> true
+    | _ -> false
+  in
+  if check_valid_old_move ba old_move_id = false then
+    IllegalInvalidMove
+  else if check_valid_stat stat = false then
+    IllegalStat
+  else
+    let new_stats = update_stats ba name stat mult in
+    let new_moves = update_moves ba name old_move_id new_move_id in
+    Legal {
+      characters = ba.characters;
+      player_health = new_stats.health;
+      enemy_health = ba.enemy_health;
+      player_moves = new_moves;
+      enemy_moves = ba.enemy_moves;
+      player_power = new_stats.power;
+      player_speed = new_stats.speed;
+      player_evasiveness = new_stats.evasiveness;
+    }
 
 let get_enemy_moves ba =
   ba.enemy_moves

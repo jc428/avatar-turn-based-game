@@ -22,7 +22,7 @@ val set_new_pp : battle -> Characters.name -> int -> int
 
 
 (** The type representing the result of an attempted movement. *)
-type result = Legal of battle | IllegalInvalidMove | IllegalNoPP
+type result = Legal of battle | IllegalInvalidMove | IllegalNoPP | IllegalStat
 
 val make_move : battle -> Characters.name -> int -> result
 
@@ -35,3 +35,6 @@ val update_stats : battle -> Characters.name -> string -> float
   -> Characters.stats
 
 val get_enemy_moves : battle -> Characters.move list
+
+val battle_end : battle -> Characters.name -> int -> int -> string -> float 
+  -> result
