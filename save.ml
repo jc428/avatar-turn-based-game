@@ -1,6 +1,7 @@
 (* writing to json file *)
 open Sys
 open Yojson
+open Battle
 
 (* Declares and sets json values
 
@@ -56,10 +57,10 @@ let write ba =
          ]
        )
       ]
-
-(* creates/overrides json save file in current directory *)
-let () = 
-  Yojson.Basic.to_file "save_file.json" episode
+  in
+  (* creates/overrides json save file in current directory *)
+  let () = 
+    Yojson.Basic.to_file "save_file.json" episode
 
 (* 
 
