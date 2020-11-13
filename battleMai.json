@@ -1,0 +1,68 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "hes da   Avatar broo0o",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 15.0,
+          "pp": 10
+        },
+        {
+          "id": 2,
+          "name": "Tornado whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Mai",
+      "element": "Fire",
+      "isplayer": false,
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Flaming Dagger",
+          "issuper": false,
+          "element": "Fire",
+          "description": "Mai engages in close combat with a small firey dagger",
+          "damage": 15.0,
+          "pp": 10
+        },
+        {
+          "id": 2,
+          "name": "Piercing Glare",
+          "issuper": false,
+          "element": "Fire",
+          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
+          "damage": 22.0,
+          "pp": 7
+        }
+      ]
+    }
+  ]
+}
