@@ -40,7 +40,9 @@ let get_p_move_by_id (ba:battle) name id : move =
     | m :: t -> if m.id = id then m else helper t id
     | _ -> raise (UnknownMove id)
   in
-  helper ba.player_moves id
+  if name = (my_list_hd (get_names ba.characters)) then 
+    helper ba.player_moves id
+  else helper ba.enemy_moves id
 
 let get_current_pp ba name move_id =
   if List.mem name (get_names ba.characters)
@@ -134,5 +136,6 @@ let update_stats battle name (stat : string) (mult : float) =
   | "speed" -> {stats with speed = stats.speed *. mult }
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
+
 let get_enemy_moves ba =
   ba.enemy_moves
