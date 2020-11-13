@@ -122,6 +122,7 @@ let play_battle str ep =
           | Legal battle_nxt -> battle_nxt
           | IllegalInvalidMove -> btl
           | IllegalNoPP -> btl
+          | IllegalStat -> failwith "IllegalStat (impossible)"
         in
         print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
                       (Characters.get_move_by_id characters enemy x).m_name);
@@ -146,7 +147,37 @@ let play_battle str ep =
                 print_battle_state battle_nxt player enemy;
                 enemy_turn battle_nxt
               end
-              else battle_end winner player enemy ep
+              (* else battle_end winner player enemy ep *)
+              else if (winner = player) then begin
+                (* COUT: suggest move upgrade *)
+                (* CIN: select move to replace *)
+                print_string "Select a move to replace: ";
+                let old_move_id = read_int () in
+
+                (* COUT: suggest stat upgrade *)
+                (* CIN: select stat to upgrade *)
+                print_string "Select a stat to upgrade: ";
+                let stat = read_line () in
+
+                (* run [battle_end] with user-provided values *)
+                let res = Battle.battle_end battle_st player old_move_id 1 stat 1.0 in
+                match res with
+                | Legal final_ba -> failwith "write_to_save unimplemented"
+                | IllegalInvalidMove -> 
+                  print_string "\nPlease enter one of the moves listed above as a \
+                                number (i.e. 1) \n"; fight battle_st
+                | IllegalStat -> 
+                  print_string "\nPlease enter one of the stats listed above as a \
+                                string (i.e. power) \n"; fight battle_st
+                | IllegalNoPP -> 
+                  print_string "IllegalNoPP (impossible)";
+                  print_enemy_line ep enemy 2;
+                  print_string ("\n" ^ (Episode.outro ep true))
+              end
+              else begin
+                print_enemy_line ep enemy 3;
+                print_string ("\n" ^ (Episode.outro ep false))
+              end
             end
           | IllegalInvalidMove -> begin
               print_string "\nNot a valid move! Try one of the moves \
@@ -160,6 +191,7 @@ let play_battle str ep =
               print_string "|>>";
               fight battle_st
             end
+          | IllegalStat -> failwith "IllegalStat (impossible"
         end
     in
     player_turn battle_st
