@@ -3,8 +3,11 @@ open Characters
 type battle = {
   characters : t;
   player_health : float;
-  enemy_health : float;
+  player_power : float;
+  player_speed : float;
+  player_evasiveness : float;
   player_moves : move list;
+  enemy_health : float;
   enemy_moves : move list;
 }
 
@@ -13,16 +16,22 @@ type t = battle
 let init_battle ch = {
   characters = ch;
   player_health = (get_stats ch (List.hd (get_names ch))).health;
-  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
   player_moves = (get_moves ch (List.hd (get_names ch)));
+  player_power = (get_stats ch (List.hd (get_names ch))).power;
+  player_speed = (get_stats ch (List.hd (get_names ch))).speed;
+  player_evasiveness = (get_stats ch (List.hd (get_names ch))).evasiveness;
+  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
 let init_battle_from_save (ch : Characters.t) (s : Characters.t2) = {
   characters = ch;
   player_health = (get_stats_save s).health;
-  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
+  player_power = (get_stats_save s).power;
+  player_speed = (get_stats_save s).speed;
+  player_evasiveness = (get_stats_save s).evasiveness;
   player_moves = (get_moves_save s);
+  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
@@ -110,7 +119,10 @@ let make_move ba name move_id =
       player_health = ba.player_health;
       enemy_health = set_new_health ba name move_id;
       player_moves = change_pp ba name move_id;
-      enemy_moves = ba.enemy_moves
+      enemy_moves = ba.enemy_moves;
+      player_power = ba.player_power;
+      player_speed = ba.player_speed;
+      player_evasiveness = ba.player_evasiveness;
     }
   else
     Legal {
@@ -118,7 +130,10 @@ let make_move ba name move_id =
       player_health = set_new_health ba name move_id;
       enemy_health = ba.enemy_health;
       player_moves = ba.player_moves;
-      enemy_moves = change_pp ba name move_id
+      enemy_moves = change_pp ba name move_id;
+      player_power = ba.player_power;
+      player_speed = ba.player_speed;
+      player_evasiveness = ba.player_evasiveness;
     }
 
 let update_moves battle name old_move_id new_move_id =
