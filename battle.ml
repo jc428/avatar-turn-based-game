@@ -5,6 +5,7 @@ type battle = {
   player_health : float;
   enemy_health : float;
   player_moves : move list;
+  enemy_moves : move list;
 }
 
 type t = battle
@@ -14,6 +15,7 @@ let init_battle ch = {
   player_health = (get_stats ch (List.hd (get_names ch))).health;
   enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
   player_moves = (get_moves ch (List.hd (get_names ch)));
+  enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
 let my_list_hd lst = 
@@ -38,7 +40,9 @@ let get_p_move_by_id (ba:battle) name id : move =
     | m :: t -> if m.id = id then m else helper t id
     | _ -> raise (UnknownMove id)
   in
-  helper ba.player_moves id
+  if name = (my_list_hd (get_names ba.characters)) then 
+    helper ba.player_moves id
+  else helper ba.enemy_moves id
 
 let get_current_pp ba name move_id =
   if List.mem name (get_names ba.characters)
@@ -71,7 +75,10 @@ type result = Legal of t | IllegalInvalidMove | IllegalNoPP
 
 let change_pp ba name move_id : move list= 
   let filtered_move_list = 
-    List.filter (fun m -> m.id <> move_id) ba.player_moves in
+    if name = (my_list_hd (get_names ba.characters)) then 
+      List.filter (fun m -> m.id <> move_id) ba.player_moves 
+    else List.filter (fun m -> m.id <> move_id) ba.enemy_moves 
+  in
   let move_to_be_updated = get_move_by_id ba.characters name move_id in
   let updated_pp_move = {
     id = move_to_be_updated.id;
@@ -94,13 +101,41 @@ let make_move ba name move_id =
       characters = ba.characters;
       player_health = ba.player_health;
       enemy_health = set_new_health ba name move_id;
-      player_moves = change_pp ba name move_id
+      player_moves = change_pp ba name move_id;
+      enemy_moves = ba.enemy_moves
     }
   else
     Legal {
       characters = ba.characters;
       player_health = set_new_health ba name move_id;
       enemy_health = ba.enemy_health;
-      player_moves = change_pp ba name move_id
+      player_moves = ba.player_moves;
+      enemy_moves = change_pp ba name move_id
     }
 
+let update_moves battle name old_move_id new_move_id =
+  let filtered_move_list = 
+    List.filter (fun move -> move.id <> old_move_id) battle.player_moves in
+  let new_move = get_move_by_id battle.characters name new_move_id in
+  let new_move_record = {
+    id = new_move.id;
+    is_super = new_move.is_super;
+    m_name = new_move.m_name;
+    m_element = new_move.m_element;
+    m_description = new_move.m_description;
+    damage = new_move.damage;
+    pp = new_move.pp;
+  }
+  in new_move_record :: filtered_move_list
+
+let update_stats battle name (stat : string) (mult : float) =
+  let stats = get_stats battle.characters name in 
+  match stat with
+  | "health" -> {stats with health = stats.health *. mult }
+  | "power" -> {stats with power = stats.power *. mult }
+  | "speed" -> {stats with speed = stats.speed *. mult }
+  | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
+  | _ -> failwith "Invalid stat"
+
+let get_enemy_moves ba =
+  ba.enemy_moves

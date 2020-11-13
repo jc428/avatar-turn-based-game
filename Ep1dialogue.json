@@ -1,0 +1,116 @@
+{
+  "battles": [
+    {
+      "id": 1,
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Sokka!",
+      "enemy text": [
+        "My first girlfriend turned into the moon. But I'm gonna turn you into dead meat!",
+        "Yeah, whatever. Get ready to lose, loser.",
+        "I'll get you next time.",
+        "Hah! Dead meat! I told you."
+      ],
+      "player text": [
+        "Bring it on, Sokka!",
+        "Sorry about your girlfriend, dude. That really sucks."
+      ],
+      "outro_win": "Congratulations, you defeated Sokka! You may proceed to the next battle.",
+      "outro_lose": "Sokka wins! Try again next time."
+    },
+    {
+      "id": 2,
+      "intro": "Welcome to your second battle. Prepare to meet your opponent: Momo!",
+      "enemy text": [
+        "nnggggggg ah kkkurrrr gllaaaa",
+        "eeeee kkkkirrr nggg ngggg rrrrallll",
+        "jjggggg rrrahhhhh glllll nihhhh",
+        "chhhhh chchhh ggghhhhh ekkkllll"
+      ],
+      "player text": [
+        "Wow, sassy aren't you?",
+        "I'll go easy on you, little guy."
+      ],
+      "outro_win": "Congratulations, you defeated Momo! You may proceed to the next battle.",
+      "outro_lose": "Momo wins! Can't believe you lost to a lemur."
+    },
+    {
+      "id": 3,
+      "intro": "Welcome to your third battle. Prepare to meet your opponent: Toph!",
+      "enemy text": [
+        "The best part about being blind is I don't have to see your ugly face. Bleh.",
+        "Yeah, yeah. Why don't you cry about it. But wait til after I beat you.",
+        "You were just lucky. My feet were kinda sensitive today.",
+        "Hah, I won! You can cry now, ugly."
+      ],
+      "player text": [
+        "Wait, how do you even know if I'm ugly when you're blind?",
+        "Gasp! That's so mean!"
+      ],
+      "outro_win": "Congratulations, you defeated Toph! You may proceed to the next battle.",
+      "outro_lose": "Toph wins! Better luck next time."
+    },
+    {
+      "id": 4,
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Appa!",
+      "enemy text": [
+        "hhhggrrr hmph",
+        "huhghgh grumph",
+        "humph grhhhrrr",
+        "umph ghhghrerrr"
+      ],
+      "player text": [
+        "Aww, Appa, I could never fight you!",
+        "You're too cute; sorry in advance!"
+      ],
+      "outro_win": "Congratulations, you defeated Appa! You may proceed to the next battle.",
+      "outro_lose": "Appa wins! Don't underestimate this giant fluff next time."
+    },
+    {
+      "id": 5,
+      "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Suki!",
+      "enemy text": [
+        "Think you can win against a Kyoshi warrior?",
+        "You wish you had the power of a woman. Get ready to be humiliated.",
+        "Ugh, I lost on purpose to make you feel better about your masculinity.",
+        "That one was for the girls!"
+      ],
+      "player text": [
+        "I'm not sure about this--I mean, you're just a girl.",
+        "I'll go easy on you, Suki."
+      ],
+      "outro_win": "Congratulations, you defeated Suki! You may proceed to the next battle.",
+      "outro_lose": "Suki wins! Maybe next time you'll win if you put on a dress."
+    },
+    {
+      "id": 6,
+      "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Katara!",
+      "enemy text": [
+        "Hi, Aang. As much as I lo- care about you, I think we both know who's gonna win this.",
+        "Ugh, let's just get this over with.",
+        "I just didn't want to hurt you.",
+        "Sorry, Aang. You're not too hurt, though, are you?"
+      ],
+      "player text": [
+        "Yeah, me, right?",
+        "Wait, what did you say? Lo-"
+      ],
+      "outro_win": "Congratulations, you defeated Katara! You may proceed to the next battle.",
+      "outro_lose": "Katara wins! She didn't really want to, though."
+    },
+    {
+      "id": 7,
+      "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Zuko!",
+      "enemy text": [
+        "I might be bad at being good, but I'm pretty darn good at being bad. Get ready to lose, Avatar.",
+        "Don't worry about it. Let's fight.",
+        "Whatever. I just didn't want you to doubt my loyalty.",
+        "I'm never happy, but watching you lose just made my day."
+      ],
+      "player text": [
+        "Your scar is on the wrong side, coward.",
+        "Uhh, Zuko? Are you sure you're Team Avatar?"
+      ],
+      "outro_win": "Congratulations, you defeated Zuko! You may proceed to the next battle.",
+      "outro_lose": "Zuko wins! Can't believe you lost to a emotionally unstable teenage boy who has a constant interal struggle with his moral compass."
+    }
+  ]
+}

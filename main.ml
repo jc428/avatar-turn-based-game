@@ -32,6 +32,9 @@ let winner battle ch1 ch2 =
   else if (health battle ch2 <= 0.) then ch1
   else ""
 
+let ai_dummy_move ba =
+  Random.int (List.length (Battle.get_enemy_moves ba)) + 1
+
 let play_battle str =
   let characters = Characters.from_json str in
   let battle = characters |> Battle.init_battle in 
@@ -55,14 +58,15 @@ let play_battle str =
   let rec fight battle_st =
     let player_turn btl = 
       let enemy_turn btl =
+        let x = ai_dummy_move battle in
         let battle_nxt =
-          match Battle.make_move btl enemy 1 with
+          match Battle.make_move btl enemy x with
           | Legal battle_nxt -> battle_nxt
           | IllegalInvalidMove -> btl
           | IllegalNoPP -> btl
         in
         print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
-                      (Characters.get_move_by_id characters enemy 1).m_name);
+                      (Characters.get_move_by_id characters enemy x).m_name);
         print_battle_state battle_nxt player enemy;
         fight battle_nxt
       in
@@ -126,8 +130,8 @@ let select_battle () =
     | Some 1 -> play_battle "MS1satisfactory10pp"
     | Some 2 -> play_battle "MS1multiplemoves"
     | Some 3 -> begin
-      print_endline "\nSee you next time!";
-      exit 0
+        print_endline "\nSee you next time!";
+        exit 0
       end
     | Some i -> begin
         print_string "\nNot a valid option! \
@@ -172,14 +176,14 @@ let play_sp_game () =
     let ic = open_in filename in
     let rec process_line () =
       let line = try input_line ic 
-      with End_of_file -> raise DoneWithAscii
+        with End_of_file -> raise DoneWithAscii
       in
-         print_endline line;
-         process_line ();
-  in process_line ()
+      print_endline line;
+      process_line ();
+    in process_line ()
   in
   try read "ascii-aang-non-battle.txt" with DoneWithAscii ->
-  start_episode ()
+    start_episode ()
 
 
 (** [main()] prompts for the game to play, then starts it. *)
@@ -188,44 +192,44 @@ let main () =
     let ic = open_in filename in
     let rec process_line () =
       let line = try input_line ic 
-      with End_of_file -> raise DoneWithAscii
+        with End_of_file -> raise DoneWithAscii
       in
-         print_endline line;
-         process_line ();
-  in process_line () 
+      print_endline line;
+      process_line ();
+    in process_line () 
   in
   try read "ascii-game-title.txt" with DoneWithAscii ->
-  ANSITerminal.(print_string [blue]
-                  "\n\nWelcome to the Avatar the Last Air Bender \
-                   - a text based game\n");
-  print_endline "Select the play mode: \n
+    ANSITerminal.(print_string [blue]
+                    "\n\nWelcome to the Avatar the Last Air Bender \
+                     - a text based game\n");
+    print_endline "Select the play mode: \n
                   1. Single Player: travel through the Four Nations as Aang \n 
                   2. Multi Player: Battle against your friends as one of \
-                 ATLA characters\n
+                   ATLA characters\n
                   3. Quit \n";
-  print_string  "|>> ";
-  let rec start_game () =
-    match (read_int_opt ()) with
-    | None -> begin
-        print_endline "\nPlease enter one of the options listed above as a \
-                       number (i.e. 1). \n";
-        print_string "|>>";
-        start_game ()
-      end
-    | Some 1 -> play_sp_game ()
-    | Some 2 -> play_mp_game ()
-    | Some 3 -> begin
-        print_endline "See you next time!";
-        exit 0
-      end
-    | Some i -> begin 
-        print_endline "\nNot a valid option! \
-                       Try one of the choices listed above. \n";
-        print_string "|>>";
-        start_game()
-      end
-  in
-  start_game ()
+    print_string  "|>> ";
+    let rec start_game () =
+      match (read_int_opt ()) with
+      | None -> begin
+          print_endline "\nPlease enter one of the options listed above as a \
+                         number (i.e. 1). \n";
+          print_string "|>>";
+          start_game ()
+        end
+      | Some 1 -> play_sp_game ()
+      | Some 2 -> play_mp_game ()
+      | Some 3 -> begin
+          print_endline "See you next time!";
+          exit 0
+        end
+      | Some i -> begin 
+          print_endline "\nNot a valid option! \
+                         Try one of the choices listed above. \n";
+          print_string "|>>";
+          start_game()
+        end
+    in
+    start_game ()
 
 (* Execute the game engine *)
 let () = main ()

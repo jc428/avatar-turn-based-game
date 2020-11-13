@@ -51,7 +51,7 @@ let stats_of_json j = {
   speed = j |> member "speed" |> to_float;
   evasiveness = j |> member "evasiveness" |> to_float;
 }
-  
+
 
 let move_of_json j = {
   id = j |> member "id" |> to_int;
@@ -76,9 +76,9 @@ let from_json file_name =
   let json = Yojson.Basic.from_file (file_name ^ ".json") in
   {
     characters = json 
-    |> member "characters" 
-    |> to_list 
-    |> List.map character_of_json
+                 |> member "characters" 
+                 |> to_list 
+                 |> List.map character_of_json
   }
 
 let get_names (ch : t) : name list =
