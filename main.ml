@@ -1,4 +1,5 @@
 exception DoneWithAscii
+open Episode 
 
 let play_mp_game () =
   ()
@@ -157,7 +158,7 @@ let play_battle str ep =
               end
               (* else battle_end winner player enemy ep *)
               else if (winner = player) then begin
-                print_string "You have unlocked a new move."; 
+                print_string "You won! You have unlocked a new move."; 
                 print_moves (Characters.get_new_moves characters);
                 print_string "Enter the number for the move you would like to 
                   replace or enter -1 if you wish to keep your current moves: ";
