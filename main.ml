@@ -17,6 +17,14 @@ let rec print_moves (moves:Characters.move list) =
       print_moves t
     end
 
+let print_stats (stats : Characters.stats) =
+  begin
+    print_string (" Health: " ^ (string_of_float stats.health) ^
+                  " Power: " ^ (string_of_float stats.power) ^
+                  " Speed: " ^ (string_of_float stats.speed) ^
+                  " Evasiveness " ^ (string_of_float stats.evasiveness));
+  end
+
 let health (battle: Battle.battle) (name : string) =
   Battle.get_current_health battle name
 
@@ -149,18 +157,16 @@ let play_battle str ep =
               end
               (* else battle_end winner player enemy ep *)
               else if (winner = player) then begin
-                (* COUT: suggest move upgrade *)
-                (* CIN: select move to replace *)
-                print_string "Select a move to replace: ";
+                print_string "You have unlocked a new move."; 
+                print_moves (Characters.get_new_moves characters);
+                print_string "Enter the number for the move you would like to 
+                  replace or enter -1 if you wish to keep your current moves: ";
+                print_moves (Characters.get_moves characters player);
                 let old_move_id = read_int () in
-
-                (* COUT: suggest stat upgrade *)
-                (* CIN: select stat to upgrade *)
-                print_string "Select a stat to upgrade: ";
+                print_stats (Characters.get_stats characters player);
+                print_string "Enter a stat to upgrade: ";
                 let stat = read_line () in
-
-                (* run [battle_end] with user-provided values *)
-                let res = Battle.battle_end battle_st player old_move_id 1 stat 1.0 in
+                let res = Battle.battle_end battle_st player old_move_id 5 stat 1.2 None in
                 match res with
                 | Legal final_ba -> failwith "write_to_save unimplemented"
                 | IllegalInvalidMove -> 

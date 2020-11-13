@@ -35,6 +35,7 @@ type character = {
 
 type t = {
   characters : character list;
+  new_moves : move list
 }
 
 let to_element = function
@@ -78,7 +79,11 @@ let from_json file_name =
     characters = json 
                  |> member "characters" 
                  |> to_list 
-                 |> List.map character_of_json
+                 |> List.map character_of_json;
+    new_moves = json 
+                |> member "new move" 
+                |> to_list 
+                |> List.map move_of_json
   }
 
 let get_names (ch : t) : name list =
@@ -110,6 +115,9 @@ let get_c_description ch name =
 let get_moves ch name =
   let character = get_c_by_name ch.characters name in
   character.moves
+
+let get_new_moves ch =
+  ch.new_moves
 
 let get_move_by_id ch name id : move =
   let rec helper move_list id = 
