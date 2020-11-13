@@ -81,7 +81,7 @@ let from_json file_name =
                  |> to_list 
                  |> List.map character_of_json;
     new_moves = json 
-                |> member "new move" 
+                |> member "new moves" 
                 |> to_list 
                 |> List.map move_of_json
   }
