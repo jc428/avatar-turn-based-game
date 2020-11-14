@@ -94,120 +94,123 @@ let rec start_episode f i=
   let ep = Episode.from_json f in
   Episode.set_current_battle ep i;
   print_string ("\n " ^ (Episode.intro ep));
-  let rec play_battle ep =
+  let rec play_battle ep is_from_save =
     let ai_dummy_move ba =
       Random.int (List.length (Battle.get_enemy_moves ba)) + 1
     in
-    let characters = Episode.get_characters ep in
-    let battle = characters |> Battle.init_battle in 
-    let player = 
-      match Characters.get_names characters with
-      | [] -> ""
-      | h :: t -> h
-    in 
-    let enemy =
-      match Characters.get_names characters with
-      | [] -> ""
-      | h :: t -> List.hd t
-    in
-    battle_intro player characters battle enemy ep;
-    let rec fight battle_st =
-      let player_turn btl = 
-        let enemy_turn btl =
-          let x = ai_dummy_move battle in
-          let battle_nxt =
-            match Battle.make_move btl enemy x with
-            | Legal battle_nxt -> battle_nxt
-            | IllegalInvalidMove -> btl
-            | IllegalNoPP -> btl
-            | IllegalStat -> failwith "IllegalStat (impossible)"
-          in
-          print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
-                        (Characters.get_move_by_id characters enemy x).m_name);
-          print_battle_state battle_nxt player enemy;
-          fight battle_nxt
-        in
-        print_string "\n Player's turn- make a move!";
-        print_moves (Characters.get_moves characters player);
-        print_string "\n|>>";
-        match (read_int_opt ())with
-        | None -> begin
-            print_string "\nPlease enter one of the moves listed above as a \
-                          number (i.e. 1) \n";
-            print_string "|>>";
-            fight battle_st
-          end
-        | Some i -> begin
-            match Battle.make_move battle_st player i with
-            | Legal battle_nxt -> begin
-                let winner = winner battle_nxt player enemy in
-                if (winner = "") then begin
-                  print_battle_state battle_nxt player enemy;
-                  enemy_turn battle_nxt
-                end
-                else if (winner = player) then begin
-                  print_enemy_line ep enemy 2;
-                  print_string "\n\n You have unlocked a new move."; 
-                  print_moves (Characters.get_new_moves characters);
-                  print_string 
-                    "\nEnter the number for the move you would like to replace 
-                   or enter -1 if you wish to keep your current moves: ";
-                  print_moves (Characters.get_moves characters player);
-                  print_string "\n|>>";
-                  let rec user_input_move () = 
-                    let old_move_id = read_int () in
-                    print_stats (Characters.get_stats characters player);
-                    print_string "\n Enter a stat to upgrade: ";
-                    print_string "\n|>>";
-                    let stat = read_line () in
-                    let lower_stat = String.lowercase_ascii stat in
-                    let res = Battle.battle_end
-                        battle_st player old_move_id 5 lower_stat 1.2 None in
-                    match res with
-                    | Legal final_ba -> Save.write battle_st characters
-                    | IllegalInvalidMove -> begin
-                        print_string "\nPlease enter one of the moves listed above as a \
-                                      number (i.e. 1) \n"; user_input_move () end
-                    | IllegalStat -> begin 
-                        print_string "\nPlease enter one of the stats listed above as a \
-                                      string (i.e. power) \n"; user_input_move () end
-                    | IllegalNoPP -> begin
-                        print_string "IllegalNoPP (impossible)";
-                        user_input_move()
-                      end
-                  in
-                  user_input_move ();
-                  print_string ("\n" ^ (Episode.outro ep true));
-                  if (Episode.move_to_next_episode ep) then begin
-                    start_episode (Episode.next_episode ep ) 1
-                  end
-                  else play_battle (next_battle ep) 
-                end
-                else begin
-                  print_enemy_line ep enemy 3;
-                  print_string ("\n" ^ (Episode.outro ep false))
-                end
-              end
-            | IllegalInvalidMove -> begin
-                print_string "\nNot a valid move! Try one of the moves \
-                              listed above!\n";
-                print_string "|>>";
-                fight battle_st
-              end
-            | IllegalNoPP -> begin
-                print_string "\nYou've exhausted this move! Try another move \
-                              listed above!\n";
-                print_string "|>>";
-                fight battle_st
-              end
-            | IllegalStat -> failwith "IllegalStat (impossible"
-          end
+    match is_from_save with 
+    | true -> let characters = 
+    | false -> let characters = Episode.get_characters ep
       in
-      player_turn battle_st
-    in 
-    fight battle
+      let battle = characters |> Battle.init_battle in 
+      let player = 
+        match Characters.get_names characters with
+        | [] -> ""
+        | h :: t -> h
+      in 
+      let enemy =
+        match Characters.get_names characters with
+        | [] -> ""
+        | h :: t -> List.hd t
+      in
+      battle_intro player characters battle enemy ep;
+      let rec fight battle_st =
+        let player_turn btl = 
+          let enemy_turn btl =
+            let x = ai_dummy_move battle in
+            let battle_nxt =
+              match Battle.make_move btl enemy x with
+              | Legal battle_nxt -> battle_nxt
+              | IllegalInvalidMove -> btl
+              | IllegalNoPP -> btl
+              | IllegalStat -> failwith "IllegalStat (impossible)"
+            in
+            print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
+                          (Characters.get_move_by_id characters enemy x).m_name);
+            print_battle_state battle_nxt player enemy;
+            fight battle_nxt
+          in
+          print_string "\n Player's turn- make a move!";
+          print_moves (Characters.get_moves characters player);
+          print_string "\n|>>";
+          match (read_int_opt ())with
+          | None -> begin
+              print_string "\nPlease enter one of the moves listed above as a \
+                            number (i.e. 1) \n";
+              print_string "|>>";
+              fight battle_st
+            end
+          | Some i -> begin
+              match Battle.make_move battle_st player i with
+              | Legal battle_nxt -> begin
+                  let winner = winner battle_nxt player enemy in
+                  if (winner = "") then begin
+                    print_battle_state battle_nxt player enemy;
+                    enemy_turn battle_nxt
+                  end
+                  else if (winner = player) then begin
+                    print_enemy_line ep enemy 2;
+                    print_string "\n\n You have unlocked a new move."; 
+                    print_moves (Characters.get_new_moves characters);
+                    print_string 
+                      "\nEnter the number for the move you would like to replace 
+                   or enter -1 if you wish to keep your current moves: ";
+                    print_moves (Characters.get_moves characters player);
+                    print_string "\n|>>";
+                    let rec user_input_move () = 
+                      let old_move_id = read_int () in
+                      print_stats (Characters.get_stats characters player);
+                      print_string "\n Enter a stat to upgrade: ";
+                      print_string "\n|>>";
+                      let stat = read_line () in
+                      let lower_stat = String.lowercase_ascii stat in
+                      let res = Battle.battle_end
+                          battle_st player old_move_id 5 lower_stat 1.2 None in
+                      match res with
+                      | Legal final_ba -> Save.write battle_st characters
+                      | IllegalInvalidMove -> begin
+                          print_string "\nPlease enter one of the moves listed above as a \
+                                        number (i.e. 1) \n"; user_input_move () end
+                      | IllegalStat -> begin 
+                          print_string "\nPlease enter one of the stats listed above as a \
+                                        string (i.e. power) \n"; user_input_move () end
+                      | IllegalNoPP -> begin
+                          print_string "IllegalNoPP (impossible)";
+                          user_input_move()
+                        end
+                    in
+                    user_input_move ();
+                    print_string ("\n" ^ (Episode.outro ep true));
+                    if (Episode.move_to_next_episode ep) then begin
+                      start_episode (Episode.next_episode ep ) 1
+                    end
+                    else play_battle (next_battle ep) true
+                  end
+                  else begin
+                    print_enemy_line ep enemy 3;
+                    print_string ("\n" ^ (Episode.outro ep false))
+                  end
+                end
+              | IllegalInvalidMove -> begin
+                  print_string "\nNot a valid move! Try one of the moves \
+                                listed above!\n";
+                  print_string "|>>";
+                  fight battle_st
+                end
+              | IllegalNoPP -> begin
+                  print_string "\nYou've exhausted this move! Try another move \
+                                listed above!\n";
+                  print_string "|>>";
+                  fight battle_st
+                end
+              | IllegalStat -> failwith "IllegalStat (impossible"
+            end
+        in
+        player_turn battle_st
+      in 
+      fight battle
   in
-  play_battle ep
+  play_battle ep false
 
 
 let select_episode () = 

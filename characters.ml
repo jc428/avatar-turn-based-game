@@ -35,7 +35,8 @@ type character = {
 
 type t = {
   characters : character list;
-  new_moves : move list
+  new_moves : move list;
+  json_name : string
 }
 
 let to_element = function
@@ -83,7 +84,8 @@ let from_json file_name =
     new_moves = json 
                 |> member "new moves" 
                 |> to_list 
-                |> List.map move_of_json
+                |> List.map move_of_json;
+    json_name = file_name
   }
 
 let get_names (ch : t) : name list =
@@ -152,3 +154,37 @@ let get_move_by_id_save s id : move =
     | _ -> raise (UnknownMove id)
   in
   helper (get_moves_save s) id
+
+let character_of_json_save (s:t2) j = 
+  let is_player = j |> member "isplayer" |> to_bool in
+  if is_player then {
+    c_name = j |> member "name" |> to_string;
+    c_description = j |> member "description" |> to_string;
+    isplayer = j |> member "isplayer" |> to_bool;
+    c_element = j |> member "element" |> to_string |> to_element;
+    stats = get_stats_save s;
+    moves = get_moves_save s
+  }
+  else
+    {
+      c_name = j |> member "name" |> to_string;
+      c_description = j |> member "description" |> to_string;
+      isplayer = j |> member "isplayer" |> to_bool;
+      c_element = j |> member "element" |> to_string |> to_element;
+      stats = j |> member "stats" |> stats_of_json;
+      moves = j |> member "moves" |> to_list |> List.map move_of_json
+    }
+
+let characters_from_save (ch:t) (s:t2) =
+  let json = Yojson.Basic.from_file (ch.json_name ^ ".json") in
+  {
+    characters = json 
+                 |> member "characters" 
+                 |> to_list 
+                 |> List.map (character_of_json_save s);
+    new_moves = json 
+                |> member "new moves" 
+                |> to_list 
+                |> List.map move_of_json;
+    json_name = ch.json_name
+  }
