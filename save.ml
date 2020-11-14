@@ -21,6 +21,12 @@ let write (ba:Battle.battle) (ch:Characters.t) : unit =
     | Avatar -> "Avatar"
     | _ -> "Bruh"
   in
+  let rec get_new_move_pp new_move_list first_id = 
+    match new_move_list with
+    | h :: t -> if h.id = first.id then h.pp else get_new_move_pp t first_id
+    | [] -> failwith "fucks up at get_new_move_pp for some reason"
+  in
+  let p_name = List.hd (get_names ch) in
   let save =
     `Assoc [("stats", (`Assoc [
         ("health", `Float (get_current_health ba (List.hd (get_names ch)))); 
@@ -39,7 +45,7 @@ let write (ba:Battle.battle) (ch:Characters.t) : unit =
              ("element", `String (string_of_element first.m_element));
              ("description", `String first.m_description);
              ("damage", `Float first.damage);
-             ("pp", `Int first.pp)
+             ("pp", `Int (get_new_move_pp (get_new_moves ch) first.id))
            ]; 
            `Assoc [
              ("id", `Int second.id);
@@ -48,7 +54,7 @@ let write (ba:Battle.battle) (ch:Characters.t) : unit =
              ("element", `String (string_of_element second.m_element));
              ("description", `String second.m_description);
              ("damage", `Float second.damage);
-             ("pp", `Int second.pp)
+             ("pp", `Int (get_move_by_id ch p_name second.id).pp)
            ];
            `Assoc [
              ("id", `Int third.id);
@@ -57,7 +63,7 @@ let write (ba:Battle.battle) (ch:Characters.t) : unit =
              ("element", `String (string_of_element third.m_element));
              ("description", `String third.m_description);
              ("damage", `Float third.damage);
-             ("pp", `Int third.pp)
+             ("pp", `Int (get_move_by_id ch p_name third.id).pp)
            ];
            `Assoc [
              ("id", `Int fourth.id);
@@ -66,7 +72,7 @@ let write (ba:Battle.battle) (ch:Characters.t) : unit =
              ("element", `String (string_of_element fourth.m_element));
              ("description", `String fourth.m_description);
              ("damage", `Float fourth.damage);
-             ("pp", `Int fourth.pp)
+             ("pp", `Int (get_move_by_id ch p_name fourth.id).pp)
            ];
          ]
        )
