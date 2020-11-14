@@ -1,1 +1,46 @@
-[{"health":1,"power":1},[{"id":1,"name":"move1","issuper":false,"element":"1","description":"1","damage":1.0,"pp":1},{"id":2,"name":"move2","issuper":false,"element":"Fire","description":"2","damage":2.0,"pp":2},{"id":3,"name":"move3","issuper":false,"element":"Water","description":"3","damage":3.0,"pp":3},{"id":4,"name":"move4","issuper":false,"element":"Air","description":"4","damage":4.0,"pp":4}]]
+[
+  {
+    "health": 45.0,
+    "power": 1.0,
+    "speed": 1.0,
+    "evasiveness": 1.0
+  },
+  [
+    {
+      "id": 1,
+      "name": "Air blast",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang shoots a powerful blast of air from his staff",
+      "damage": 1.0,
+      "pp": 1
+    },
+    {
+      "id": 2,
+      "name": "Tornado whirl",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang spins a dazzling whirlwind at his opponent",
+      "damage": 2.0,
+      "pp": 2
+    },
+    {
+      "id": 3,
+      "name": "Tornado whirl",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang spins a dazzling whirlwind at his opponent",
+      "damage": 3.0,
+      "pp": 3
+    },
+    {
+      "id": 4,
+      "name": "Tornado whirl",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang spins a dazzling whirlwind at his opponent",
+      "damage": 4.0,
+      "pp": 4
+    }
+  ]
+]

@@ -147,6 +147,36 @@ let rec start_episode f i=
                 end
                 else if (winner = player) then begin
                   print_enemy_line ep enemy 2;
+                  print_string "\n\n You have unlocked a new move."; 
+                  print_moves (Characters.get_new_moves characters);
+                  print_string 
+                    "\nEnter the number for the move you would like to replace 
+                   or enter -1 if you wish to keep your current moves: ";
+                  print_moves (Characters.get_moves characters player);
+                  print_string "\n|>>";
+                  let rec user_input_move () = 
+                    let old_move_id = read_int () in
+                    print_stats (Characters.get_stats characters player);
+                    print_string "\n Enter a stat to upgrade: ";
+                    print_string "\n|>>";
+                    let stat = read_line () in
+                    let lower_stat = String.lowercase_ascii stat in
+                    let res = Battle.battle_end
+                        battle_st player old_move_id 5 lower_stat 1.2 None in
+                    match res with
+                    | Legal final_ba -> Save.write battle_st characters
+                    | IllegalInvalidMove -> begin
+                        print_string "\nPlease enter one of the moves listed above as a \
+                                      number (i.e. 1) \n"; user_input_move () end
+                    | IllegalStat -> begin 
+                        print_string "\nPlease enter one of the stats listed above as a \
+                                      string (i.e. power) \n"; user_input_move () end
+                    | IllegalNoPP -> begin
+                        print_string "IllegalNoPP (impossible)";
+                        user_input_move()
+                      end
+                  in
+                  user_input_move ();
                   print_string ("\n" ^ (Episode.outro ep true));
                   if (Episode.move_to_next_episode ep) then begin
                     start_episode (Episode.next_episode ep ) 1
@@ -157,35 +187,6 @@ let rec start_episode f i=
                   print_enemy_line ep enemy 3;
                   print_string ("\n" ^ (Episode.outro ep false))
                 end
-                (* print_string "\n\n You have unlocked a new move."; 
-                   print_moves (Characters.get_new_moves characters);
-                   print_string "\nEnter the number for the move you would like to 
-                   replace or enter -1 if you wish to keep your current moves: ";
-                   print_moves (Characters.get_moves characters player);
-                   print_string "\n|>>";
-                   let rec user_input_move () = 
-                   let old_move_id = read_int () in
-                   print_stats (Characters.get_stats characters player);
-                   print_string "\n Enter a stat to upgrade: ";
-                   print_string "\n|>>";
-                   let stat = read_line () in
-                   let res = Battle.battle_end
-                      battle_st player old_move_id 5 stat 1.2 None in
-                   match res with
-                   | Legal final_ba -> print_string "save unimplemneted"
-                   (* failwith "write_to_save unimplemented" *)
-                   | IllegalInvalidMove -> begin
-                      print_string "\nPlease enter one of the moves listed above as a \
-                                    number (i.e. 1) \n"; user_input_move () end
-                   | IllegalStat -> begin 
-                      print_string "\nPlease enter one of the stats listed above as a \
-                                    string (i.e. power) \n"; user_input_move () end
-                   | IllegalNoPP -> begin
-                      print_string "IllegalNoPP (impossible)";
-                      user_input_move()
-                    end
-                   in
-                   user_input_move (); *)
               end
             | IllegalInvalidMove -> begin
                 print_string "\nNot a valid move! Try one of the moves \

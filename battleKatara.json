@@ -29,6 +29,24 @@
           "description": "Aang spins a dazzling whirlwind at his opponent",
           "damage": 10.0,
           "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Tornado whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        },
+        {
+          "id": 4,
+          "name": "Tornado whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
         }
       ]
     },

@@ -14,6 +14,12 @@ val init_battle_from_save : Characters.t -> Characters.t2 -> battle
 
 val get_current_health : battle -> Characters.name -> float
 
+val get_power : battle -> Characters.name -> float
+
+val get_speed : battle -> Characters.name -> float
+
+val get_evasiveness: battle -> Characters.name -> float
+
 val get_current_pp : battle -> Characters.name -> int -> int
 
 val set_new_health : battle -> Characters.name -> int -> float
@@ -32,7 +38,9 @@ val update_moves : battle -> Characters.name -> int -> int
 
 (* Updates a character's stats by multiplying the value of a stat *)
 val update_stats : battle -> Characters.name -> string -> float -> 
-Characters.t2 option -> Characters.stats
+  Characters.t2 option -> Characters.stats
+
+val get_player_moves : battle -> Characters.move list
 
 val get_enemy_moves : battle -> Characters.move list
 
