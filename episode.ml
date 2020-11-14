@@ -60,6 +60,10 @@ let current_battle ep =
 let get_characters ep = 
   Characters.from_json ((current_battle ep).character_json)
 
+let get_characters_from_save ep save_name =
+  let ch = get_characters ep in
+  Characters.characters_from_save ch (Characters.from_json_save save_name)
+
 let intro ep = 
   (current_battle ep).intro
 

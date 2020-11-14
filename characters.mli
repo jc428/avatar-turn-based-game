@@ -63,16 +63,23 @@ val get_c_description : t -> name -> description
 val get_moves : t -> name -> move list
 
 (* [get_new_moves] returns a list representing the new moves a character can 
-learn *)
+   learn *)
 val get_new_moves : t -> move list
 
 (* [get_move_by_id] returns a record representing a move from a move id. *)
 val get_move_by_id : t -> name -> int -> move
 
 (* [from_json_save] takes input of the JSON file name to load (DO NOT INCLUDE 
-'.json') and returns an instance of t*)
+   '.json') and returns an instance of t*)
 val from_json_save : string -> t2
 
-(* [update_characters_from_save] takes a character record and updates it with
-updated moves and stats loaded from a save json (t2) *)
-val update_characters_from_save : t -> t2 -> t
+(* [get_stats_save] are the stats for the player. *)
+val get_stats_save : t2 -> stats
+
+(* [get_moves_save] returns a list representing the moveset of character. *)
+val get_moves_save : t2 -> move list
+
+(* [get_move_by_id_save] returns a record representing a move from a move id. *)
+val get_move_by_id_save : t2 -> int -> move
+
+val characters_from_save : t -> t2 -> t

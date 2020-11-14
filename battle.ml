@@ -40,7 +40,23 @@ let get_current_health (ba : battle) name =
   else if name = (my_list_taili (get_names ba.characters)) then ba.enemy_health
   else failwith "name does not belong to player or enemy"
 
-let get_p_move_by_id (ba:battle) name id : move =
+let get_power (ba : battle) name = 
+  if name = (my_list_hd (get_names ba.characters)) then ba.player_power
+  else if name = (my_list_taili (get_names ba.characters)) then ba.player_power
+  else failwith "name does not belong to player or enemy"
+
+let get_speed (ba : battle) name = 
+  if name = (my_list_hd (get_names ba.characters)) then ba.player_speed
+  else if name = (my_list_taili (get_names ba.characters)) then ba.player_speed
+  else failwith "name does not belong to player or enemy"
+
+let get_evasiveness (ba : battle) name = 
+  if name = (my_list_hd (get_names ba.characters)) then ba.player_evasiveness
+  else if name = (my_list_taili (get_names ba.characters)) 
+  then ba.player_evasiveness
+  else failwith "name does not belong to player or enemy"
+
+let get_p_move_by_id (ba : battle) name id : move =
   let rec helper move_list id = 
     match move_list with 
     | m :: t -> if m.id = id then m else helper t id
@@ -125,11 +141,10 @@ let make_move ba name move_id =
       player_evasiveness = ba.player_evasiveness;
     }
 
-
 let update_moves battle name old_move_id new_move_id =
   let filtered_move_list = 
     List.filter (fun move -> move.id <> old_move_id) battle.player_moves in
-  let new_move = get_move_by_id battle.characters name new_move_id in
+  let new_move = List.hd (get_new_moves battle.characters) in
   let new_move_record = {
     id = new_move.id;
     is_super = new_move.is_super;
@@ -152,7 +167,7 @@ let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
   | _ -> failwith "Invalid stat"
 
 let battle_end ba name old_move_id new_move_id stat mult 
-  (s:Characters.t2 option): result =
+    (s:Characters.t2 option): result =
   let check_valid_old_move (ba:battle) old_move_id : bool =
     let rec helper move_list old_move_id = 
       match move_list with 
@@ -161,9 +176,8 @@ let battle_end ba name old_move_id new_move_id stat mult
     in
     helper ba.player_moves old_move_id
   in
-  let check_valid_stat stat =
-    let lower_stat = String.lowercase_ascii stat in
-    match lower_stat with
+  let check_valid_stat (stat : string) =
+    match stat with
     | "health" -> true
     | "power" -> true
     | "speed" -> true
@@ -187,6 +201,9 @@ let battle_end ba name old_move_id new_move_id stat mult
       player_speed = new_stats.speed;
       player_evasiveness = new_stats.evasiveness;
     }
+
+let get_player_moves ba =
+  ba.player_moves
 
 let get_enemy_moves ba =
   ba.enemy_moves

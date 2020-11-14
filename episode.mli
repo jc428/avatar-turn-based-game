@@ -10,6 +10,8 @@ val set_current_battle : t -> int -> unit
 
 val get_characters : t -> Characters.t
 
+val get_characters_from_save : t -> string -> Characters.t
+
 val intro : t -> string
 
 val enemy_line: t -> int -> string

@@ -1,63 +1,79 @@
 open Sys
 open Yojson
+open Characters
 open Battle
 
 (* Declares and sets json values
-
    [> `Assoc of (string * [> `Assoc of (string * [> `String of string ]) list ]) list ] 
 *)
-let write () : unit = 
+let write (ba:Battle.battle) (ch:Characters.t) : unit = 
+  let move_list = Battle.get_player_moves ba in
+  let first = List.nth move_list 0 in
+  let second = List.nth move_list 1 in
+  let third = List.nth move_list 2 in
+  let fourth = List.nth move_list 3 in
+  let string_of_element elt =
+    match elt with 
+    | Air -> "Air "
+    | Fire -> "Fire"
+    | Earth -> "Earth"
+    | Water -> "Water"
+    | Avatar -> "Avatar"
+    | _ -> "Bruh"
+  in
   let save =
-    `List [(`Assoc [
-        ("health", `Float 10.0); 
-        ("power", `Float 10.0);
-        ("speed", `Float 10.0);
-        ("evasiveness", `Float 10.0)
+    `Assoc [("stats", (`Assoc [
+        ("health", `Float (get_current_health ba (List.hd (get_names ch)))); 
+        ("power", `Float (get_power ba (List.hd (get_names ch))));
+        ("speed", `Float (get_speed ba (List.hd (get_names ch))));
+        ("evasiveness", `Float (get_evasiveness ba (List.hd (get_names ch))))
       ]
+      )
       );
 
-       (`List [
+       ("moves", (`List [
            `Assoc [
-             ("id", `Int 1);
-             ("name", `String "move1");
-             ("issuper", `Bool false);
-             ("element", `String "1");
-             ("description", `String "1");
-             ("damage", `Float 1.0);
-             ("pp", `Int 1)
+             ("id", `Int first.id);
+             ("name", `String first.m_name);
+             ("issuper", `Bool first.is_super);
+             ("element", `String (string_of_element first.m_element));
+             ("description", `String first.m_description);
+             ("damage", `Float first.damage);
+             ("pp", `Int first.pp)
            ]; 
            `Assoc [
-             ("id", `Int 2);
-             ("name", `String "move2");
-             ("issuper", `Bool false);
-             ("element", `String "Fire");
-             ("description", `String "2");
-             ("damage", `Float 2.0);
-             ("pp", `Int 2)
+             ("id", `Int second.id);
+             ("name", `String second.m_name);
+             ("issuper", `Bool second.is_super);
+             ("element", `String (string_of_element second.m_element));
+             ("description", `String second.m_description);
+             ("damage", `Float second.damage);
+             ("pp", `Int second.pp)
            ];
            `Assoc [
-             ("id", `Int 3);
-             ("name", `String "move3");
-             ("issuper", `Bool false);
-             ("element", `String "Water");
-             ("description", `String "3");
-             ("damage", `Float 3.0);
-             ("pp", `Int 3)
+             ("id", `Int third.id);
+             ("name", `String third.m_name);
+             ("issuper", `Bool third.is_super);
+             ("element", `String (string_of_element third.m_element));
+             ("description", `String third.m_description);
+             ("damage", `Float third.damage);
+             ("pp", `Int third.pp)
            ];
            `Assoc [
-             ("id", `Int 4);
-             ("name", `String "move4");
-             ("issuper", `Bool false);
-             ("element", `String "Air");
-             ("description", `String "4");
-             ("damage", `Float 4.0);
-             ("pp", `Int 4)
+             ("id", `Int fourth.id);
+             ("name", `String fourth.m_name);
+             ("issuper", `Bool fourth.is_super);
+             ("element", `String (string_of_element fourth.m_element));
+             ("description", `String fourth.m_description);
+             ("damage", `Float fourth.damage);
+             ("pp", `Int fourth.pp)
            ];
          ]
        )
+       )
       ]
-    in 
-    Yojson.Basic.to_file "save_file.json" save
+  in 
+  Yojson.Basic.to_file "save_file.json" save
 
 
 (* 
