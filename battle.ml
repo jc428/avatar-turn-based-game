@@ -24,17 +24,6 @@ let init_battle ch = {
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
 }
 
-let init_battle_from_save (ch : Characters.t) (s : Characters.t2) = {
-  characters = ch;
-  player_health = (get_stats_save s).health;
-  player_power = (get_stats_save s).power;
-  player_speed = (get_stats_save s).speed;
-  player_evasiveness = (get_stats_save s).evasiveness;
-  player_moves = (get_moves_save s);
-  enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
-  enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
-}
-
 let my_list_hd lst = 
   match lst with
   | h :: t -> h 
@@ -153,12 +142,7 @@ let update_moves battle name old_move_id new_move_id =
   in new_move_record :: filtered_move_list
 
 let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
-  let stats_helper battle name s = 
-    match s with
-    | None -> get_stats battle.characters name
-    | Some save -> get_stats_save save
-  in
-  let stats = stats_helper battle name s in
+  let stats = get_stats battle.characters name in
   let stat = String.lowercase_ascii stat in
   match stat with
   | "health" -> {stats with health = stats.health *. mult }

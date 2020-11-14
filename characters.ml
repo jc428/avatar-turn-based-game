@@ -139,16 +139,5 @@ let from_json_save file_name : t2 =
     moves = json |> member "moves" |> to_list |> List.map move_of_json
   }
 
-let get_stats_save s = 
-  s.stats
-
-let get_moves_save s = 
-  s.moves
-
-let get_move_by_id_save s id : move =
-  let rec helper move_list id = 
-    match move_list with 
-    | m :: t -> if m.id = id then m else helper t id
-    | _ -> raise (UnknownMove id)
-  in
-  helper (get_moves_save s) id
+let update_characters_from_save ch s =
+  failwith "unimplemented"
