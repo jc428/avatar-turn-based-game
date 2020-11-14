@@ -8,6 +8,8 @@ val from_json : string -> t
 
 val set_current_battle : t -> int -> unit
 
+val get_characters : t -> Characters.t
+
 val intro : t -> string
 
 val enemy_line: t -> int -> string
@@ -18,9 +20,9 @@ val outro : t-> bool -> string
 
 val current_battle: t -> battle
 
-val move_to_next_battle: t -> bool
+val next_battle: t -> t
 
-val episode_done : t -> bool 
+val move_to_next_episode: t -> bool
 
 
 

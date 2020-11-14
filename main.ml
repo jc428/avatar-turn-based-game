@@ -90,26 +90,11 @@ let battle_intro player characters battle enemy ep =
   print_string ("\n\n Player starting health: " ^ (health_str battle player));
   print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
 
-let battle_outro winner player enemy ep =
-  if (winner = player) then begin
-    (* suggest a new move for the player to learn *)
-    (* player selects move to replace (or not) *)
-    (* suggest stat categories for the player to upgrade *)
-    (* battle_end with user chosen values *)
-    print_enemy_line ep enemy 2;
-    print_string ("\n" ^ (Episode.outro ep true))
-  end
-  else begin
-    print_enemy_line ep enemy 3;
-    print_string ("\n" ^ (Episode.outro ep false))
-  end
-
-let play_battle str ep =
+let rec play_battle ep =
   let ai_dummy_move ba =
     Random.int (List.length (Battle.get_enemy_moves ba)) + 1
   in
-  let characters = Characters.from_json str in
-  print_string "here";
+  let characters = Episode.get_characters ep in
   let battle = characters |> Battle.init_battle in 
   let player = 
     match Characters.get_names characters with
@@ -159,40 +144,42 @@ let play_battle str ep =
               else if (winner = player) then begin
                 print_enemy_line ep enemy 2;
                 print_string ("\n" ^ (Episode.outro ep true));
-                print_string "\n\n You have unlocked a new move."; 
-                print_moves (Characters.get_new_moves characters);
-                print_string "\nEnter the number for the move you would like to 
-                  replace or enter -1 if you wish to keep your current moves: ";
-                print_moves (Characters.get_moves characters player);
-                print_string "\n|>>";
-                let rec user_input_move () = 
-                  let old_move_id = read_int () in
-                  print_stats (Characters.get_stats characters player);
-                  print_string "\n Enter a stat to upgrade: ";
-                  print_string "\n|>>";
-                  let stat = read_line () in
-                  let res = Battle.battle_end
-                      battle_st player old_move_id 5 stat 1.2 None in
-                  match res with
-                  | Legal final_ba -> print_string "save unimplemneted"
-                  (* failwith "write_to_save unimplemented" *)
-                  | IllegalInvalidMove -> begin
-                      print_string "\nPlease enter one of the moves listed above as a \
-                                    number (i.e. 1) \n"; user_input_move () end
-                  | IllegalStat -> begin 
-                      print_string "\nPlease enter one of the stats listed above as a \
-                                    string (i.e. power) \n"; user_input_move () end
-                  | IllegalNoPP -> begin
-                      print_string "IllegalNoPP (impossible)";
-                      user_input_move()
-                    end
-                in
-                user_input_move ();
+                if (Episode.move_to_next_episode ep) then ()
+                else play_battle (next_battle ep) 
               end
               else begin
                 print_enemy_line ep enemy 3;
                 print_string ("\n" ^ (Episode.outro ep false))
               end
+              (* print_string "\n\n You have unlocked a new move."; 
+                 print_moves (Characters.get_new_moves characters);
+                 print_string "\nEnter the number for the move you would like to 
+                 replace or enter -1 if you wish to keep your current moves: ";
+                 print_moves (Characters.get_moves characters player);
+                 print_string "\n|>>";
+                 let rec user_input_move () = 
+                 let old_move_id = read_int () in
+                 print_stats (Characters.get_stats characters player);
+                 print_string "\n Enter a stat to upgrade: ";
+                 print_string "\n|>>";
+                 let stat = read_line () in
+                 let res = Battle.battle_end
+                    battle_st player old_move_id 5 stat 1.2 None in
+                 match res with
+                 | Legal final_ba -> print_string "save unimplemneted"
+                 (* failwith "write_to_save unimplemented" *)
+                 | IllegalInvalidMove -> begin
+                    print_string "\nPlease enter one of the moves listed above as a \
+                                  number (i.e. 1) \n"; user_input_move () end
+                 | IllegalStat -> begin 
+                    print_string "\nPlease enter one of the stats listed above as a \
+                                  string (i.e. power) \n"; user_input_move () end
+                 | IllegalNoPP -> begin
+                    print_string "IllegalNoPP (impossible)";
+                    user_input_move()
+                  end
+                 in
+                 user_input_move (); *)
             end
           | IllegalInvalidMove -> begin
               print_string "\nNot a valid move! Try one of the moves \
@@ -215,9 +202,9 @@ let play_battle str ep =
 
 let start_episode f = 
   let ep = Episode.from_json f in
-  Episode.set_current_battle ep 7;
+  Episode.set_current_battle ep 6;
   print_string ("\n " ^ (Episode.intro ep));
-  play_battle "MS1multiplemoves" ep
+  play_battle ep
 
 let select_episode () = 
   print_endline "\n Select one of the following: \n 

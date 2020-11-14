@@ -64,5 +64,16 @@
         }
       ]
     }
+  ],
+  "new moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 8.0,
+      "pp": 25
+    }
   ]
 }

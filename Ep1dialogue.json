@@ -2,6 +2,7 @@
   "battles": [
     {
       "id": 1,
+      "character json": "",
       "intro": "Welcome to your first battle. Prepare to meet your opponent: Sokka!",
       "enemy text": [
         "My first girlfriend turned into the moon. But I'm gonna turn you into dead meat!",
@@ -18,6 +19,7 @@
     },
     {
       "id": 2,
+      "character json": "",
       "intro": "Welcome to your second battle. Prepare to meet your opponent: Momo!",
       "enemy text": [
         "nnggggggg ah kkkurrrr gllaaaa",
@@ -34,6 +36,7 @@
     },
     {
       "id": 3,
+      "character json": "",
       "intro": "Welcome to your third battle. Prepare to meet your opponent: Toph!",
       "enemy text": [
         "The best part about being blind is I don't have to see your ugly face. Bleh.",
@@ -50,6 +53,7 @@
     },
     {
       "id": 4,
+      "character json": "",
       "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Appa!",
       "enemy text": [
         "hhhggrrr hmph",
@@ -66,6 +70,7 @@
     },
     {
       "id": 5,
+      "character json": "",
       "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Suki!",
       "enemy text": [
         "Think you can win against a Kyoshi warrior?",
@@ -82,6 +87,7 @@
     },
     {
       "id": 6,
+      "character json": "battleKatara",
       "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Katara!",
       "enemy text": [
         "Hi, Aang. As much as I lo- care about you, I think we both know who's gonna win this.",
@@ -98,6 +104,7 @@
     },
     {
       "id": 7,
+      "character json": "MS1multiplemoves",
       "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Zuko!",
       "enemy text": [
         "I might be bad at being good, but I'm pretty darn good at being bad. Get ready to lose, Avatar.",
@@ -109,8 +116,9 @@
         "Your scar is on the wrong side, coward.",
         "Uhh, Zuko? Are you sure you're Team Avatar?"
       ],
-      "outro_win": "Congratulations, you defeated Zuko! You may proceed to the next battle.",
+      "outro_win": "Congratulations, you defeated Zuko! You have completed the episode!",
       "outro_lose": "Zuko wins! Can't believe you lost to a emotionally unstable teenage boy who has a constant interal struggle with his moral compass."
     }
-  ]
+  ],
+  "next episode": "Ep5dialogue.json"
 }
