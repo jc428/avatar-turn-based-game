@@ -81,6 +81,9 @@ let next_battle ep =
     next_episode = ep.next_episode;
   }
 
+let next_episode ep =
+  ep.next_episode
+
 let move_to_next_episode ep =
   ep.last_battle
 

@@ -22,6 +22,8 @@ val current_battle: t -> battle
 
 val next_battle: t -> t
 
+val next_episode: t -> string
+
 val move_to_next_episode: t -> bool
 
 
