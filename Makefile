@@ -21,4 +21,4 @@ clean:
 	ocamlbuild -clean
 
 zip: 
-	zip avatar.zip *.ml *.json _tags Makefile
+	zip -r avatar.zip *.mli* *.ml* *.json* *.txt* _tags Makefile
