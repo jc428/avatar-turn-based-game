@@ -1,4 +1,4 @@
-MODULES= main battle characters authors save episode
+MODULES= main battle characters authors save episode sp_play mp_play
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 TEST=test.byte
