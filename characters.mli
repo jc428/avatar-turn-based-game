@@ -1,7 +1,7 @@
 (** 
    Representation of static character data.
 
-   This module represents the data stored in episode files, including
+   This module represents the data stored in battle files, including
    the characters, moves and other relevant info. It handles loading of that 
    data from JSON, querying the data, and loading a specific JSON file.
 *)
