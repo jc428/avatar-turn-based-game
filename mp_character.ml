@@ -1,8 +1,10 @@
 type name = string
+type id = int
 type element = Fire | Earth | Water | Air | Avatar | Bruh
 
 exception UnknownCharacter of name
-exception UnknownMove of int
+exception UnknownMove of id
+exception UnknownId of id
 
 type description = string
 
@@ -23,13 +25,16 @@ type stats = {
   evasiveness: float
 }
 
-type t = {
-  c_name : name;
-  c_description : string;
-  c_element : element;
-  stats : stats;
-  moves : move list
-}
+type character = 
+  {
+    c_name : name;
+    c_description : string;
+    c_element : element;
+    stats : stats;
+    moves : move list
+  }
+
+type t = id * character
 
 let aang = { 
   c_name = "Aang";
@@ -123,28 +128,45 @@ let katara = {
     ]
 }
 
-let characters = [aang; zuko; ty_lee; katara]
+let characters = [(1,aang); (2,zuko); (3,ty_lee); (4,katara)]
 
 let is_character name = 
-  let rec helper lst =
-    match lst with 
-    | c :: t -> if c.c_name = name then true else helper t
+  let rec helper assoc =
+    match assoc with 
+    | (i, n) :: t -> if n.c_name = name then true else helper t
     | [] -> false
   in helper characters
 
 let names = 
-  let rec helper (c_list) acc = 
-    match c_list with 
-    | c :: t -> helper t (c.c_name :: acc)
+  let rec helper lst acc = 
+    match lst with 
+    | (i,n ) :: t -> helper t (n.c_name :: acc)
     | _ -> acc
   in
   List.rev (helper characters [])
 
+let id character = 
+  match character with 
+  | (i, c) -> i
+
+let id_to_name id = 
+  match List.assoc_opt id characters with 
+  | None -> raise (UnknownId id)
+  | Some c -> c.c_name 
+
 let c_by_name name = 
   let rec helper lst =
     match lst with 
-    | c :: t -> if c.c_name = name then c else helper t
+    | (i, c) :: t -> if c.c_name = name then c else helper t
     | [] -> raise (UnknownCharacter name)
+  in 
+  helper characters
+
+let c_by_id id = 
+  let rec helper lst =
+    match lst with 
+    | (i, c) :: t -> if i = id then c else helper t
+    | [] -> raise (UnknownId id)
   in 
   helper characters
 
@@ -172,4 +194,5 @@ let c_move_by_id name id : move =
   in
   helper (c_moves name) id
 
-
+let remove_character name (lst: t list) =
+  List.filter (fun (i, c) -> c.c_name <> name) lst
