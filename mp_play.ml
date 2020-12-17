@@ -71,7 +71,19 @@ let select_players () =
   print_string ("\nPlayer 4 playing as " ^ player4 );
   [player1; player2; player3; player4]
 
-let start_battle battle = 
+let player_order btl = 
+  let fastest_teammember team = 
+    match team with 
+      (a, b) -> begin 
+        let speedA = Mp_battle.speed a in 
+        let speedB = Mp_battle.speed b in 
+        if (speedA > speedB) then (a, speedA)
+        else (b, speedB)
+      end
+
+
+
+let start_battle btl = 
   ()
 
 let play_mp_game () =

@@ -13,6 +13,10 @@ exception PlayerNotFound of name
     in Mp_character.characters *)
 val init_battle : name list -> t
 
+val team1 : t -> name * name 
+
+val team2 : t -> name * name
+
 (** [current_health btl name] returns the current health value of the player
     with name [name] in the battle [btl] *)
 val current_health : t -> name -> float
