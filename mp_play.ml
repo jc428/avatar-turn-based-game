@@ -70,7 +70,15 @@ let rec select_character lst str =
         select_character lst str
     end
   | Some i -> begin 
-      try (Mp_character.id_to_name i) with 
+      try 
+        (if not (List.mem (Mp_character.id_to_name i) lst) then begin
+            print_string "\nNot a valid option! \
+                          Try one of the choices listed above. \n";
+            print_string "|>>";
+            select_character lst str
+          end
+         else Mp_character.id_to_name i) 
+      with 
       | Mp_character.UnknownId i -> begin 
           print_string "\nNot a valid option! \
                         Try one of the choices listed above. \n";
@@ -84,25 +92,25 @@ let select_players () =
   print_string "\n\nEnter the number of Player 1's character: ";
   print_characters !characters;
   print_string "\n |>> ";
-  let player1 = select_character !characters char_str in 
+  let player1 = select_character (Mp_character.names !characters) char_str in 
   characters := Mp_character.remove_character player1 !characters;
   print_string ("\nPlayer 1 playing as " ^ player1 );
   print_string "\nEnter the number of Player 2's character: ";
   print_characters !characters;
   print_string "\n |>> ";
-  let player2 = select_character !characters char_str in 
+  let player2 = select_character (Mp_character.names !characters) char_str in 
   characters := Mp_character.remove_character player2 !characters;
   print_string ("\nPlayer 2 playing as " ^ player2 );
   print_string "\n\nEnter the number of Player 3's character: ";
   print_characters !characters;
   print_string "\n |>> ";
-  let player3 = select_character Mp_character.characters char_str in 
+  let player3 = select_character (Mp_character.names !characters) char_str in 
   characters := Mp_character.remove_character player3 !characters;
   print_string ("\nPlayer 3 playing as " ^ player3 );
   print_string "\n\nEnter the number of Player 4's character: ";
   print_characters !characters;
   print_string "\n |>> ";
-  let player4 = select_character Mp_character.characters char_str in
+  let player4 = select_character (Mp_character.names !characters) char_str in
   characters := Mp_character.remove_character player1 !characters; 
   print_string ("\nPlayer 4 playing as " ^ player4 );
   [player1; player2; player3; player4]
@@ -116,7 +124,8 @@ let start_battle battle =
   let rec fight battle_st =
     let rec player_turn btl x = 
       let player = List.nth players x in
-      print_string ("\n\nPlayer " ^ string_of_int (x+1) ^ "'s turn- make a move!");
+      print_string ("\n\nPlayer " ^ string_of_int (x+1) ^ 
+                    "'s turn- make a move!");
       print_moves battle_st player (Mp_battle.player_moves btl player);
       print_string "\n|>>";
       match (read_int_opt ())with
@@ -130,12 +139,13 @@ let start_battle battle =
           let rec chars acc lst =
             match lst with
             | [] -> acc
-            | a :: t -> if List.mem (Mp_character.name a) players then chars (a :: acc) t else chars acc t
+            | a :: t -> if List.mem (Mp_character.name a) players 
+              then chars (a :: acc) t else chars acc t
           in let c = List.rev (chars [] Mp_character.characters) in
           print_characters c;
           print_string target_str;
           print_string "\n |>> ";
-          let target = select_character c target_str in
+          let target = select_character players target_str in
           match Mp_battle.make_move battle_st player i target with
           | Legal battle_nxt -> begin
               let winner = winner battle_nxt pl1 pl2 pl3 pl4 in
@@ -164,8 +174,8 @@ let start_battle battle =
                 let rec helper () = 
                   match (read_int_opt ()) with
                   | None -> begin
-                      print_string "\nPlease enter one of the options listed above as a \
-                                    number (i.e. 1) \n";
+                      print_string "\nPlease enter one of the options listed \
+                                    above as a number (i.e. 1) \n";
                       print_string "|>>";
                       helper ()
                     end
