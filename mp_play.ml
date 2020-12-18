@@ -141,7 +141,7 @@ let start_battle battle =
               let winner = winner battle_nxt pl1 pl2 pl3 pl4 in
               if (winner = []) then begin
                 print_battle_state battle_nxt pl1 pl2 pl3 pl4;
-                player_turn battle_nxt (if x = 0 || x = 1 then x + 2 else x - 2)
+                player_turn battle_nxt (if x = 0 || x = 1 then x + 2 else x - 1)
               end
               else begin
                 let line = begin
