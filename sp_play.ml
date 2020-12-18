@@ -97,6 +97,7 @@ let battle_intro player characters battle enemy ep =
   print_enemy_line ep enemy 0;
   player_response player ep;
   print_enemy_line ep enemy 1;
+  pause ();
   print_string ("\n\n Player starting health: " ^ (health_str battle player));
   print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
 
@@ -140,9 +141,11 @@ and play_battle ep is_from_save =
             | IllegalNoPP -> btl
             | IllegalStat -> failwith "IllegalStat (impossible)"
           in
+          pause ();
           print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
                         (Characters.get_move_by_id characters enemy x).m_name);
           print_battle_state battle_nxt player enemy;
+          pause ();
           fight battle_nxt
         in
         print_string "\n Player's turn- make a move!";
