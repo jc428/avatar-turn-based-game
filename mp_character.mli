@@ -44,6 +44,8 @@ val characters : t list
 
 val id : t -> id
 
+val name : t -> name
+
 (** [is_character] returns true if [name] is the name of a character in
     [characters] and false otherwise *)
 val is_character : name -> bool

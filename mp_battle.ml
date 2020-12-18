@@ -63,6 +63,15 @@ let is_team2 btl name =
   match btl.team2.members with
   | (a, b) -> name = a || name = b
 
+let players btl = 
+  let t1 = 
+    match btl.team1.members with
+    | (a, b) -> [a;b]
+  in let t2 =
+       match btl.team2.members with
+       | (a, b) -> [a;b]
+  in t1 @ t2
+
 let player_stats btl name = 
   let helper team = 
     match team.members with 

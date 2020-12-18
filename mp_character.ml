@@ -145,6 +145,10 @@ let names =
   in
   List.rev (helper characters [])
 
+let name (character: t) =
+  match character with
+  | (i,c) -> c.c_name
+
 let id character = 
   match character with 
   | (i, c) -> i
