@@ -137,13 +137,17 @@ let is_character name =
     | [] -> false
   in helper characters
 
-let names = 
+let names char_list = 
   let rec helper lst acc = 
     match lst with 
     | (i,n ) :: t -> helper t (n.c_name :: acc)
     | _ -> acc
   in
-  List.rev (helper characters [])
+  List.rev (helper char_list [])
+
+let name (character: t) =
+  match character with
+  | (i,c) -> c.c_name
 
 let id character = 
   match character with 

@@ -1,9 +1,11 @@
 MODULES= main battle characters authors save episode sp_play mp_play mp_character mp_battle
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
+MLIS=$(MODULES:=.mli)
 TEST=test.byte
 MAIN=main.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
+PKGS=unix,ounit2,str,yojson,ANSITerminal
 
 default: build
 	utop
@@ -22,9 +24,9 @@ docs-public: build
 		-html -stars -d doc.public $(MLIS)
 
 docs-private: build
-	mkdir -p doc.public
+	mkdir -p doc.private
 	ocamlfind ocamldoc -I _build -package $(PKGS) \
-		-html -stars -d doc.public \
+		-html -stars -d doc.private \
 		-inv-merge-ml-mli -m A -hide-warnings $(MLIS) $(MLS)
 
 play:

@@ -69,6 +69,15 @@ let is_team2 btl name =
   match btl.team2.members with
   | (a, b) -> name = a || name = b
 
+let players btl = 
+  let t1 = 
+    match btl.team1.members with
+    | (a, b) -> [a;b]
+  in let t2 =
+       match btl.team2.members with
+       | (a, b) -> [a;b]
+  in t1 @ t2
+
 let player_stats btl name = 
   let helper team = 
     match team.members with 
@@ -145,58 +154,141 @@ let update_move_list btl name id =
   let filtered_move_list =  List.filter (fun m -> m.id <> id) moves in
   updated_move :: filtered_move_list 
 
-let update_team team btl name id target= 
+let update_team team btl name id target = 
   let old_stats = player_stats btl target in 
   let new_stats =  { 
     health = new_health btl name id target;
     power = old_stats.power;
     speed = old_stats.speed;
     evasiveness = old_stats.evasiveness
-  }
-  in
-  match team.members with 
-    (a, b) -> if target = a then {
+  } in
+  match team.members with
+    (a, b) -> if target = a && name = b then { (* target a name b -> probably healing *)
       members = team.members;
       playerA_name = team.playerA_name;
       playerA_description = team.playerA_description;
       playerA_element = team.playerA_element;
       playerA_stats = new_stats; 
-      playerA_moves = update_move_list btl target id;
+      playerA_moves = team.playerA_moves;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = team.playerB_stats;
+      playerB_moves = update_move_list btl name id;
+    }
+    else if target = b && name = a then {  (* target b name a -> probably healing *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = team.playerA_stats; 
+      playerA_moves = update_move_list btl name id;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = new_stats;
+      playerB_moves = team.playerB_moves;
+    }
+    else if target = a then {         (* target a name other team *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = new_stats; 
+      playerA_moves = team.playerA_moves;
       playerB_name = team.playerB_name;
       playerB_description = team.playerB_description;
       playerB_element = team.playerB_element;
       playerB_stats = team.playerB_stats;
       playerB_moves = team.playerB_moves;
     }
-    else  {
+    else if target = b then {         (* target b name other team *)
       members = team.members;
       playerA_name = team.playerA_name;
       playerA_description = team.playerA_description;
       playerA_element = team.playerA_element;
-      playerA_stats = old_stats; 
+      playerA_stats = team.playerA_stats; 
+      playerA_moves = team.playerA_moves;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = new_stats;
+      playerB_moves = team.playerB_moves;
+    }
+    else if name = a then {           (* name a target other team *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = team.playerA_stats; 
+      playerA_moves = update_move_list btl name id;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = team.playerB_stats;
+      playerB_moves = team.playerB_moves;
+    }
+    else {                             (* name b target other team *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = team.playerA_stats; 
       playerA_moves = team.playerA_moves;
       playerB_name = team.playerB_name;
       playerB_description = team.playerB_description;
       playerB_element = team.playerB_element;
       playerB_stats = team.playerB_stats;
-      playerB_moves = update_move_list btl target id;
-    } 
+      playerB_moves = update_move_list btl name id;
+    }
+(* Before Rachel's edit: *)
+(* (a, b) -> if target = a then {
+   members = team.members;
+   playerA_name = team.playerA_name;
+   playerA_description = team.playerA_description;
+   playerA_element = team.playerA_element;
+   playerA_stats = new_stats; 
+   playerA_moves = update_move_list btl target id;
+   playerB_name = team.playerB_name;
+   playerB_description = team.playerB_description;
+   playerB_element = team.playerB_element;
+   playerB_stats = team.playerB_stats;
+   playerB_moves = team.playerB_moves;
+   }
+   else  {
+   members = team.members;
+   playerA_name = team.playerA_name;
+   playerA_description = team.playerA_description;
+   playerA_element = team.playerA_element;
+   playerA_stats = old_stats; 
+   playerA_moves = team.playerA_moves;
+   playerB_name = team.playerB_name;
+   playerB_description = team.playerB_description;
+   playerB_element = team.playerB_element;
+   playerB_stats = team.playerB_stats;
+   playerB_moves = update_move_list btl target id;
+   }  *)
 
 let make_move btl name id target = 
   match move_by_id btl name id with 
   | move -> begin 
-      if is_team1 btl name then 
-        let team1 = update_team btl.team1 btl name id target in 
-        Legal {
+      Legal {
+        team1 = update_team btl.team1 btl name id target;
+        team2 = update_team btl.team2 btl name id target
+      }
+      (* before Rachel's edit: *)
+      (* if is_team1 btl name then 
+         let team1 = update_team btl.team1 btl name id target in 
+         Legal {
           team1 = team1;
           team2 = btl.team2
-        }
-      else 
-        let team2 = update_team btl.team2 btl name id target in 
-        Legal {
+         }
+         else 
+         let team2 = update_team btl.team2 btl name id target in 
+         Legal {
           team1 = btl.team2;
           team2 = team2
-        }
+         } *)
     end
   | exception UnknownMove id -> IllegalInvalidMove
 

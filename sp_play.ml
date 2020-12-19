@@ -219,7 +219,7 @@ and play_battle ep is_from_save =
                 print_string "|>>";
                 fight battle_st
               end
-            | IllegalStat -> failwith "IllegalStat (impossible"
+            | IllegalStat -> failwith "IllegalStat (impossible)"
           end
       in
       player_turn battle_st

@@ -18,6 +18,8 @@ val team1 : t -> name * name
 
 (** [team2 btl] returns the names of the two players in team 2 as a tuple*)
 val team2 : t -> name * name
+(** [players btl] returns a list of all four players in battle [btl]*)
+val players : t -> name list
 
 (** [current_health btl name] returns the current health value of the player
     with name [name] in the battle [btl] *)

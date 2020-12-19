@@ -44,12 +44,15 @@ val characters : t list
 
 val id : t -> id
 
+val name : t -> name
+
 (** [is_character] returns true if [name] is the name of a character in
     [characters] and false otherwise *)
 val is_character : name -> bool
 
-(** [get_names] returns a list of the names of all characters in [characters] *)
-val names : name list 
+(** [get_names char_list] returns a list of the names of all characters in a 
+    list of characters [char_list] *)
+val names : t list -> name list 
 
 (** [id_to_name id] returns the name of the character with id [id] *)
 val id_to_name : id -> name 
