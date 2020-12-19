@@ -146,6 +146,9 @@ let start_battle battle =
             List.nth players (List.hd (List.filter (fun y -> y != x) [2;3]))
         end
       in
+      let living_players = 
+        List.filter (fun y -> not (List.mem y (dead_list btl players))) players
+      in
       print_string ("\n\nPlayer " ^ string_of_int (x+1) ^ 
                     "'s turn- make a move!");
       print_moves battle_st player (Mp_battle.player_moves btl player);
@@ -161,13 +164,13 @@ let start_battle battle =
           let rec chars acc lst =
             match lst with
             | [] -> acc
-            | a :: t -> if List.mem (Mp_character.name a) players 
+            | a :: t -> if List.mem (Mp_character.name a) living_players 
               then chars (a :: acc) t else chars acc t
           in let c = List.rev (chars [] Mp_character.characters) in
           print_characters c;
           print_string target_str;
           print_string "\n |>> ";
-          let target = select_character players target_str in
+          let target = select_character living_players target_str in
           match Mp_battle.mp_make_move battle_st player i target with
           | Legal battle_nxt -> begin
               let winner = winner battle_nxt pl1 pl2 pl3 pl4 in
@@ -198,7 +201,8 @@ let start_battle battle =
                    (winner != [1;2] && winner != [3;4])
                 then begin
                   print_battle_state battle_nxt pl1 pl2 pl3 pl4;
-                  player_turn battle_nxt (if x = 0 || x = 1 then x + 2 else x - 1)
+                  player_turn battle_nxt (if x = 0 || x = 1 
+                                          then x + 2 else x - 1)
                 end
                 else
                   pause ();

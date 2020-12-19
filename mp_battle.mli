@@ -8,7 +8,7 @@ exception PlayerNotFound of name
 
 (** [mp_init_battle names] creates a mp_battle from a list of
     character names [names] 
-    Require: name is length 4 
+    Require: names has length 4 
     Raise: UnknownCharacter name if there are no character with name [name]
     in Mp_character.characters *)
 val mp_init_battle : name list -> t
