@@ -1,7 +1,9 @@
 (** Representation of static character data. *)
 
+(** Type of a multiplay character *)
 type t
 
+(** Type of character *)
 type character
 
 type name = string
@@ -19,6 +21,7 @@ exception UnknownId of id
 (* UnknownMove is thrown when attempting to call on unknown move *)
 exception UnknownMove of int
 
+(** Type of the properties of a character *)
 type stats = {
   health: float;
   power: float;
@@ -26,8 +29,11 @@ type stats = {
   evasiveness: float
 }
 
+(** Type of character and move element
+    Determines effectiveness of moves*)
 type element = Fire | Earth | Water | Air | Avatar | Bruh
 
+(** Type of character moves *)
 type move = {
   id: int;
   is_super: bool;
@@ -42,8 +48,10 @@ type move = {
     for the player and the opponent *)
 val characters : t list
 
+(** [id character] is the id of the character [character] *)
 val id : t -> id
 
+(** [name character] is the name of the character [character] *)
 val name : t -> name
 
 (** [is_character] returns true if [name] is the name of a character in
@@ -76,5 +84,8 @@ val c_moves : name -> move list
 (** [c_move_by_id] returns a record representing a move from a move id. *)
 val c_move_by_id : name -> int -> move
 
+(** [remove_character name lst] removes the character with name [name]
+    from [lst] 
+    [lst] is unchanged if no character with [name] is in [lst] *)
 val remove_character : name -> t list -> t list
 
