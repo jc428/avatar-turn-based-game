@@ -55,6 +55,12 @@ let mp_init_battle names =
     {team1 = team1; team2 = team2} 
   | _ -> failwith "precondition violated"
 
+let team1 btl = 
+  btl.team1.members
+
+let team2 btl = 
+  btl.team2.members
+
 let is_team1 btl name = 
   match btl.team1.members with
   | (a, b) -> name = a || name = b

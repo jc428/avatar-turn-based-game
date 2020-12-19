@@ -13,6 +13,11 @@ exception PlayerNotFound of name
     in Mp_character.characters *)
 val mp_init_battle : name list -> t
 
+(** [team1 btl] returns the names of the two players in team 2 as a tuple*)
+val team1 : t -> name * name 
+
+(** [team2 btl] returns the names of the two players in team 2 as a tuple*)
+val team2 : t -> name * name
 (** [players btl] returns a list of all four players in battle [btl]*)
 val players : t -> name list
 
