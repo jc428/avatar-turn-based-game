@@ -1,6 +1,7 @@
 open OUnit2
 open Characters
 open Battle
+open Mp_battle
 (********************************************************************
    Re-using helper functions from A2 to compare set-like lists & print lists
  ********************************************************************)
@@ -128,7 +129,7 @@ let characters_tests =
   ]
 
 (* start of battle tests*)
-let extract legal = 
+let extract (legal : Battle.result) = 
   match legal with 
   | Legal t -> t
   | IllegalInvalidMove -> raise (Failure "IllegalInvalidMove")
@@ -272,10 +273,89 @@ let battle_tests =
       }]
   ]
 
+
+(* multiplayer battle test *)
+let mp_current_health_test 
+    (name : string) 
+    (btl : Mp_battle.t)
+    (name : name)
+    (expected_output : float) : test = 
+  name >:: (fun _ -> 
+      assert_equal expected_output (current_health btl name) 
+        ~printer: string_of_float)
+
+let mp_current_pp_test 
+    (name : string) 
+    (btl : Mp_battle.t)
+    (name : name)
+    (move_id : int)
+    (expected_output : int) : test = 
+  name >:: (fun _ -> 
+      assert_equal expected_output (current_pp btl name move_id)
+        ~printer: string_of_int)
+
+let mp_new_health_test
+    (name : string) 
+    (btl : Mp_battle.t)
+    (name : name)
+    (move_id : int)
+    (target : name)
+    (expected_output : float) : test = 
+  name >:: (fun _ -> 
+      assert_equal expected_output (new_health btl name move_id target)
+        ~printer: string_of_float) 
+
+let mp_extract (legal : Mp_battle.result) = 
+  match legal with 
+  | Legal t -> t
+  | IllegalInvalidMove -> raise (Failure "IllegalInvalidMove")
+  | IllegalNoPP -> raise (Failure "IllegalNoPP")
+
+let btl = mp_init_battle ["Aang";"Zuko";"Ty Lee";"Katara"] 
+let btl2_raw = mp_make_move btl "Aang" 1 "Ty Lee"
+let btl2 = mp_extract btl2_raw
+
+(* let ba3_raw = mp_make_move ba "Aang" 1
+   let ba3 = extract ba3_raw
+   let ba4_raw = make_move ba "Zuko" 1
+   let ba4 = extract ba4_raw *)
+
+let mp_battle_tests = [
+  mp_current_health_test "mp initial health Aang" btl "Aang" 100.0;
+  mp_current_health_test "mp initial health Zuko" btl "Zuko" 69.0;
+  "name does not exist" >:: 
+  (fun _ -> assert_raises 
+      (Failure "name does not belong to player or enemy") 
+      (fun () -> current_health btl "Borat"));
+
+  mp_current_pp_test "mp initial pp of Aang move 1" btl "Aang" 1 10;
+  "name does not exist" >:: 
+  (fun _ -> assert_raises 
+      (Failure "name does not belong to player or enemy") 
+      (fun () -> current_pp btl "Borat" 1));
+
+  mp_new_health_test "mp Aang attacks Ty Lee w/ move 1" btl "Aang" 1 "Ty Lee" 85.0;
+  "name does not exist" >:: 
+  (fun _ -> assert_raises 
+      (Failure "name does not belong to player or enemy") 
+      (fun () -> new_health btl "Borat" 1 "Boop"));
+
+  mp_current_pp_test "mp Aang pp after move 1 used once" btl2 "Aang" 1 9;
+
+  mp_current_health_test "mp post-move health Aang" btl2 "Aang" 100.0;
+  mp_current_health_test "mp post-move health Ty Lee" btl2 "Zuko" 84.0;
+  "mp aang move 69 should not exist" >:: (fun _ -> 
+      assert_equal
+        (mp_make_move btl2 "Aang" 69 "Ty Lee") 
+        (IllegalInvalidMove));
+
+]
+
 let suite =
   "test suite for final proj"  >::: List.flatten [
     characters_tests;
     battle_tests;
+    mp_battle_tests;
   ]
 
 let _ = run_test_tt_main suite

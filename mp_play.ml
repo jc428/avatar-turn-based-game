@@ -47,10 +47,24 @@ let health (battle: Mp_battle.t) (name : string) =
 let health_str battle name = 
   health battle name |> string_of_float
 
+let dead battle player =
+  health battle player <= 0.
+
+let dead_list battle pl_list =
+  List.filter (dead battle) pl_list
+
 let winner battle pl1 pl2 pl3 pl4 = 
-  if (health battle pl1 <= 0. && health battle pl2 <= 0.) then [3;4]
-  else if (health battle pl3 <= 0. && health battle pl4 <= 0.) then [1;2]
-  else []
+  if (dead battle pl1 && dead battle pl2) then [3;4]
+  else if (dead battle pl3 && dead battle pl4) then [1;2]
+  else (* will return list of dead players *)
+    let rec helper acc = function
+      | [] -> []
+      | h :: t -> if h = pl1 then acc @ [1]
+        else if h = pl2 then acc @ [2]
+        else if h = pl3 then acc @ [3]
+        else acc @ [4]
+    in
+    helper [] (dead_list battle [pl1; pl2; pl3; pl4])
 
 let print_battle_state battle pl1 pl2 pl3 pl4 = 
   print_string ("\n" ^ pl1 ^ "'s health: " ^ (health_str battle pl1));
@@ -123,7 +137,15 @@ let start_battle battle =
   let pl4 = List.nth players 3 in
   let rec fight battle_st =
     let rec player_turn btl x = 
-      let player = List.nth players x in
+      let player = if not (dead battle (List.nth players x)) 
+        then List.nth players x
+        else begin
+          if x < 2 
+          then List.nth players (List.hd (List.filter (fun y -> y != x) [0;1]))
+          else 
+            List.nth players (List.hd (List.filter (fun y -> y != x) [2;3]))
+        end
+      in
       print_string ("\n\nPlayer " ^ string_of_int (x+1) ^ 
                     "'s turn- make a move!");
       print_moves battle_st player (Mp_battle.player_moves btl player);
@@ -146,7 +168,7 @@ let start_battle battle =
           print_string target_str;
           print_string "\n |>> ";
           let target = select_character players target_str in
-          match Mp_battle.make_move battle_st player i target with
+          match Mp_battle.mp_make_move battle_st player i target with
           | Legal battle_nxt -> begin
               let winner = winner battle_nxt pl1 pl2 pl3 pl4 in
               if (winner = []) then begin
@@ -156,17 +178,30 @@ let start_battle battle =
               else begin
                 let line = begin
                   match winner with
+                  | [a] -> "\nOh no! " ^ List.nth players (a-1) ^ "has been \
+                                                                   defeated!"
                   | [a;b] -> begin
-                      if (x + 1 = a || x + 1 = b) then
-                        "\nCongratulations " ^ List.nth players (a-1) ^ 
-                        " and " ^ List.nth players (b-1) ^ "! Your team won!"
-                      else "\nYour team lost! " ^ List.nth players (a-1) ^ 
-                           " and " ^ List.nth players (b-1) ^ " won!"
+                      if (a = 3 && b = 4) || (a = 1 && b = 2) then begin
+                        if (x + 1 = a || x + 1 = b) then
+                          "\nCongratulations " ^ List.nth players (a-1) ^ 
+                          " and " ^ List.nth players (b-1) ^ "! Your team won!"
+                        else "\nYour team lost! " ^ List.nth players (a-1) ^ 
+                             " and " ^ List.nth players (b-1) ^ " won!"
+                      end
+                      else "\nOh no! " ^ List.nth players (a-1) ^ "and " ^
+                           List.nth players (b-1) ^ "have been defeated!"
                     end
                   | _ -> "impossible"
                 end
                 in print_string line;
-                pause ();
+                if List.length winner = 1 || 
+                   (winner != [1;2] && winner != [3;4])
+                then begin
+                  print_battle_state battle_nxt pl1 pl2 pl3 pl4;
+                  player_turn battle_nxt (if x = 0 || x = 1 then x + 2 else x - 1)
+                end
+                else
+                  pause ();
                 print_endline "\n Would you like to play again?: \n 
                  1. Yes \n 
                  2. Quit  \n";
@@ -218,7 +253,7 @@ let play_mp_game () =
   pause ();
   print_string "\n\nChoose your fighter "; 
   let players = select_players () in 
-  let battle = init_battle players in 
+  let battle = mp_init_battle players in 
   start_battle battle
 
 

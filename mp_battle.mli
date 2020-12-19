@@ -6,12 +6,12 @@ type name = string
 
 exception PlayerNotFound of name
 
-(** [init_battle names] creates a mp_battle from a list of
+(** [mp_init_battle names] creates a mp_battle from a list of
     character names [names] 
     Require: name is length 4 
     Raise: UnknownCharacter name if there are no character with name [name]
     in Mp_character.characters *)
-val init_battle : name list -> t
+val mp_init_battle : name list -> t
 
 (** [players btl] returns a list of all four players in battle [btl]*)
 val players : t -> name list
@@ -44,9 +44,9 @@ val new_health : t -> name -> int -> name -> float
 (** The type representing the result of an attempted move. *)
 type result = Legal of t | IllegalInvalidMove | IllegalNoPP 
 
-(** [make_move btl name id target] is the result of player [name] using 
+(** [mp_make_move btl name id target] is the result of player [name] using 
     move [id] on player [target] in battle [btl] *)
-val make_move : t -> name -> int -> name -> result
+val mp_make_move : t -> name -> int -> name -> result
 
 (** [player_moves btl name] is the list of moves belonging to player [name] 
     in battle [btl] *)

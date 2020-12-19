@@ -28,7 +28,7 @@ let find_character name =
   if is_character name then name
   else raise (UnknownCharacter name)
 
-let init_battle names = 
+let mp_init_battle names = 
   match names with 
   | [a; b; c; d] ->
     let player1 = find_character a in 
@@ -120,8 +120,8 @@ let move_by_id btl name id =
   in 
   helper (player_moves btl name) id
 
-let current_pp btl name id = 
-  (move_by_id btl name id).pp
+let current_pp btl name move_id = 
+  (move_by_id btl name move_id).pp
 
 let new_health btl name move_id target = 
   let move = move_by_id btl name move_id in 
@@ -263,7 +263,7 @@ let update_team team btl name id target =
    playerB_moves = update_move_list btl target id;
    }  *)
 
-let make_move btl name id target = 
+let mp_make_move btl name id target = 
   match move_by_id btl name id with 
   | move -> begin 
       Legal {
