@@ -29,7 +29,7 @@ let rec print_moves btl chr (moves:Mp_character.move list) =
   | h :: t -> begin
       let pp = Mp_battle.current_pp btl chr h.id in
       print_string ("\n" ^ (string_of_int h.id) ^ ". " ^ (h.m_name) ^
-                    " Damage: " ^ (string_of_float h.damage) ^
+                    "\nDamage: " ^ (string_of_float h.damage) ^
                     " PP: " ^ (string_of_int pp)
                     ^ "\n" ^ h.m_description);
       print_moves btl chr t
@@ -56,7 +56,7 @@ let dead_list battle pl_list =
 let winner battle pl1 pl2 pl3 pl4 = 
   if (dead battle pl1 && dead battle pl2) then [3;4]
   else if (dead battle pl3 && dead battle pl4) then [1;2]
-  else (* will return list of dead players *)
+  else (* will return list of dead players as their number *)
     let rec helper acc = function
       | [] -> []
       | h :: t -> if h = pl1 then acc @ [1]
@@ -137,7 +137,7 @@ let start_battle battle =
   let pl4 = List.nth players 3 in
   let rec fight battle_st =
     let rec player_turn btl x = 
-      let player = if not (dead battle (List.nth players x)) 
+      let player = if not (dead btl (List.nth players x)) 
         then List.nth players x
         else begin
           if x < 2 
@@ -149,104 +149,133 @@ let start_battle battle =
       let living_players = 
         List.filter (fun y -> not (List.mem y (dead_list btl players))) players
       in
-      print_string ("\n\nPlayer " ^ string_of_int (x+1) ^ 
-                    "'s turn- make a move!");
-      print_moves battle_st player (Mp_battle.player_moves btl player);
+      print_string ("\n\n" ^ player ^ "'s turn- make a move!");
+      print_moves btl player (Mp_battle.player_moves btl player);
       print_string "\n|>>";
-      match (read_int_opt ())with
-      | None -> begin
-          print_string "\nPlease enter one of the moves listed above as a \
-                        number (i.e. 1) \n";
-          print_string "|>>";
-          fight battle_st
-        end
-      | Some i -> begin
-          let rec chars acc lst =
-            match lst with
-            | [] -> acc
-            | a :: t -> if List.mem (Mp_character.name a) living_players 
-              then chars (a :: acc) t else chars acc t
-          in let c = List.rev (chars [] Mp_character.characters) in
-          print_characters c;
-          print_string target_str;
-          print_string "\n |>> ";
-          let target = select_character living_players target_str in
-          match Mp_battle.mp_make_move battle_st player i target with
-          | Legal battle_nxt -> begin
-              let winner = winner battle_nxt pl1 pl2 pl3 pl4 in
-              if (winner = []) then begin
-                print_battle_state battle_nxt pl1 pl2 pl3 pl4;
-                player_turn battle_nxt (if x = 0 || x = 1 then x + 2 else x - 1)
-              end
-              else begin
-                let line = begin
-                  match winner with
-                  | [a] -> "\nOh no! " ^ List.nth players (a-1) ^ "has been \
-                                                                   defeated!"
-                  | [a;b] -> begin
-                      if (a = 3 && b = 4) || (a = 1 && b = 2) then begin
-                        if (x + 1 = a || x + 1 = b) then
-                          "\nCongratulations " ^ List.nth players (a-1) ^ 
-                          " and " ^ List.nth players (b-1) ^ "! Your team won!"
-                        else "\nYour team lost! " ^ List.nth players (a-1) ^ 
-                             " and " ^ List.nth players (b-1) ^ " won!"
-                      end
-                      else "\nOh no! " ^ List.nth players (a-1) ^ "and " ^
-                           List.nth players (b-1) ^ "have been defeated!"
-                    end
-                  | _ -> "impossible"
-                end
-                in print_string line;
-                if List.length winner = 1 || 
-                   (winner != [1;2] && winner != [3;4])
-                then begin
+      let rec move_helper () =
+        match (read_int_opt ()) with
+        | None -> begin
+            print_string "\nPlease enter one of the moves listed above as a \
+                          number (i.e. 1) \n";
+            print_string "|>>";
+            move_helper ()
+          end
+        | Some i -> begin
+            let rec chars acc lst =
+              match lst with
+              | [] -> acc
+              | a :: t -> if List.mem (Mp_character.name a) living_players 
+                then chars (a :: acc) t else chars acc t
+            in let c = List.rev (chars [] Mp_character.characters) in
+            print_characters c;
+            print_string ("\n" ^ target_str);
+            print_string "\n |>> ";
+            let target = select_character living_players target_str in
+            match Mp_battle.mp_make_move btl player i target with
+            | Legal battle_nxt -> begin
+                let winners = winner battle_nxt pl1 pl2 pl3 pl4 in
+                let winner_names = 
+                  List.map (fun y -> List.nth players y) winners
+                in
+                if (winners = [] || 
+                    (List.filter
+                       (fun y -> not (List.mem y (winner btl pl1 pl2 pl3 pl4)))
+                       winners) = []) then begin
                   print_battle_state battle_nxt pl1 pl2 pl3 pl4;
-                  player_turn battle_nxt (if x = 0 || x = 1 
-                                          then x + 2 else x - 1)
+                  player_turn battle_nxt  (if x = 0 || x = 1 
+                                           then x + 2 
+                                           else if x = 2 then 1
+                                           else 0)
                 end
-                else
+                else begin
+                  let line = begin
+                    match winners with
+                    | [a] -> "\nOh no! " ^ 
+                             List.nth players (a-1) ^ " has been defeated! " ^
+                             List.nth players (a-1) ^ " can no longer play.\n"
+                    | [a;b] -> begin
+                        if (a = 3 && b = 4) || (a = 1 && b = 2) then begin
+                          if (x + 1 = a || x + 1 = b) then
+                            "\nCongratulations " ^ List.nth players (a-1) ^ 
+                            " and " ^ List.nth players (b-1) ^ "! Your team won!"
+                          else "\nYour team lost! " ^ List.nth players (a-1) ^ 
+                               " and " ^ List.nth players (b-1) ^ " won!"
+                        end
+                        else 
+                          match (List.filter
+                                   (fun y -> List.mem y 
+                                       (dead_list btl living_players))
+                                   winner_names) with
+                          | [a] -> "\nOh no! " ^ a ^ " has been defeated! " ^
+                                   a ^ " can no longer play.\n"
+                          | [a;b] ->
+                            "\nOh no! " ^ a ^ "and " ^ b ^ 
+                            " have been defeated!" ^ a ^ " and " ^ b ^
+                            " can no longer play.\n"
+                          | _ -> "impossible"
+                      end
+                    | _ -> "impossible"
+                  end
+                  in print_string line;
                   pause ();
-                print_endline "\n Would you like to play again?: \n 
+                  if (List.length winners = 1 || 
+                      (winners != [1;2] && winners != [3;4]))
+                  then begin
+                    let rec print_list = function 
+                      | [] -> ""
+                      | e::l -> print_int e ; print_string " " ; print_list l
+                    in
+                    print_string (print_list winners);
+                    print_battle_state battle_nxt pl1 pl2 pl3 pl4;
+                    player_turn battle_nxt (if x = 0 || x = 1 
+                                            then x + 2 
+                                            else if x = 2 then 1
+                                            else 0)
+                  end
+                  else
+                    pause ();
+                  print_endline "\n Would you like to play again?: \n 
                  1. Yes \n 
                  2. Quit  \n";
-                print_string "|>>"; 
-                let rec helper () = 
-                  match (read_int_opt ()) with
-                  | None -> begin
-                      print_string "\nPlease enter one of the options listed \
-                                    above as a number (i.e. 1) \n";
-                      print_string "|>>";
-                      helper ()
-                    end
-                  | Some 1 -> begin 
-                      fight battle
-                    end
-                  | Some 2 -> begin
-                      print_endline "\nSee you next time!";
-                      exit 0
-                    end
-                  | Some i -> begin
-                      print_string "\nNot a valid option! \
-                                    Try one of the choices listed above. \n";
-                      print_string "|>>";
-                      helper ()
-                    end
-                in helper ()
+                  print_string "|>>"; 
+                  let rec helper () = 
+                    match (read_int_opt ()) with
+                    | None -> begin
+                        print_string "\nPlease enter one of the options listed \
+                                      above as a number (i.e. 1) \n";
+                        print_string "|>>";
+                        helper ()
+                      end
+                    | Some 1 -> begin 
+                        fight battle
+                      end
+                    | Some 2 -> begin
+                        print_endline "\nSee you next time!";
+                        exit 0
+                      end
+                    | Some i -> begin
+                        print_string "\nNot a valid option! \
+                                      Try one of the choices listed above. \n";
+                        print_string "|>>";
+                        helper ()
+                      end
+                  in helper ()
+                end
               end
-            end
-          | IllegalInvalidMove -> begin
-              print_string "\nNot a valid move! Try one of the moves \
-                            listed above!\n";
-              print_string "|>>";
-              fight battle_st
-            end
-          | IllegalNoPP -> begin
-              print_string "\nYou've exhausted this move! Try another move \
-                            listed above!\n";
-              print_string "|>>";
-              fight battle_st
-            end
-        end
+            | IllegalInvalidMove -> begin
+                print_string "\nNot a valid move! Try one of the moves listed \
+                              above!\n";
+                print_string "|>>";
+                move_helper ()
+              end
+            | IllegalNoPP -> begin
+                print_string "\nYou've exhausted this move! Try another move \
+                              listed above!\n";
+                print_string "|>>";
+                move_helper ()
+              end
+          end
+      in move_helper ()
     in
     player_turn battle_st 0
   in 
