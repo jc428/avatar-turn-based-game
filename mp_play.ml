@@ -70,7 +70,7 @@ let select_players () =
   characters := Mp_character.remove_character player1 !characters; 
   print_string ("\nPlayer 4 playing as " ^ player4 );
   [player1; player2; player3; player4]
-
+(* 
 let player_order btl = 
   let fastest_teammember team = 
     match team with 
@@ -79,7 +79,7 @@ let player_order btl =
         let speedB = Mp_battle.speed b in 
         if (speedA > speedB) then (a, speedA)
         else (b, speedB)
-      end
+      end *)
 
 
 

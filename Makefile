@@ -14,11 +14,25 @@ build:
 test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
+docs: docs-public docs-private
+
+docs-public: build
+	mkdir -p doc.public
+	ocamlfind ocamldoc -I _build -package $(PKGS) \
+		-html -stars -d doc.public $(MLIS)
+
+docs-private: build
+	mkdir -p doc.public
+	ocamlfind ocamldoc -I _build -package $(PKGS) \
+		-html -stars -d doc.public \
+		-inv-merge-ml-mli -m A -hide-warnings $(MLIS) $(MLS)
+
 play:
 	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
 
 clean:
 	ocamlbuild -clean
+	rm -rf avatar.zip doc.public doc.private
 
 zip: 
 	zip -r avatar.zip *.mli* *.ml* *.json* *.txt* _tags Makefile
