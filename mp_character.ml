@@ -267,45 +267,6 @@ let toph = {
     ]
 }
 
-let toph = { 
-  c_name = "Toph";
-  c_description = "small, blind, sees with her feet";
-  c_element = Earth;
-  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
-  moves = [{
-      id = 1; is_super = false; m_name = "Avalanche";
-      m_element = Earth;
-      m_description = "Toph creates an avalanche, crushing her opponent with \
-                       large rocks";
-      damage = 25.0;
-      pp = 15
-    };
-     {
-       id = 2; is_super = false; m_name = "Little Rich Girls";
-       m_element = Normal;
-       m_description =  "Toph uses her wealthy background to hire a random guy \
-                         to punch her opponent in the face";
-       damage = 15.0;
-       pp = 20
-     };
-     {
-       id = 3; is_super = false; m_name = "Blind Healing";
-       m_element = Earth;
-       m_description =  "Toph heals a teammate with her blind senses";
-       damage = -13.0;
-       pp = 12
-     };
-     {
-       id = 4; is_super = false; m_name = "Geyser";
-       m_element = Water;
-       m_description =  "Toph creates a hole in the ground and a geyser erupts \
-                         in her opponent's face";
-       damage = 22.0;
-       pp = 13
-     }
-    ]
-}
-
 let suki = { 
   c_name = "Suki";
   c_description = "Kyoshi warrior, proud feminist, will destroy you while \
