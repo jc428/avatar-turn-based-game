@@ -1,1 +1,41 @@
-{"stats":{"health":120.0,"power":1.0,"speed":1.0,"evasiveness":1.0},"moves":[{"id":5,"name":"Fire breath","issuper":false,"element":"Fire","description":"Aang harnesses his inner dragon, unleashing a breath of fire","damage":17.0,"pp":25},{"id":1,"name":"Air Blast","issuper":false,"element":"Air ","description":"Aang shoots a powerful blast of air from his staff","damage":20.0,"pp":15},{"id":2,"name":"Tornado Whirl","issuper":false,"element":"Air ","description":"Aang spins a dazzling whirlwind at his opponent","damage":10.0,"pp":20},{"id":4,"name":"Dolphin Spray","issuper":false,"element":"Water","description":"Aang showers his opponent with a strong burst of water","damage":12.0,"pp":20}]}
+{
+  "stats": { "health": 100.0, "power": 1.0, "speed": 1.0, "evasiveness": 1.2 },
+  "moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 17.0,
+      "pp": 25
+    },
+    {
+      "id": 1,
+      "name": "Air Blast",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang shoots a powerful blast of air from his staff",
+      "damage": 20.0,
+      "pp": 15
+    },
+    {
+      "id": 2,
+      "name": "Tornado Whirl",
+      "issuper": false,
+      "element": "Air ",
+      "description": "Aang spins a dazzling whirlwind at his opponent",
+      "damage": 10.0,
+      "pp": 20
+    },
+    {
+      "id": 3,
+      "name": "Spit Ball",
+      "issuper": false,
+      "element": "Bruh",
+      "description": "Aang spits on his opponent",
+      "damage": 5.0,
+      "pp": 30
+    }
+  ]
+}
