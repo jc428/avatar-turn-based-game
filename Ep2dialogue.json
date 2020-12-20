@@ -2,7 +2,7 @@
   "battles": [
     {
       "id": 1,
-      "character json": "",
+      "character json": "battleChiefArnook",
       "intro": "Welcome to your first battle. Prepare to meet your opponent: Chief Arnook!",
       "enemy text": [
         "I will not allow you to learn Waterbending if you keep teaching Katara.",
@@ -19,8 +19,8 @@
     },
     {
       "id": 2,
-      "character json": "",
-      "intro": "Welcome to your first battle. Prepare to meet your opponent: Princess Yue!",
+      "character json": "battlePrincessYue",
+      "intro": "Welcome to your second battle. Prepare to meet your opponent: Princess Yue!",
       "enemy text": [
         "Your friend Sokka is really cute.",
         "I'll show you something pretty and cute.",
@@ -36,8 +36,8 @@
     },
     {
       "id": 3,
-      "character json": "",
-      "intro": "Welcome to your first battle. Prepare to meet your opponent: Kanna (Katara and Sokka’s grandmother)!",
+      "character json": "battleKanna",
+      "intro": "Welcome to your third battle. Prepare to meet your opponent: Kanna (Katara and Sokka’s grandmother)!",
       "enemy text": [
         "Young Avatar, thank you for leading my grandchildren.",
         "Why don't you show me your ability to lead in a duel?",
@@ -53,8 +53,8 @@
     },
     {
       "id": 4,
-      "character json": "",
-      "intro": "Welcome to your first battle. Prepare to meet your opponent: Master Pakku!",
+      "character json": "battleMasterPakku",
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Master Pakku!",
       "enemy text": [
         "Avatar, you must show me your willingness to learn Waterbending from me.",
         "If you can beat me in a battle, I will teach you and even consider to allow Katara to learn as well.",
@@ -70,8 +70,8 @@
     },
     {
       "id": 5,
-      "character json": "",
-      "intro": "Welcome to your first battle. Prepare to meet your opponent: Chief Hakoda (Katara and Sokka’s father)!",
+      "character json": "battleChiefHakoda",
+      "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Chief Hakoda (Katara and Sokka’s father)!",
       "enemy text": [
         "Thanks for taking care of my kids while I was away, Avatar.",
         "Hahaha, care for a friendly duel? I need to see if you really can protect my kiddos.",

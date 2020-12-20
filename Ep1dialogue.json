@@ -2,7 +2,7 @@
   "battles": [
     {
       "id": 1,
-      "character json": "",
+      "character json": "battleSokka",
       "intro": "Welcome to your first battle. Prepare to meet your opponent: Sokka!",
       "enemy text": [
         "My first girlfriend turned into the moon. But I'm gonna turn you into dead meat!",
@@ -19,7 +19,7 @@
     },
     {
       "id": 2,
-      "character json": "",
+      "character json": "battleMomo",
       "intro": "Welcome to your second battle. Prepare to meet your opponent: Momo!",
       "enemy text": [
         "nnggggggg ah kkkurrrr gllaaaa",
@@ -36,7 +36,7 @@
     },
     {
       "id": 3,
-      "character json": "",
+      "character json": "battleToph",
       "intro": "Welcome to your third battle. Prepare to meet your opponent: Toph!",
       "enemy text": [
         "The best part about being blind is I don't have to see your ugly face. Bleh.",
@@ -53,7 +53,7 @@
     },
     {
       "id": 4,
-      "character json": "",
+      "character json": "battleAppa",
       "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Appa!",
       "enemy text": [
         "hhhggrrr hmph",
@@ -70,7 +70,7 @@
     },
     {
       "id": 5,
-      "character json": "",
+      "character json": "battleSuki",
       "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Suki!",
       "enemy text": [
         "Think you can win against a Kyoshi warrior?",
@@ -104,7 +104,7 @@
     },
     {
       "id": 7,
-      "character json": "MS1multiplemoves",
+      "character json": "battleZuko",
       "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Zuko!",
       "enemy text": [
         "I might be bad at being good, but I'm pretty darn good at being bad. Get ready to lose, Avatar.",

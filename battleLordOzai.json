@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "Mai",
+      "name": "Fire Lord Ozai",
       "element": "Fire",
       "isplayer": false,
       "stats": {
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "father of Prince Zuko and Princess Azula, evil dude, wants to rule the world",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Fire Dragon",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
-          "pp": 10
+          "description": "Fire Lord Ozai attacks with a dragon of flames",
+          "damage": 21.0,
+          "pp": 12
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "Molten Throne",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
+          "description": "Fire Lord Ozai sits atop a floating throne that drips molten lava on his opponent",
+          "damage": 19.0,
+          "pp": 15
         },
         {
           "id": 3,
-          "name": "Scoff",
+          "name": "Blind Rage",
           "issuper": false,
           "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
-          "pp": 20
+          "description": "Fire Lord Ozai expresses his distaste for various things, lashing out at his opponent.",
+          "damage": 7.0,
+          "pp": 29
         },
         {
           "id": 4,
-          "name": "Hot Hair Pins",
+          "name": "Heat Wave",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
-          "pp": 17
+          "element": "Air",
+          "description": "Fire Lord Ozai radiates the heat of a sun for a moment, burning his opponent",
+          "damage": 29.0,
+          "pp": 2
         }
       ]
     }

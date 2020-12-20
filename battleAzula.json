@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "Mai",
+      "name": "Azula",
       "element": "Fire",
       "isplayer": false,
       "stats": {
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "has a few screws loose but her raw power is crazy",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Blue Flame",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
+          "description": "Azula brings the heat in this move",
+          "damage": 21.0,
           "pp": 10
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "Hot Chain",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
+          "description": "Azula uses flames to chain her opponent in heat",
+          "damage": 18.0,
+          "pp": 15
         },
         {
           "id": 3,
-          "name": "Scoff",
+          "name": "Screw Loose",
           "issuper": false,
           "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
-          "pp": 20
+          "description": "Azula has a mental breakdown and lets out a piercing scream",
+          "damage": 10.0,
+          "pp": 3
         },
         {
           "id": 4,
-          "name": "Hot Hair Pins",
+          "name": "Fire Fists",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
-          "pp": 17
+          "description": "Azula pummels her opponent with burning punches",
+          "damage": 24.0,
+          "pp": 4
         }
       ]
     }

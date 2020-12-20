@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Mai",
-      "element": "Fire",
+      "name": "Long Feng",
+      "element": "Earth",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,42 +60,42 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "leader of Dai Li, power hungry, evil as heck",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Smirk",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
-          "pp": 10
+          "element": "Normal",
+          "description": "Long Feng smirks knowingly at his opponent, causing unease",
+          "damage": 5.0,
+          "pp": 28
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "Mustache Bash",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
+          "element": "Earth",
+          "description": "Long Feng uses his mustache to throw tiny rocks at his opponent",
+          "damage": 20.0,
+          "pp": 10
         },
         {
           "id": 3,
-          "name": "Scoff",
+          "name": "Manipulation",
           "issuper": false,
           "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
-          "pp": 20
+          "description": "Long Feng uses manipulation to get his opponent to attack themself",
+          "damage": 27.0,
+          "pp": 8
         },
         {
           "id": 4,
-          "name": "Hot Hair Pins",
+          "name": "Fire Arrow",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
+          "description": "Long Feng shoots fire arrows at his opponent",
+          "damage": 19.0,
           "pp": 17
         }
       ]

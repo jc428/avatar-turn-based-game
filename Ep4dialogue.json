@@ -36,88 +36,54 @@
     },
     {
       "id": 3,
-      "character json": "",
-      "intro": "Welcome to your third battle. Prepare to meet your opponent: Admiral Zhao!",
+      "character json": "battleIroh",
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Iroh!",
       "enemy text": [
-        "",
-        "",
-        "",
-        ""
+        "Young Avatar, are you sure you have what it takes?",
+        "Prove it, then.",
+        "Ah, I see you are ready.",
+        "You need to drink more tea. Then you will be ready."
       ],
       "player text": [
-        "",
-        ""
+        "I mean, I think so.",
+        "Yes! I do I do!"
       ],
-      "outro_win": "Congratulations, you defeated Admiral Zhao! You may proceed to the next battle.",
-      "outro_lose": "Admiral Zhao wins! Better luck next time."
+      "outro_win": "Congratulations, you defeated Iroh! You may proceed to the next battle.",
+      "outro_lose": "Iroh wins! Try again next time."
     },
     {
       "id": 4,
-      "character json": "",
-      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Iroh!",
+      "character json": "battleLordOzai",
+      "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Fire Lord Ozai!",
       "enemy text": [
-        "",
-        "",
-        "",
-        ""
+        "The Avatar has graced me with his presence. How delightful.",
+        "I will destroy you, Avatar. Then I will rule the world.",
+        "This is a one time loss. I will find you again.",
+        "Now that I have defeated the Avatar, I can conquer all else."
       ],
       "player text": [
-        "",
-        ""
+        "Oh, you're welcome, Fire Lord Ozai.",
+        "Hmm, you don't sound too delighted."
       ],
-      "outro_win": "Congratulations, you defeated Iroh! You may proceed to the next battle.",
-      "outro_lose": "Iroh wins!"
+      "outro_win": "Congratulations, you defeated Fire Lord Ozai! You may proceed to the next battle.",
+      "outro_lose": "Fire Lord Ozai wins! Try again next time."
     },
     {
       "id": 5,
-      "character json": "",
-      "intro": "Welcome to your fifth battle. Prepare to meet your opponent: Combustion Man!",
-      "enemy text": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "player text": [
-        "",
-        ""
-      ],
-      "outro_win": "Congratulations, you defeated Combustion Man! You may proceed to the next battle.",
-      "outro_lose": "Combustion Man wins!"
-    },
-    {
-      "id": 6,
-      "character json": "",
-      "intro": "Welcome to your sixth battle. Prepare to meet your opponent: Fire Lord Ozai!",
-      "enemy text": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "player text": [
-        "",
-        ""
-      ],
-      "outro_win": "Congratulations, you defeated Fire Lord Ozai! You may proceed to the next battle.",
-      "outro_lose": "Fire Lord Ozai wins! She didn't really want to, though."
-    },
-    {
-      "id": 7,
-      "character json": "",
+      "character json": "battleAzula",
       "intro": "Welcome to your seventh battle. Prepare to meet your opponent: Azula!",
       "enemy text": [
-        "",
-        "",
-        "",
-        ""
+        "Hey, tiny Avatar. Can't believe you turned my poor excuse of a brother to your side.",
+        "Oh, you're so funny. Time to get rid of you and take my place on the throne.",
+        "NO I cannot lose to a puny bald child.",
+        "The world is mine."
       ],
       "player text": [
-        "",
-        ""
+        "Oh, Zuko? He's actually a pretty great guy.",
+        "That's not very nice."
       ],
       "outro_win": "Congratulations, you defeated Azula! You may proceed to the next battle.",
-      "outro_lose": "Azula wins!"
+      "outro_lose": "Azula wins! Try again next time."
     }
   ],
   "next episode": "Ep1dialogue.json"

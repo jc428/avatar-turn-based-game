@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "Mai",
+      "name": "Iroh",
       "element": "Fire",
       "isplayer": false,
       "stats": {
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "tea lover, inspirational, sweet uncle dude",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Jasmine Dragon",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
-          "pp": 10
+          "description": "Iroh brews a pot of hot tea that he uses to burn his opponent",
+          "damage": 20.0,
+          "pp": 12
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "White Lotus",
           "issuper": false,
           "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
+          "description": "Iroh attacks with his white lotus wisdom",
+          "damage": 19.0,
+          "pp": 15
         },
         {
           "id": 3,
-          "name": "Scoff",
+          "name": "Ba Sing Se",
           "issuper": false,
-          "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
-          "pp": 20
+          "element": "Fire",
+          "description": "Iroh fuels his firey attacks with the rage and sorrow of the events at Ba Sing Se",
+          "damage": 26.0,
+          "pp": 7
         },
         {
           "id": 4,
-          "name": "Hot Hair Pins",
+          "name": "Bath Song",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
-          "pp": 17
+          "element": "Water",
+          "description": "Iroh takes a quick bath and sings a song out of tune, hurting his opponent's ears",
+          "damage": 6.0,
+          "pp": 29
         }
       ]
     }

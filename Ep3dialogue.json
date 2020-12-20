@@ -1,0 +1,73 @@
+{
+  "battles": [
+    {
+      "id": 1,
+      "character json": "battleHaru",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Haru!",
+      "enemy text": [
+        "Hey, dude, thanks again for saving me. You up for a friendly sparring match?",
+        "Haha, get ready to get rocked!",
+        "I guess I got rocked instead, huh. Haha.",
+        "Wow, you really got rocked. Woops."
+      ],
+      "player text": [
+        "Bring it on, Haru!",
+        "Are you sure? I'll go easy on ya."
+      ],
+      "outro_win": "Congratulations, you defeated Haru! You may proceed to the next battle.",
+      "outro_lose": "Haru wins! Try again next time."
+    },
+    {
+      "id": 2,
+      "character json": "battleTheBoulder",
+      "intro": "Welcome to your second battle. Prepare to meet your opponent: The Boulder!",
+      "enemy text": [
+        "It is me, The Boulder!",
+        "Fight me, you little pip squeak!!!",
+        "I lost to a pip squeak!!",
+        "The Boulder never loses."
+      ],
+      "player text": [
+        "You're kinda built like a boulder, too.",
+        "HAhahAHA, boulder."
+      ],
+      "outro_win": "Congratulations, you defeated The Boulder! You may proceed to the next battle.",
+      "outro_lose": "The Boulder wins! Try again next time."
+    },
+    {
+      "id": 3,
+      "character json": "battleJooDee",
+      "intro": "Welcome to your third battle. Prepare to meet your opponent: Joo Dee!",
+      "enemy text": [
+        "Welcome to the Earth Kingdome! I am Joo Dee.",
+        "I am Joo Dee. Don't believe me? Question the Earth Kingdom? We duel.",
+        "Hmph. The Joo Dee's are watching you.",
+        "Submit to the Earth Kingdom's rule, foolish child."
+      ],
+      "player text": [
+        "Wait, wasn't the other lady Joo Dee, too?",
+        "You're not Joo Dee!"
+      ],
+      "outro_win": "Congratulations, you defeated Joo Dee! You may proceed to the next battle.",
+      "outro_lose": "Joo Dee wins! Try again next time."
+    },
+    {
+      "id": 4,
+      "character json": "battleLongFeng",
+      "intro": "Welcome to your fourth battle. Prepare to meet your opponent: Long Feng!",
+      "enemy text": [
+        "Looks like you know too much, kid.",
+        "I think I need to teach you a lesson.",
+        "You'll get your lesson next time, brat.",
+        "Maybe now you'll understaned the concept of ultimate rule."
+      ],
+      "player text": [
+        "Me? Oh, I don't know anything. You got the wrong guy.",
+        "Why does the Earth Kingdom have so many Joo Dee's?"
+      ],
+      "outro_win": "Congratulations, you defeated Long Feng! You may proceed to the next battle.",
+      "outro_lose": "Long Feng wins! Try again next time."
+    }
+  ],
+  "next episode": "Ep4dialogue.json"
+}

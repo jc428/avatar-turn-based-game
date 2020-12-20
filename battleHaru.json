@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Mai",
-      "element": "Fire",
+      "name": "Haru",
+      "element": "Earth",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "originally forbidden from Earthbending, passionate and kind, daddy's boy",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Boulder Drop",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
-          "pp": 10
+          "element": "Earth",
+          "description": "Haru molds a large boulder from the earth and drops it atop his opponent's body",
+          "damage": 20.0,
+          "pp": 15
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "Earth Crack",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
-        },
-        {
-          "id": 3,
-          "name": "Scoff",
-          "issuper": false,
-          "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
+          "element": "Earth",
+          "description": "Haru cracks the earth beneath his opponent, causing misstep and maybe a broken ankle",
+          "damage": 15.0,
           "pp": 20
         },
         {
-          "id": 4,
-          "name": "Hot Hair Pins",
+          "id": 3,
+          "name": "Teenage Charm",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
-          "pp": 17
+          "element": "Normal",
+          "description": "Haru shows his nice guy side that makes his opponent pause",
+          "damage": 9.0,
+          "pp": 25
+        },
+        {
+          "id": 4,
+          "name": "Hidden Talent",
+          "issuper": false,
+          "element": "Earth",
+          "description": "Haru displays his hidden earthbending, stronger than ever due to supression",
+          "damage": 26.0,
+          "pp": 5
         }
       ]
     }

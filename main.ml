@@ -18,7 +18,7 @@ let main () =
                     "\n\nWelcome to the Avatar the Last Air Bender \
                      - a text based game\n");
     print_endline "Select the play mode: \n
-                  1. Single Player: travel through the Four Nations as Aang \n 
+                  1. Single Player: Travel through the Element Nations as Aang\n 
                   2. Multi Player: Battle against your friends as one of \
                    ATLA characters\n
                   3. Quit \n";

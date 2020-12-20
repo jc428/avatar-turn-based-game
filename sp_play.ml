@@ -296,7 +296,10 @@ and continue ep =
 let select_episode () = 
   print_endline "\n Select one of the following: \n 
                  1. Episode 1: Team Avatar\n 
-                 2. Quit  \n";
+                 2. Episode 2: Water Tribe\n
+                 3. Episode 3: Earth Kingdom\n
+                 4. Episode 4: Fire Nation\n
+                 5. Quit  \n";
   print_string "|>>";         
   let rec select_battle_r () = 
     match (read_int_opt ()) with
@@ -306,8 +309,11 @@ let select_episode () =
         print_string "|>>";
         select_battle_r ()
       end
-    | Some 1 -> start_episode "Ep1dialogue.json" 6 false
-    | Some 2 -> begin
+    | Some 1 -> start_episode "Ep1dialogue.json" 1 false
+    | Some 2 -> start_episode "Ep2dialogue.json" 1 false
+    | Some 3 -> start_episode "Ep3dialogue.json" 1 false
+    | Some 4 -> start_episode "Ep4dialogue.json" 1 false
+    | Some 5 -> begin
         print_endline "\nSee you next time!";
         exit 0
       end

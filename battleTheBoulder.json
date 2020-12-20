@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Mai",
-      "element": "Fire",
+      "name": "The Boulder",
+      "element": "Earth",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "stoic, indifferent, in love with Zuko like the rest of us are",
+      "description": "super big guy, champion Earthbender, probably a gentle giant",
       "moves": [
         {
           "id": 1,
-          "name": "Flaming Dagger",
+          "name": "Giant Bowling",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai engages in close combat with a small firey dagger",
-          "damage": 15.0,
-          "pp": 10
+          "element": "Earth",
+          "description": "The Boulder becomes a boulder and rolls into his opponent like a giant bowling ball",
+          "damage": 23.0,
+          "pp": 15
         },
         {
           "id": 2,
-          "name": "Piercing Glare",
+          "name": "Karate Chop",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
-          "damage": 22.0,
-          "pp": 7
+          "element": "Normal",
+          "description": "The Boulder karate chops his opponent on the forehead",
+          "damage": 4.0,
+          "pp": 25
         },
         {
           "id": 3,
-          "name": "Scoff",
+          "name": "Buns of Rock",
           "issuper": false,
           "element": "Normal",
-          "description": "Mai displays an air of judgement, harming her opponent's resolve",
-          "damage": 5.0,
-          "pp": 20
+          "description": "The Boulder jumps into the air and falls on his opponent, buns first",
+          "damage": 20.0,
+          "pp": 15
         },
         {
           "id": 4,
-          "name": "Hot Hair Pins",
+          "name": "Rock Wall Fall",
           "issuper": false,
-          "element": "Fire",
-          "description": "Mai attacks her opponent with burning hot hair pins",
-          "damage": 15.0,
-          "pp": 17
+          "element": "Earth",
+          "description": "The Boulder creates a tall wall of rock and drops it on his opponents, flattening them",
+          "damage": 25.0,
+          "pp": 5
         }
       ]
     }
