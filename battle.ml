@@ -9,6 +9,7 @@ type battle = {
   player_moves : move list;
   enemy_health : float;
   enemy_moves : move list;
+  enemy_element : element;
 }
 
 type t = battle
@@ -22,6 +23,7 @@ let init_battle ch = {
   player_evasiveness = (get_stats ch (List.hd (get_names ch))).evasiveness;
   enemy_health = (get_stats ch (List.hd (List.tl (get_names ch)))).health;
   enemy_moves = (get_moves ch (List.hd (List.tl (get_names ch))));
+  enemy_element = (get_c_element ch (List.hd (List.tl (get_names ch))));
 }
 
 let my_list_hd lst = 
@@ -73,17 +75,38 @@ let get_current_pp ba name move_id =
   else
     failwith "name does not belong to player or enemy"
 
+let get_move_element ba name move_id =
+  if List.mem name (get_names ba.characters)
+  then
+    (get_p_move_by_id ba name move_id).m_element
+  else
+    failwith "name does not belong to player or enemy"
+
 let set_new_health ba user_name (user_move_id : int) : float =
   if user_name = (my_list_hd (get_names ba.characters)) then
     let enemy_name = my_list_taili (get_names ba.characters) in 
     let user_move = get_move_by_id ba.characters user_name user_move_id in
     let cur_enemy_health = get_current_health ba enemy_name in
-    cur_enemy_health -. user_move.damage
+    let move_element = get_move_element ba user_name user_move_id in
+    if move_element = Normal 
+    then cur_enemy_health -. user_move.damage
+    else if move_element = ba.enemy_element 
+    then cur_enemy_health -. (0.75 *. user_move.damage)
+    else if move_element = Fire && ba.enemy_element = Air 
+    then cur_enemy_health -. (1.25 *. user_move.damage)
+    else if move_element = Earth && ba.enemy_element = Water 
+    then cur_enemy_health -. (1.25 *. user_move.damage)
+    else if move_element = Water && ba.enemy_element = Fire 
+    then cur_enemy_health -. (1.25 *. user_move.damage)
+    else if move_element = Air && ba.enemy_element = Earth 
+    then cur_enemy_health -. (1.25 *. user_move.damage)
+    else cur_enemy_health -. user_move.damage
   else if user_name = (my_list_taili (get_names ba.characters)) then 
     let player_name = my_list_hd (get_names ba.characters) in 
     let enemy_move = get_move_by_id ba.characters player_name user_move_id in
     let cur_player_health = get_current_health ba player_name in
-    cur_player_health -. enemy_move.damage
+    cur_player_health -. (1.0 *. enemy_move.damage)
+
   else failwith "name does not belong to player or enemy"
 
 let set_new_pp ba name move_id =
@@ -128,6 +151,7 @@ let make_move ba name move_id =
       player_power = ba.player_power;
       player_speed = ba.player_speed;
       player_evasiveness = ba.player_evasiveness;
+      enemy_element = ba.enemy_element
     }
   else
     Legal {
@@ -139,6 +163,7 @@ let make_move ba name move_id =
       player_power = ba.player_power;
       player_speed = ba.player_speed;
       player_evasiveness = ba.player_evasiveness;
+      enemy_element = ba.enemy_element
     }
 
 let update_moves battle name old_move_id new_move_id =
@@ -200,6 +225,7 @@ let battle_end ba name old_move_id new_move_id stat mult
       player_power = new_stats.power;
       player_speed = new_stats.speed;
       player_evasiveness = new_stats.evasiveness;
+      enemy_element = ba.enemy_element
     }
 
 let get_player_moves ba =

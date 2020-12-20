@@ -21,7 +21,7 @@ type stats = {
   evasiveness: float
 }
 
-type element = Fire | Earth | Water | Air | Avatar | Bruh
+type element = Fire | Earth | Water | Air | Normal | Avatar| Bruh
 
 type description = string
 
