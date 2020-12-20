@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 24,
+      "name": "Foot Quake",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang uses his feet to sense the earth and create a trembling earthquake",
+      "damage": 27.0,
+      "pp": 10
     }
   ]
 }

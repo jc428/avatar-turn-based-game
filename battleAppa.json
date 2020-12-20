@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 8,
+      "name": "Giant Sneeze",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Water",
+      "description": "Aang sneezes, covering his opponent in his snot",
+      "damage": 18.0,
+      "pp": 20
     }
   ]
 }
