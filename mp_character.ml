@@ -1,6 +1,6 @@
 type name = string
 type id = int
-type element = Fire | Earth | Water | Air | Avatar | Normal | Bruh
+type element = Fire | Earth | Water | Air | Normal | Avatar | Bruh
 
 exception UnknownCharacter of name
 exception UnknownMove of id

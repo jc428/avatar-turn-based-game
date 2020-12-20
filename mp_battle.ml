@@ -129,9 +129,40 @@ let move_by_id btl name id =
 let current_pp btl name move_id = 
   (move_by_id btl name move_id).pp
 
+let element_by_name btl name = 
+  let helper team = 
+    match team.members with 
+    | (a, b) -> begin 
+        if name = a then team.playerA_element
+        else if name = b then team.playerB_element
+        else raise (PlayerNotFound name)
+      end
+  in 
+  if is_team1 btl name then 
+    helper btl.team1
+  else
+    helper btl.team2
+
 let new_health btl name move_id target = 
-  let move = move_by_id btl name move_id in 
-  (current_health btl target) -. move.damage
+  let move = move_by_id btl name move_id in
+  let move_element = move.m_element in
+  let target_element = element_by_name btl name
+  in
+  if move_element = Normal 
+  then current_health btl target -. move.damage
+  else if move_element = Avatar || target_element = Avatar 
+  then current_health btl target -. (1.1 *. move.damage)
+  else if move_element = target_element 
+  then current_health btl target -. (0.75 *. move.damage)
+  else if move_element = Fire && target_element = Air 
+  then current_health btl target -. (1.25 *. move.damage)
+  else if move_element = Earth && target_element = Water 
+  then current_health btl target -. (1.25 *. move.damage)
+  else if move_element = Water && target_element = Fire 
+  then current_health btl target -. (1.25 *. move.damage)
+  else if move_element = Air && target_element = Earth 
+  then current_health btl target -. (1.25 *. move.damage)
+  else current_health btl target -. move.damage
 
 (** The type representing the result of an attempted move. *)
 type result = Legal of t | IllegalInvalidMove | IllegalNoPP
