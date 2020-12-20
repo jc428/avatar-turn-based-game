@@ -134,6 +134,7 @@ let extract (legal : Battle.result) =
   | Legal t -> t
   | IllegalInvalidMove -> raise (Failure "IllegalInvalidMove")
   | IllegalNoPP -> raise (Failure "IllegalNoPP")
+  | IllegalStat -> raise (Failure "IllegalStat")
 
 
 let ba = init_battle ms1 
@@ -199,9 +200,10 @@ let update_stats_test
     (name : Characters.name)
     (stat : string)
     (mult : float)
+    (s: t2 option)
     (expected_output : Characters.stats) : test =
   test_name >:: (fun _ -> assert_equal expected_output
-                    (update_stats battle name stat mult))
+                    (update_stats battle name stat mult s))
 
 let get_enemy_moves_test
     (name : string)
@@ -272,7 +274,6 @@ let battle_tests =
         pp = 9;
       }]
   ]
-
 
 (* multiplayer battle test *)
 let mp_current_health_test 
