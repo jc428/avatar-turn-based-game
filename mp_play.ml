@@ -84,7 +84,7 @@ let rec select_character lst str =
   | Some i -> begin 
       try 
         (if not (List.mem (Mp_character.id_to_name i) lst) then begin
-            print_string "\nNot a valid option! \
+            print_string "\nNot a valid player! \
                           Try one of the choices listed above. \n";
             print_string "|>>";
             select_character lst str
@@ -92,7 +92,7 @@ let rec select_character lst str =
          else Mp_character.id_to_name i) 
       with 
       | Mp_character.UnknownId i -> begin 
-          print_string "\nNot a valid option! \
+          print_string "\nNot a valid player! \
                         Try one of the choices listed above. \n";
           print_string "|>>";
           select_character lst str
@@ -167,7 +167,7 @@ let start_battle battle =
             in let c = List.rev (chars [] Mp_character.characters) in
             print_characters c;
             print_string ("\n" ^ target_str);
-            print_string "\n |>> ";
+            print_string "\n|>> ";
             let target = select_character living_players target_str in
             match Mp_battle.mp_make_move btl player i target with
             | Legal battle_nxt -> begin

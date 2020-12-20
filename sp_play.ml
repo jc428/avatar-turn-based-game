@@ -15,9 +15,9 @@ let rec print_moves btl chr (moves:Characters.move list) =
   | h :: t -> begin
       let pp = Battle.get_current_pp btl chr h.id in
       print_string ("\n" ^ (string_of_int h.id) ^ ". " ^ (h.m_name) ^
-                    " Damage: " ^ (string_of_float h.damage) ^
+                    "\nDamage: " ^ (string_of_float h.damage) ^
                     " PP: " ^ (string_of_int pp)
-                    ^ "\n" ^ h.m_description);
+                    ^ "\n" ^ h.m_description ^ "\n");
       print_moves btl chr t
     end
 
@@ -172,38 +172,53 @@ and play_battle ep is_from_save =
                     print_enemy_line ep enemy 2;
                     print_string ("\n" ^ (Episode.outro ep true));
                     pause ();
-                    print_string "\n\n You have unlocked a new move."; 
-                    print_new_moves (Characters.get_new_moves characters);
-                    print_string 
-                      "\nEnter the number for the move you would like to replace 
-                   or enter -1 if you wish to keep your current moves: ";
-                    print_moves battle player 
-                      (Characters.get_moves characters player);
-                    print_string "\n|>>";
-                    (* getting user input is still buggy  *)
                     let rec user_input_move () = 
-                      let old_move_id = read_int () in
-                      print_stats (Characters.get_stats characters player);
-                      print_string "\n Enter a stat to upgrade: ";
+                      print_string "\n\n You have unlocked a new move."; 
+                      print_new_moves (Characters.get_new_moves characters);
+                      pause ();
+                      print_moves battle player 
+                        (Characters.get_moves characters player);
+                      print_string 
+                        "\nEnter the number for the move you would like to \
+                         replace\n or enter -1 if you wish to keep your \
+                         current moves:\n";
                       print_string "\n|>>";
-                      let stat = read_line () in
-                      let lower_stat = String.lowercase_ascii stat in
-                      let res = Battle.battle_end
-                          battle_st player old_move_id 5 lower_stat 1.2 None in
-                      match res with
-                      | Legal final_ba -> Save.write final_ba characters
-                      | IllegalInvalidMove -> begin
+                      let rec old_move_id_helper () =
+                        try (read_int ()) with 
+                        | Failure _ ->
                           print_string "\nPlease enter one of the moves listed \
                                         above as a number (i.e. 1) \n";
-                          user_input_move () end
-                      | IllegalStat -> begin 
-                          print_string "\nPlease enter one of the stats listed \
-                                        above as a string (i.e. power) \n";
-                          user_input_move () end
-                      | IllegalNoPP -> begin
-                          print_string "IllegalNoPP (impossible)";
-                          user_input_move()
-                        end
+                          print_string "\n|>>";
+                          old_move_id_helper () in
+                      let old_move_id = old_move_id_helper () in
+                      if old_move_id != -1 then begin
+                        print_stats (Characters.get_stats characters player);
+                        print_string "\n Enter a stat to upgrade: ";
+                        print_string "\n|>>";
+                        let stat = read_line () in
+                        let lower_stat = String.lowercase_ascii stat in
+                        let res = Battle.battle_end
+                            battle_st player old_move_id 5 lower_stat 1.2 None
+                        in
+                        match res with
+                        | Legal final_ba -> Save.write final_ba characters;
+                        | IllegalInvalidMove -> begin
+                            print_string "\nInvalid input(s)! \
+                                          Please try again.";
+                            pause ();
+                            user_input_move () end
+                        | IllegalStat -> begin 
+                            print_string "\nInvalid input(s)! \
+                                          Please try again.";
+                            pause ();
+                            user_input_move () end
+                        | IllegalNoPP -> begin
+                            print_string "\nIllegalNoPP (impossible)";
+                            pause ();
+                            user_input_move()
+                          end
+                      end
+                      else pause ();
                     in
                     user_input_move ();
                     continue ep;
