@@ -14,12 +14,12 @@
       "moves": [
         {
           "id": 1,
-          "name": "Air Blast",
+          "name": "Avatar State",
           "issuper": false,
-          "element": "Air",
-          "description": "Aang shoots a powerful blast of air from his staff",
-          "damage": 20.0,
-          "pp": 15
+          "element": "Avatar",
+          "description": "Aang enters the Avatar State, becoming extremely powerful",
+          "damage": 27.0,
+          "pp": 3
         },
         {
           "id": 2,
@@ -27,8 +27,8 @@
           "issuper": false,
           "element": "Air",
           "description": "Aang spins a dazzling whirlwind at his opponent",
-          "damage": 10.0,
-          "pp": 20
+          "damage": 20.0,
+          "pp": 15
         },
         {
           "id": 3,
@@ -104,11 +104,11 @@
   "new moves": [
     {
       "id": 5,
-      "name": "Fire breath",
+      "name": "Fire Breath",
       "issuper": false,
       "element": "Fire",
       "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 17.0,
+      "damage": 21.0,
       "pp": 25
     }
   ]

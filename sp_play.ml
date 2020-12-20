@@ -27,6 +27,7 @@ let rec print_moves btl chr (moves:Characters.move list) =
   | h :: t -> begin
       let pp = Battle.get_current_pp btl chr h.id in
       print_string ("\n" ^ (string_of_int h.id) ^ ". " ^ (h.m_name) ^
+                    "\nElement: " ^ (Characters.string_of_element h.m_element) ^
                     "\nDamage: " ^ (string_of_float h.damage) ^
                     " PP: " ^ (string_of_int pp)
                     ^ "\n" ^ h.m_description ^ "\n");
@@ -68,8 +69,10 @@ let make_hp_bar hp : unit =
      | not_zero -> not_zero)
   in
   match num_bars with
-  | n when n < 5 -> ANSITerminal.(print_string [red] (make_hp_bar_helper num_bars ""))
-  | n when n < 10 -> ANSITerminal.(print_string [yellow] (make_hp_bar_helper num_bars ""))
+  | n when n < 5 -> ANSITerminal.(print_string [red] 
+                                    (make_hp_bar_helper num_bars ""))
+  | n when n < 10 -> ANSITerminal.(print_string [yellow] 
+                                     (make_hp_bar_helper num_bars ""))
   | _ -> ANSITerminal.(print_string [green] (make_hp_bar_helper num_bars ""))
 
 let print_battle_state battle ch1 ch2 = 
@@ -87,8 +90,10 @@ let print_battle_state battle ch1 ch2 =
        | not_zero -> not_zero)
     in
     match num_bars with
-    | n when n < 5 -> ANSITerminal.(print_string [red] (make_hp_bar_helper num_bars ""))
-    | n when n < 10 -> ANSITerminal.(print_string [yellow] (make_hp_bar_helper num_bars ""))
+    | n when n < 5 -> ANSITerminal.(print_string [red] 
+                                      (make_hp_bar_helper num_bars ""))
+    | n when n < 10 -> ANSITerminal.(print_string [yellow] 
+                                       (make_hp_bar_helper num_bars ""))
     | _ -> ANSITerminal.(print_string [green] (make_hp_bar_helper num_bars ""))
   in
   let player_hp = health_str battle ch1 in
@@ -342,7 +347,8 @@ and continue ep next =
     | Some 1 -> begin 
         if next then 
           if (Episode.move_to_next_episode ep) then begin
-            print_string ("\nStarting next episode: " ^ Episode.next_episode ep );
+            print_string ("\nStarting next episode: " ^ 
+                          Episode.next_episode ep );
             start_episode (Episode.next_episode ep) 1 true
           end
           else play_battle (next_battle ep) true

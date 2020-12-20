@@ -92,6 +92,8 @@ let set_new_health ba user_name (user_move_id : int) : float =
     then cur_enemy_health -. user_move.damage
     else if move_element = ba.enemy_element 
     then cur_enemy_health -. (0.75 *. user_move.damage)
+    else if move_element = Avatar
+    then cur_enemy_health -. (1.1 *. user_move.damage)
     else if move_element = Fire && ba.enemy_element = Air 
     then cur_enemy_health -. (1.25 *. user_move.damage)
     else if move_element = Earth && ba.enemy_element = Water 
