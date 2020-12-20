@@ -1,0 +1,90 @@
+{
+  "battles": [
+    {
+      "id": 1,
+      "character json": "",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Chief Arnook!",
+      "enemy text": [
+        "I will not allow you to learn Waterbending if you keep teaching Katara.",
+        "You can try your best to defeat me; I just might still allow you to learn.",
+        "Very well. You may continue to learn under Master Pakku.",
+        "A clear victory. You are too young, Avatar."
+      ],
+      "player text": [
+        "I think girls and boys should both be able to learn Waterbending.",
+        "If I defeat you, will you still let me learn?"
+      ],
+      "outro_win": "Congratulations, you defeated Chief Arnook! You may proceed to the next battle.",
+      "outro_lose": "Chief Arnook wins! Try again next time."
+    },
+    {
+      "id": 2,
+      "character json": "",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Princess Yue!",
+      "enemy text": [
+        "Your friend Sokka is really cute.",
+        "I'll show you something pretty and cute.",
+        "Woops! Fighting was never my strong suit, anyway.",
+        "Am I still just cute and pretty?"
+      ],
+      "player text": [
+        "Cute? He's kinda weird in my opinion.",
+        "You are way too pretty for that guy."
+      ],
+      "outro_win": "Congratulations, you defeated Princess Yue! You may proceed to the next battle.",
+      "outro_lose": "Princess Yue wins! Try again next time."
+    },
+    {
+      "id": 3,
+      "character json": "",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Kanna (Katara and Sokka’s grandmother)!",
+      "enemy text": [
+        "Young Avatar, thank you for leading my grandchildren.",
+        "Why don't you show me your ability to lead in a duel?",
+        "I see. You will grow to be a great Avatar.",
+        "Perhaps you are not ready to lead."
+      ],
+      "player text": [
+        "Thanks, ma'am! I'm a really good leader.",
+        "Of course! They're my best friends."
+      ],
+      "outro_win": "Congratulations, you defeated Kanna! You may proceed to the next battle.",
+      "outro_lose": "Kanna wins! Try again next time."
+    },
+    {
+      "id": 4,
+      "character json": "",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Master Pakku!",
+      "enemy text": [
+        "Avatar, you must show me your willingness to learn Waterbending from me.",
+        "If you can beat me in a battle, I will teach you and even consider to allow Katara to learn as well.",
+        "As expected of the Avatar. I'll see you tomorrow at sunrise for class.",
+        "You are too weak. Come back to the Northern Water Tribe when you are actually prepared to learn Waterbending."
+      ],
+      "player text": [
+        "I really really really want to learn! How can I show you?",
+        "Will you teach me if I beat you in a fight?"
+      ],
+      "outro_win": "Congratulations, you defeated Master Pakku! You may proceed to the next battle.",
+      "outro_lose": "Master Pakku wins! Try again next time."
+    },
+    {
+      "id": 5,
+      "character json": "",
+      "intro": "Welcome to your first battle. Prepare to meet your opponent: Chief Hakoda (Katara and Sokka’s father)!",
+      "enemy text": [
+        "Thanks for taking care of my kids while I was away, Avatar.",
+        "Hahaha, care for a friendly duel? I need to see if you really can protect my kiddos.",
+        "Didn't doubt you for a second, kid.",
+        "Maybe I should be chaperoning your little adventures."
+      ],
+      "player text": [
+        "Wow, Sokka really looks a lot like you.",
+        "They're my best buds. I'd do anything for them."
+      ],
+      "outro_win": "Congratulations, you defeated Chief Hakoda! You may proceed to the next battle.",
+      "outro_lose": "Chief Hakoda wins! Try again next time."
+    }
+  ],
+  "next episode": "Ep3dialogue.json"
+}

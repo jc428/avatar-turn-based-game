@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Katara",
-      "element": "Water",
+      "name": "Zuko",
+      "element": "Fire",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "mom friend, pretty hair, crush on Aang",
+      "description": "scarface, going through several stages of teen development, overall great guy",
       "moves": [
         {
           "id": 1,
-          "name": "Splash",
+          "name": "Fire Hands",
           "issuper": false,
-          "element": "Water",
-          "description": "Katara stuns her opponent with a medium splash of water to the face",
-          "damage": 10.0,
+          "element": "Fire",
+          "description": "Zuko attacks with burning red hands through strikes and punches",
+          "damage": 15.0,
           "pp": 15
         },
         {
           "id": 2,
-          "name": "Bloodbending",
-          "issuper": true,
-          "element": "Water",
-          "description": "Katara manipulates her opponent's blood to control them",
-          "damage": 30.0,
-          "pp": 1
+          "name": "Hot Head",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Zuko loses his cool and steam shoots from his ears and heats the atmosphere",
+          "damage": 5.0,
+          "pp": 30
         },
         {
           "id": 3,
-          "name": "Hot Mist",
+          "name": "Volcano Blast",
           "issuper": false,
-          "element": "Water",
-          "description": "Katara fills her opponent's atmosophere with scalding hot mist",
-          "damage": 22.0,
+          "element": "Earth",
+          "description": "Zuko creates a mini volcano that erupts right in front of his opponent",
+          "damage": 29.0,
           "pp": 10
         },
         {
           "id": 4,
-          "name": "Silent Treatment",
+          "name": "Teen Angst",
           "issuper": false,
-          "element": "Normal",
-          "description": "Katara angers her opponent with the silent treatment",
-          "damage": 4.0,
-          "pp": 30
+          "element": "Fire",
+          "description": "Zuko chases his opponent with a series of combinations, fire and martial arts",
+          "damage": 21.0,
+          "pp": 15
         }
       ]
     }

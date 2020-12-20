@@ -1,6 +1,6 @@
 type name = string
 type id = int
-type element = Fire | Earth | Water | Air | Avatar | Bruh
+type element = Fire | Earth | Water | Air | Avatar | Normal | Bruh
 
 exception UnknownCharacter of name
 exception UnknownMove of id
@@ -38,21 +38,35 @@ type t = id * character
 
 let aang = { 
   c_name = "Aang";
-  c_description = "hes da  Avatar broo0o";
+  c_description = "small, bald, the Avatar";
   c_element = Air;
   stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
   moves = [{
-      id = 1; is_super = false; m_name = "Air blast";
+      id = 1; is_super = false; m_name = "Air Blast";
       m_element = Air;
       m_description = "Aang shoots a powerful blast of air from his staff";
-      damage = 15.0;
-      pp = 10
+      damage = 20.0;
+      pp = 15
     };
      {
-       id = 2; is_super = false; m_name = "Tornado whirl";
+       id = 2; is_super = false; m_name = "Tornado Whirl";
        m_element = Air;
        m_description = "Aang spins a dazzling whirlwind at his opponent";
        damage = 10.0;
+       pp = 20
+     };
+     {
+       id = 3; is_super = false; m_name = "Spit Ball";
+       m_element = Normal;
+       m_description = "Aang spits on his opponent";
+       damage = 5.0;
+       pp = 30
+     };
+     {
+       id = 4; is_super = false; m_name = "Dolphin Spray";
+       m_element = Water;
+       m_description = "Aang showers his opponent with a strong burst of water";
+       damage = 12.0;
        pp = 20
      }
     ]
@@ -60,23 +74,41 @@ let aang = {
 
 let zuko = { 
   c_name = "Zuko";
-  c_description = "DISGRACED PRINCE RAWRRR XD";
+  c_description = "scarface, going through several stages of teen development, \
+                   overall great guy";
   c_element = Fire;
-  stats = {health = 69.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
   moves = [{
-      id = 1; is_super = false; m_name = "Fire ball";
+      id = 1; is_super = false; m_name = "Fire Hands";
       m_element = Fire;
-      m_description = "Zuko shoots a powerful blast of fire";
+      m_description = "Zuko attacks with burning red hands through strikes and \
+                       punches";
       damage = 15.0;
-      pp = 10
+      pp = 15
     };
      {
-       id = 2; is_super = false; m_name = "Fire breath";
+       id = 2; is_super = false; m_name = "Hot Head";
+       m_element = Normal;
+       m_description = "Zuko loses his cool and steam shoots from his ears and \
+                        heats the atmosphere";
+       damage = 5.0;
+       pp = 30
+     };
+     {
+       id = 3; is_super = false; m_name = "Volcano Blast";
+       m_element = Earth;
+       m_description = "Zuko creates a mini volcano that erupts right in front \
+                        of his opponent";
+       damage = 29.0;
+       pp = 10
+     };
+     {
+       id = 4; is_super = false; m_name = "Teen Angst";
        m_element = Fire;
-       m_description = "Zuko harnesses his inner dragon, \
-                        unleashing a breath of fire";
-       damage = 8.0;
-       pp = 25
+       m_description = "Zuko chases his opponent with a series of \
+                        combinations, fire and martial arts";
+       damage = 21.0;
+       pp = 15
      }
     ]
 }
@@ -96,10 +128,25 @@ let ty_lee = {
     };
      {
        id = 2; is_super = false; m_name = "Animal Whisper";
+       m_element = Normal;
+       m_description =  "Ty Lee communicates with animals and has them do her \
+                         bidding";
+       damage = 10.0;
+       pp = 25
+     };
+     {
+       id = 3; is_super = false; m_name = "Flaming Cartwheel";
        m_element = Fire;
-       m_description =  "idk why but I feel like Ty Lee could communicate with \
-                         animals and have them do her bidding";
+       m_description =  "Ty Lee surrounds her opponent with circles of flame";
        damage = 20.0;
+       pp = 12
+     };
+     {
+       id = 4; is_super = false; m_name = "Fire Flips";
+       m_element = Fire;
+       m_description =  "Ty Lee moves swiftly around her opponent, spreading \
+                         flames across the battle ground";
+       damage = 25.0;
        pp = 10
      }
     ]
@@ -119,16 +166,231 @@ let katara = {
       pp = 15
     };
      {
-       id = 2; is_super = false; m_name = "Heal";
+       id = 2; is_super = false; m_name = "Healing Water";
        m_element = Water;
-       m_description =  "Katara uses waterbending to heal a teammate";
+       m_description =  "Katara uses waterbending to heal a player";
        damage = -10.0;
+       pp = 15
+     };
+     {
+       id = 3; is_super = false; m_name = "Hot Mist";
+       m_element = Water;
+       m_description =  "Katara fills her opponent's atmosophere with scalding \
+                         hot mist";
+       damage = 22.0;
+       pp = 10
+     };
+     {
+       id = 4; is_super = true; m_name = "Bloodbending";
+       m_element = Water;
+       m_description =  "Katara manipulates her opponent's blood to control \
+                         them";
+       damage = 30.0;
+       pp = 2
+     }
+    ]
+}
+
+let sokka = { 
+  c_name = "Sokka";
+  c_description = "dad jokes, kinda clumsy, insists he's a man to be feared";
+  c_element = Water;
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  moves = [{
+      id = 1; is_super = false; m_name = "Blubber";
+      m_element = Water;
+      m_description = "Sokka throws whale blubber at his opponent's face";
+      damage = 17.0;
+      pp = 25
+    };
+     {
+       id = 2; is_super = false; m_name = "Wavepool";
+       m_element = Water;
+       m_description =  "Sokka pushes a wavepool at his opponent";
+       damage = 18.0;
+       pp = 20
+     };
+     {
+       id = 3; is_super = false; m_name = "Dad Joke";
+       m_element = Normal;
+       m_description =  "Sokka tells a joke so bad that his opponent loses \
+                         health";
+       damage = 5.0;
+       pp = 25
+     };
+     {
+       id = 4; is_super = false; m_name = "Water Martial Arts";
+       m_element = Water;
+       m_description =  "Sokka shows off his dank moves";
+       damage = 10.0;
        pp = 15
      }
     ]
 }
 
-let characters = [(1,aang); (2,zuko); (3,ty_lee); (4,katara)]
+let toph = { 
+  c_name = "Toph";
+  c_description = "small, blind, sees with her feet";
+  c_element = Earth;
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  moves = [{
+      id = 1; is_super = false; m_name = "Avalanche";
+      m_element = Earth;
+      m_description = "Toph creates an avalanche, crushing her opponent with \
+                       large rocks";
+      damage = 25.0;
+      pp = 15
+    };
+     {
+       id = 2; is_super = false; m_name = "Little Rich Girls";
+       m_element = Normal;
+       m_description =  "Toph uses her wealthy background to hire a random guy \
+                         to punch her opponent in the face";
+       damage = 15.0;
+       pp = 20
+     };
+     {
+       id = 3; is_super = false; m_name = "Blind Healing";
+       m_element = Earth;
+       m_description =  "Toph heals a teammate with her blind senses";
+       damage = -13.0;
+       pp = 12
+     };
+     {
+       id = 4; is_super = false; m_name = "Geyser";
+       m_element = Water;
+       m_description =  "Toph creates a hole in the ground and a geyser erupts \
+                         in her opponent's face";
+       damage = 22.0;
+       pp = 13
+     }
+    ]
+}
+
+let toph = { 
+  c_name = "Toph";
+  c_description = "small, blind, sees with her feet";
+  c_element = Earth;
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  moves = [{
+      id = 1; is_super = false; m_name = "Avalanche";
+      m_element = Earth;
+      m_description = "Toph creates an avalanche, crushing her opponent with \
+                       large rocks";
+      damage = 25.0;
+      pp = 15
+    };
+     {
+       id = 2; is_super = false; m_name = "Little Rich Girls";
+       m_element = Normal;
+       m_description =  "Toph uses her wealthy background to hire a random guy \
+                         to punch her opponent in the face";
+       damage = 15.0;
+       pp = 20
+     };
+     {
+       id = 3; is_super = false; m_name = "Blind Healing";
+       m_element = Earth;
+       m_description =  "Toph heals a teammate with her blind senses";
+       damage = -13.0;
+       pp = 12
+     };
+     {
+       id = 4; is_super = false; m_name = "Geyser";
+       m_element = Water;
+       m_description =  "Toph creates a hole in the ground and a geyser erupts \
+                         in her opponent's face";
+       damage = 22.0;
+       pp = 13
+     }
+    ]
+}
+
+let suki = { 
+  c_name = "Suki";
+  c_description = "Kyoshi warrior, proud feminist, will destroy you while \
+                   calling you a sissy";
+  c_element = Earth;
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  moves = [{
+      id = 1; is_super = false; m_name = "Fan Dance";
+      m_element = Earth;
+      m_description = "Suki performs a combative dance with her Kyoshi Warrior \
+                       fan";
+      damage = 18.0;
+      pp = 15
+    };
+     {
+       id = 2; is_super = false; m_name = "Makeup Blast";
+       m_element = Normal;
+       m_description =  "Suki paints her opponent's face like a Kyoshi \
+                         Warrior's, making them embarrassed";
+       damage = 6.0;
+       pp = 25
+     };
+     {
+       id = 3; is_super = false; m_name = "Paper Cranes";
+       m_element = Air;
+       m_description =  "Suki uses her fans to create paper cranes that attack \
+                         her opponent";
+       damage = 20.0;
+       pp = 15
+     };
+     {
+       id = 4; is_super = false; m_name = "Close Combat";
+       m_element = Normal;
+       m_description =  "Suki engages in close combat and throws a series of \
+                         punches and kicks";
+       damage = 28.0;
+       pp = 10
+     }
+    ]
+}
+
+let mai = { 
+  c_name = "Mai";
+  c_description = "stoic, indifferent, in love with Zuko like the rest of us \
+                   are";
+  c_element = Fire;
+  stats = {health = 100.0; power = 1.0; speed = 1.0; evasiveness = 1.0};
+  moves = [{
+      id = 1; is_super = false; m_name = "Flaming Dagger";
+      m_element = Fire;
+      m_description = "Mai engages in close combat with a small firey dagger";
+      damage = 15.0;
+      pp = 10
+    };
+     {
+       id = 2; is_super = false; m_name = "Piercing Glare";
+       m_element = Air;
+       m_description =  "Mai focuses all of her supressed rage into her gaze \
+                         and shoots out a concentrated beam of light that \
+                         burns the skin";
+       damage = 22.0;
+       pp = 7
+     };
+     {
+       id = 3; is_super = false; m_name = "Scoff";
+       m_element = Normal;
+       m_description =  "Mai displays an air of judgement, harming her \
+                         opponent's resolve";
+       damage = 5.0;
+       pp = 20
+     };
+     {
+       id = 4; is_super = false; m_name = "Hot Hair Pins";
+       m_element = Fire;
+       m_description =  "Mai attacks her opponent with burning hot hair pins";
+       damage = 15.0;
+       pp = 17
+     }
+    ]
+}
+
+
+
+let characters = [(1,aang); (2,zuko); (3,ty_lee); (4,katara); (5,sokka); 
+                  (6,toph); (7,suki); (8,mai)]
 
 let is_character name = 
   let rec helper assoc =

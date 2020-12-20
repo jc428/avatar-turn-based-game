@@ -295,14 +295,3 @@ let mp_make_move btl name id target =
       }
     end
   | exception UnknownMove id -> IllegalInvalidMove
-
-
-
-
-
-
-
-
-
-
-

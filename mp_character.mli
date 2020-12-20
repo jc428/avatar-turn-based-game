@@ -31,7 +31,7 @@ type stats = {
 
 (** Type of character and move element
     Determines effectiveness of moves*)
-type element = Fire | Earth | Water | Air | Avatar | Bruh
+type element = Fire | Earth | Water | Air | Avatar | Normal | Bruh
 
 (** Type of character moves *)
 type move = {

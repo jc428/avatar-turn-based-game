@@ -296,7 +296,7 @@ and continue ep =
 
 let select_episode () = 
   print_endline "\n Select one of the following: \n 
-                 1. Episode 1\n 
+                 1. Episode 1: Team Avatar\n 
                  2. Quit  \n";
   print_string "|>>";         
   let rec select_battle_r () = 
