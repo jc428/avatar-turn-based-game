@@ -1,9 +1,14 @@
-(** Representation of a dynamic multiplayer t
+(** 
+   Representation of dynamic multiplayer battle.
 *)
+
+(** Representation of a dynamic multiplayer t *)
 type t
 
+(** Type of name *)
 type name = string
 
+(** PlayerNotFound is thrown when player with [name] is not found *)
 exception PlayerNotFound of name
 
 (** [mp_init_battle names] creates a mp_battle from a list of
