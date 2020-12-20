@@ -145,6 +145,9 @@ and play_battle ep is_from_save =
           pause ();
           print_string ("\n Opponent turn- " ^ enemy ^ " used " ^
                         (Characters.get_move_by_id characters enemy x).m_name);
+          print_string ("\n" ^ 
+                        (Characters.get_move_description characters enemy x) ^ 
+                        "\n");
           print_battle_state battle_nxt player enemy;
           pause ();
           fight battle_nxt
@@ -163,6 +166,13 @@ and play_battle ep is_from_save =
           | Some i -> begin
               match Battle.make_move battle_st player i with
               | Legal battle_nxt -> begin
+                  print_string 
+                    ("\n Player used " ^
+                     (Characters.get_move_by_id characters player i).m_name);
+                  print_string 
+                    ("\n" ^ 
+                     (Characters.get_move_description characters player i) ^ 
+                     "\n");
                   let winner = winner battle_nxt player enemy in
                   if (winner = "") then begin
                     print_battle_state battle_nxt player enemy;

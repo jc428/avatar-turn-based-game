@@ -10,7 +10,7 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "hes da   Avatar broo0o",
+      "description": "small, bald, the Avatar",
       "moves": [
         {
           "id": 1,
@@ -61,6 +61,24 @@
           "description": "Mai focuses all of her supressed rage into her gaze and shoots out a concentrated beam of light that burns the skin",
           "damage": 22.0,
           "pp": 7
+        },
+        {
+          "id": 3,
+          "name": "Scoff",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Mai displays an air of judgement, harming her opponent's resolve",
+          "damage": 5.0,
+          "pp": 20
+        },
+        {
+          "id": 4,
+          "name": "Hot Hair Pins",
+          "issuper": false,
+          "element": "Fire",
+          "description": "Mai attacks her opponent with burning hot hair pins",
+          "damage": 15.0,
+          "pp": 17
         }
       ]
     }
@@ -72,7 +90,7 @@
       "issuper": false,
       "element": "Fire",
       "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 8.0,
+      "damage": 17.0,
       "pp": 25
     }
   ]

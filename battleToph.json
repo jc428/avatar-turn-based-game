@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Ty Lee",
-      "element": "Fire",
+      "name": "Toph",
+      "element": "Earth",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "a bit of an airhead but very cheerful and pretty",
+      "description": "small, blind, sees with her feet",
       "moves": [
         {
           "id": 1,
-          "name": "Acrobatics",
+          "name": "Avalanche",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee stuns and confuses her opponent with a sequence of acrobatic movements combined with bursts of fire",
-          "damage": 10.0,
+          "element": "Earth",
+          "description": "Toph creates an avalanche, crushing her opponent with large rocks",
+          "damage": 25.0,
           "pp": 15
         },
         {
           "id": 2,
-          "name": "Animal Whisper",
+          "name": "Little Rich Girl",
           "issuper": false,
           "element": "Normal",
-          "description": "Ty Lee communicates with animals and has them do her bidding",
-          "damage": 10.0,
-          "pp": 25
+          "description": "Toph uses her wealthy background to hire a random guy to punch her opponent in the face",
+          "damage": 18.0,
+          "pp": 20
         },
         {
           "id": 3,
-          "name": "Flaming Cartwheel",
+          "name": "Foot Quake",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee surrounds her opponent with circles of flame",
-          "damage": 20.0,
-          "pp": 12
+          "element": "Earth",
+          "description": "Toph uses her feet to sense the earth and create a trembling earthquake",
+          "damage": 27.0,
+          "pp": 10
         },
         {
           "id": 4,
-          "name": "Fire Flips",
+          "name": "Geyser",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee moves swiftly around her opponent, spreading flames across the battle ground",
-          "damage": 25.0,
-          "pp": 10
+          "element": "Water",
+          "description": "Toph creates a hole in the ground and a geyser erupts in her opponent's face",
+          "damage": 22.0,
+          "pp": 13
         }
       ]
     }

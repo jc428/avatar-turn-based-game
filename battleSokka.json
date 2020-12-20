@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Ty Lee",
-      "element": "Fire",
+      "name": "Sokka",
+      "element": "Water",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "a bit of an airhead but very cheerful and pretty",
+      "description": "dad jokes, kinda clumsy, insists he's a man to be feared",
       "moves": [
         {
           "id": 1,
-          "name": "Acrobatics",
+          "name": "Blubber",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee stuns and confuses her opponent with a sequence of acrobatic movements combined with bursts of fire",
-          "damage": 10.0,
-          "pp": 15
-        },
-        {
-          "id": 2,
-          "name": "Animal Whisper",
-          "issuper": false,
-          "element": "Normal",
-          "description": "Ty Lee communicates with animals and has them do her bidding",
-          "damage": 10.0,
+          "element": "Water",
+          "description": "Sokka throws whale blubber at his opponent's face",
+          "damage": 17.0,
           "pp": 25
         },
         {
-          "id": 3,
-          "name": "Flaming Cartwheel",
+          "id": 2,
+          "name": "Wavepool",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee surrounds her opponent with circles of flame",
-          "damage": 20.0,
-          "pp": 12
+          "element": "Water",
+          "description": "Sokka pushes a wavepool at his opponent",
+          "damage": 18.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Dad Joke",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Sokka tells a joke so bad that his opponent loses health",
+          "damage": 5.0,
+          "pp": 25
         },
         {
           "id": 4,
-          "name": "Fire Flips",
+          "name": "Water Martial Arts",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee moves swiftly around her opponent, spreading flames across the battle ground",
-          "damage": 25.0,
-          "pp": 10
+          "element": "Water",
+          "description": "Sokka shows off his dank moves",
+          "damage": 10.0,
+          "pp": 15
         }
       ]
     }

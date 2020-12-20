@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Ty Lee",
-      "element": "Fire",
+      "name": "Momo",
+      "element": "Air",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,43 +60,43 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "a bit of an airhead but very cheerful and pretty",
+      "description": "tiny lemur, very cute, loves Aang",
       "moves": [
         {
           "id": 1,
-          "name": "Acrobatics",
+          "name": "Chatter",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee stuns and confuses her opponent with a sequence of acrobatic movements combined with bursts of fire",
-          "damage": 10.0,
-          "pp": 15
+          "element": "Normal",
+          "description": "Momo makes chattering sounds and annoys his opponent",
+          "damage": 5.0,
+          "pp": 30
         },
         {
           "id": 2,
-          "name": "Animal Whisper",
+          "name": "Dizzy Spinny",
           "issuper": false,
-          "element": "Normal",
-          "description": "Ty Lee communicates with animals and has them do her bidding",
-          "damage": 10.0,
-          "pp": 25
+          "element": "Air",
+          "description": "Momo flys in circles above his opponent's head, giving them a bad headache",
+          "damage": 18.0,
+          "pp": 20
         },
         {
           "id": 3,
-          "name": "Flaming Cartwheel",
+          "name": "Ear Flaps",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee surrounds her opponent with circles of flame",
+          "element": "Air",
+          "description": "Momo bats his big ole ears and blows a gust of wind at his opponent",
           "damage": 20.0,
-          "pp": 12
+          "pp": 15
         },
         {
           "id": 4,
-          "name": "Fire Flips",
+          "name": "Hypnosis",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee moves swiftly around her opponent, spreading flames across the battle ground",
-          "damage": 25.0,
-          "pp": 10
+          "element": "Air",
+          "description": "Momo hypnotizes his opponent with his big green eyes and gives them shock",
+          "damage": 17.0,
+          "pp": 15
         }
       ]
     }

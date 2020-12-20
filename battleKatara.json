@@ -10,20 +10,20 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "hes da   Avatar broo0o",
+      "description": "small, bald, the Avatar",
       "moves": [
         {
           "id": 1,
-          "name": "Air blast",
+          "name": "Air Blast",
           "issuper": false,
           "element": "Air",
           "description": "Aang shoots a powerful blast of air from his staff",
-          "damage": 15.0,
-          "pp": 10
+          "damage": 20.0,
+          "pp": 15
         },
         {
           "id": 2,
-          "name": "Tornado whirl",
+          "name": "Tornado Whirl",
           "issuper": false,
           "element": "Air",
           "description": "Aang spins a dazzling whirlwind at his opponent",
@@ -32,20 +32,20 @@
         },
         {
           "id": 3,
-          "name": "Tornado whirl",
+          "name": "Spit Ball",
           "issuper": false,
-          "element": "Air",
-          "description": "Aang spins a dazzling whirlwind at his opponent",
-          "damage": 10.0,
-          "pp": 20
+          "element": "Normal",
+          "description": "Aang spits on his opponent",
+          "damage": 5.0,
+          "pp": 30
         },
         {
           "id": 4,
-          "name": "Tornado whirl",
+          "name": "Dolphin Spray",
           "issuper": false,
-          "element": "Air",
-          "description": "Aang spins a dazzling whirlwind at his opponent",
-          "damage": 10.0,
+          "element": "Water",
+          "description": "Aang showers his opponent with a strong burst of water",
+          "damage": 12.0,
           "pp": 20
         }
       ]
@@ -77,8 +77,26 @@
           "issuper": true,
           "element": "Water",
           "description": "Katara manipulates her opponent's blood to control them",
-          "damage": 35.0,
+          "damage": 30.0,
           "pp": 1
+        },
+        {
+          "id": 3,
+          "name": "Hot Mist",
+          "issuper": false,
+          "element": "Water",
+          "description": "Katara fills her opponent's atmosophere with hot scalding mist",
+          "damage": 20.0,
+          "pp": 10
+        },
+        {
+          "id": 4,
+          "name": "Silent Treatment",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Katara angers her opponent with the silent treatment",
+          "damage": 4.0,
+          "pp": 30
         }
       ]
     }
@@ -90,7 +108,7 @@
       "issuper": false,
       "element": "Fire",
       "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 8.0,
+      "damage": 17.0,
       "pp": 25
     }
   ]

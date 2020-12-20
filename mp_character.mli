@@ -84,6 +84,9 @@ val c_moves : name -> move list
 (** [c_move_by_id] returns a record representing a move from a move id. *)
 val c_move_by_id : name -> int -> move
 
+(** [c_move_description] returns a description of a move from a move id. *)
+val c_move_description : name -> int -> description
+
 (** [remove_character name lst] removes the character with name [name]
     from [lst] 
     [lst] is unchanged if no character with [name] is in [lst] *)
