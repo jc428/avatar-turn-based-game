@@ -152,7 +152,11 @@ let update_move_list btl name id =
     }
   in 
   let filtered_move_list =  List.filter (fun m -> m.id <> id) moves in
-  updated_move :: filtered_move_list 
+  let rec ordered_move_list i move = function
+    | [] -> [move]
+    | h :: t -> if i = 0 then move :: (h :: t)
+      else h :: (ordered_move_list (i-1) move t)
+  in ordered_move_list (id-1) updated_move filtered_move_list
 
 let update_team team btl name id target = 
   let old_stats = player_stats btl target in 
@@ -188,6 +192,32 @@ let update_team team btl name id target =
       playerB_element = team.playerB_element;
       playerB_stats = new_stats;
       playerB_moves = team.playerB_moves;
+    }
+    else if name = a && target = a then { (* move on self *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = new_stats; 
+      playerA_moves = update_move_list btl name id;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = team.playerB_stats;
+      playerB_moves = team.playerB_moves;
+    }
+    else if name = b && target = b then { (* move on self *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = team.playerA_stats; 
+      playerA_moves = team.playerA_moves;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = new_stats;
+      playerB_moves = update_move_list btl name id;
     }
     else if target = a then {         (* target a name other team *)
       members = team.members;
@@ -228,7 +258,8 @@ let update_team team btl name id target =
       playerB_stats = team.playerB_stats;
       playerB_moves = team.playerB_moves;
     }
-    else {                             (* name b target other team *)
+
+    else if name = b then {            (* name b target other team *)
       members = team.members;
       playerA_name = team.playerA_name;
       playerA_description = team.playerA_description;
@@ -240,6 +271,19 @@ let update_team team btl name id target =
       playerB_element = team.playerB_element;
       playerB_stats = team.playerB_stats;
       playerB_moves = update_move_list btl name id;
+    }
+    else {                             (* nothing happened to this team *)
+      members = team.members;
+      playerA_name = team.playerA_name;
+      playerA_description = team.playerA_description;
+      playerA_element = team.playerA_element;
+      playerA_stats = team.playerA_stats; 
+      playerA_moves = team.playerA_moves;
+      playerB_name = team.playerB_name;
+      playerB_description = team.playerB_description;
+      playerB_element = team.playerB_element;
+      playerB_stats = team.playerB_stats;
+      playerB_moves = team.playerB_moves;
     }
 (* Before Rachel's edit: *)
 (* (a, b) -> if target = a then {
