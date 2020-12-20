@@ -88,4 +88,5 @@ val get_moves_save : t2 -> move list
 (* [get_move_by_id_save] returns a record representing a move from a move id. *)
 val get_move_by_id_save : t2 -> int -> move
 
+(* [characters_from_save] returns the characters from a saved JSON file*)
 val characters_from_save : t -> t2 -> t
