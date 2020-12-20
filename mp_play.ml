@@ -127,7 +127,15 @@ let select_players () =
   print_string ("\nPlayer 4 playing as " ^ player4 );
   [player1; player2; player3; player4]
 
-let start_battle battle = 
+let rec play_mp_game () =
+  print_string "\nA 2 vs 2 team battle";
+  pause ();
+  print_string "\n\nChoose your fighter "; 
+  let players = select_players () in 
+  let battle = mp_init_battle players in 
+  start_battle battle
+
+and start_battle battle = 
   let players = Mp_battle.players battle in
   let pl1 = List.hd players in
   let pl2 = List.nth players 1 in
@@ -237,7 +245,7 @@ let start_battle battle =
                           helper ()
                         end
                       | Some 1 -> begin 
-                          fight battle
+                          play_mp_game ()
                         end
                       | Some 2 -> begin
                           print_endline "\nSee you next time!";
@@ -277,14 +285,6 @@ let start_battle battle =
     player_turn battle_st 0
   in 
   fight battle
-
-let play_mp_game () =
-  print_string "\nA 2 vs 2 team battle";
-  pause ();
-  print_string "\n\nChoose your fighter "; 
-  let players = select_players () in 
-  let battle = mp_init_battle players in 
-  start_battle battle
 
 
 
