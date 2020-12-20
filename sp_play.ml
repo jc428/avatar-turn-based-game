@@ -43,8 +43,26 @@ let health_str battle name =
   health battle name |> string_of_float
 
 let print_battle_state battle ch1 ch2 = 
-  print_string ("\nPlayer health: " ^ (health_str battle ch1));
-  print_string ("\nOpponent health: " ^ (health_str battle ch2) ^ "\n")
+  let make_hp_bar hp : unit =
+    let rec make_hp_bar_helper num_bars acc = 
+      match num_bars with 
+      | num when num > 0 -> let new_acc = "|" ^ acc in 
+        make_hp_bar_helper (num_bars - 1) new_acc
+      | num when num <= 0 -> acc
+      | _ -> failwith "this should never happen"
+    in
+    let num_bars = hp / 5 in
+    match num_bars with
+    | n when n < 5 -> ANSITerminal.(print_string [red] (make_hp_bar_helper num_bars ""))
+    | n when n < 10 -> ANSITerminal.(print_string [yellow] (make_hp_bar_helper num_bars ""))
+    | _ -> ANSITerminal.(print_string [green] (make_hp_bar_helper num_bars ""))
+  in
+  let player_hp = health_str battle ch1 in
+  let opponent_hp = health_str battle ch2 in
+  print_string ("\nPlayer health: " ^ player_hp ^ "\n");
+  make_hp_bar (int_of_float (float_of_string player_hp));
+  print_string ("\nOpponent health: " ^ opponent_hp ^ "\n");
+  make_hp_bar (int_of_float (float_of_string opponent_hp))
 
 let winner battle ch1 ch2 = 
   if (health battle ch1 <= 0.) then ch2
