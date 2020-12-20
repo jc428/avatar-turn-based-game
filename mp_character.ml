@@ -198,5 +198,8 @@ let c_move_by_id name id : move =
   in
   helper (c_moves name) id
 
+let c_move_description name id : description =
+  (c_move_by_id name id).m_description
+
 let remove_character name (lst: t list) =
   List.filter (fun (i, c) -> c.c_name <> name) lst

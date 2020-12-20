@@ -69,6 +69,9 @@ val get_new_moves : t -> move list
 (* [get_move_by_id] returns a record representing a move from a move id. *)
 val get_move_by_id : t -> name -> int -> move
 
+(* [get_move_description] returns the decritpion of a move from a move id. *)
+val get_move_description : t -> name -> int -> description
+
 (* [from_json_save] takes input of the JSON file name to load (DO NOT INCLUDE 
    '.json') and returns an instance of t*)
 val from_json_save : string -> t2

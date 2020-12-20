@@ -198,7 +198,7 @@ let update_team team btl name id target =
     evasiveness = old_stats.evasiveness
   } in
   match team.members with
-    (a, b) -> if target = a && name = b then { (* target a name b -> probably healing *)
+    (a, b) -> if target = a && name = b then { (* target a name b *)
       members = team.members;
       playerA_name = team.playerA_name;
       playerA_description = team.playerA_description;
@@ -211,7 +211,7 @@ let update_team team btl name id target =
       playerB_stats = team.playerB_stats;
       playerB_moves = update_move_list btl name id;
     }
-    else if target = b && name = a then {  (* target b name a -> probably healing *)
+    else if target = b && name = a then {  (* target b name a *)
       members = team.members;
       playerA_name = team.playerA_name;
       playerA_description = team.playerA_description;
@@ -316,33 +316,6 @@ let update_team team btl name id target =
       playerB_stats = team.playerB_stats;
       playerB_moves = team.playerB_moves;
     }
-(* Before Rachel's edit: *)
-(* (a, b) -> if target = a then {
-   members = team.members;
-   playerA_name = team.playerA_name;
-   playerA_description = team.playerA_description;
-   playerA_element = team.playerA_element;
-   playerA_stats = new_stats; 
-   playerA_moves = update_move_list btl target id;
-   playerB_name = team.playerB_name;
-   playerB_description = team.playerB_description;
-   playerB_element = team.playerB_element;
-   playerB_stats = team.playerB_stats;
-   playerB_moves = team.playerB_moves;
-   }
-   else  {
-   members = team.members;
-   playerA_name = team.playerA_name;
-   playerA_description = team.playerA_description;
-   playerA_element = team.playerA_element;
-   playerA_stats = old_stats; 
-   playerA_moves = team.playerA_moves;
-   playerB_name = team.playerB_name;
-   playerB_description = team.playerB_description;
-   playerB_element = team.playerB_element;
-   playerB_stats = team.playerB_stats;
-   playerB_moves = update_move_list btl target id;
-   }  *)
 
 let mp_make_move btl name id target = 
   match move_by_id btl name id with 
@@ -351,19 +324,6 @@ let mp_make_move btl name id target =
         team1 = update_team btl.team1 btl name id target;
         team2 = update_team btl.team2 btl name id target
       }
-      (* before Rachel's edit: *)
-      (* if is_team1 btl name then 
-         let team1 = update_team btl.team1 btl name id target in 
-         Legal {
-          team1 = team1;
-          team2 = btl.team2
-         }
-         else 
-         let team2 = update_team btl.team2 btl name id target in 
-         Legal {
-          team1 = btl.team2;
-          team2 = team2
-         } *)
     end
   | exception UnknownMove id -> IllegalInvalidMove
 

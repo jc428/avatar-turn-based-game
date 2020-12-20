@@ -130,6 +130,9 @@ let get_move_by_id ch name id : move =
   in
   helper (get_moves ch name) id
 
+let get_move_description ch name id : description =
+  (get_move_by_id ch name id).m_description
+
 type t2 = {
   stats : stats;
   moves : move list

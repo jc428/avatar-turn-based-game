@@ -51,8 +51,8 @@
       ]
     },
     {
-      "name": "Ty Lee",
-      "element": "Fire",
+      "name": "Suki",
+      "element": "Earth",
       "isplayer": false,
       "stats": {
         "health": 100.0,
@@ -60,42 +60,42 @@
         "speed": 1.0,
         "evasiveness": 1.0
       },
-      "description": "a bit of an airhead but very cheerful and pretty",
+      "description": "Kyoshi warrior, proud feminist, will destroy you while calling you a sissy",
       "moves": [
         {
           "id": 1,
-          "name": "Acrobatics",
+          "name": "Fan Dance",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee stuns and confuses her opponent with a sequence of acrobatic movements combined with bursts of fire",
-          "damage": 10.0,
+          "element": "Earth",
+          "description": "Suki performs a combative dance with her Kyoshi Warrior fan",
+          "damage": 18.0,
           "pp": 15
         },
         {
           "id": 2,
-          "name": "Animal Whisper",
+          "name": "Makeup Blast",
           "issuper": false,
           "element": "Normal",
-          "description": "Ty Lee communicates with animals and has them do her bidding",
-          "damage": 10.0,
+          "description": "Suki paints her opponent's face like a Kyoshi Warrior's, making them embarrassed",
+          "damage": 6.0,
           "pp": 25
         },
         {
           "id": 3,
-          "name": "Flaming Cartwheel",
+          "name": "Paper Cranes",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee surrounds her opponent with circles of flame",
+          "element": "Air",
+          "description": "Suki uses her fans to create paper cranes that attack her opponent",
           "damage": 20.0,
-          "pp": 12
+          "pp": 15
         },
         {
           "id": 4,
-          "name": "Fire Flips",
+          "name": "Close Combat",
           "issuper": false,
-          "element": "Fire",
-          "description": "Ty Lee moves swiftly around her opponent, spreading flames across the battle ground",
-          "damage": 25.0,
+          "element": "Normal",
+          "description": "Suki engages in close combat and throws a series of punches and kicks",
+          "damage": 28.0,
           "pp": 10
         }
       ]

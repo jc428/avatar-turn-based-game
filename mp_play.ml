@@ -171,6 +171,12 @@ let start_battle battle =
             let target = select_character living_players target_str in
             match Mp_battle.mp_make_move btl player i target with
             | Legal battle_nxt -> begin
+                print_string ("\n" ^ player ^ " used " ^ 
+                              (Mp_character.c_move_by_id player i).m_name
+                              ^ " on " ^ target ^ "!");
+                print_string ("\n  " ^ 
+                              (Mp_character.c_move_description player i)
+                              ^ "\n");
                 let winners = winner battle_nxt pl1 pl2 pl3 pl4 in
                 let new_dead = 
                   (List.filter 
@@ -178,6 +184,7 @@ let start_battle battle =
                      winners) in
                 if (winners = [] || new_dead = []) then begin
                   print_battle_state battle_nxt pl1 pl2 pl3 pl4;
+                  pause ();
                   player_turn battle_nxt  (if x = 0 || x = 1 
                                            then x + 2 
                                            else if x = 2 then 1
