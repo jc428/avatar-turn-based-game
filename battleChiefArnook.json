@@ -1,0 +1,115 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "small, bald, the Avatar",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air Blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 20.0,
+          "pp": 15
+        },
+        {
+          "id": 2,
+          "name": "Tornado Whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Spit Ball",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Aang spits on his opponent",
+          "damage": 5.0,
+          "pp": 30
+        },
+        {
+          "id": 4,
+          "name": "Dolphin Spray",
+          "issuper": false,
+          "element": "Water",
+          "description": "Aang showers his opponent with a strong burst of water",
+          "damage": 12.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Chief Arnook",
+      "element": "Water",
+      "isplayer": false,
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "chief of Northern Water Tribe, anti female combative waterbending, father of the moon",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Grumpy Old Man",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Chief Arnook shows his dominance as a Grumpy Old Man",
+          "damage": 7.0,
+          "pp": 30
+        },
+        {
+          "id": 2,
+          "name": "Patriarchy",
+          "issuper": false,
+          "element": "Water",
+          "description": "Chief Arnook shows his manly Waterbending strength that apparently only men can possess",
+          "damage": 23.0,
+          "pp": 18
+        },
+        {
+          "id": 3,
+          "name": "Giant Wave",
+          "issuper": false,
+          "element": "Water",
+          "description": "Chief Arnook waves his arm and controls a giant wave that washes over his opponent",
+          "damage": 27.0,
+          "pp": 10
+        },
+        {
+          "id": 4,
+          "name": "Icy Rain",
+          "issuper": false,
+          "element": "Water",
+          "description": "Chief Arnook controls frozen water droplets that fall at a frightening speed above his opponent",
+          "damage": 25.0,
+          "pp": 8
+        }
+      ]
+    }
+  ],
+  "new moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 17.0,
+      "pp": 25
+    }
+  ]
+}

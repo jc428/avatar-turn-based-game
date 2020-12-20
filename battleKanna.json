@@ -1,0 +1,115 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "small, bald, the Avatar",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air Blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 20.0,
+          "pp": 15
+        },
+        {
+          "id": 2,
+          "name": "Tornado Whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Spit Ball",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Aang spits on his opponent",
+          "damage": 5.0,
+          "pp": 30
+        },
+        {
+          "id": 4,
+          "name": "Dolphin Spray",
+          "issuper": false,
+          "element": "Water",
+          "description": "Aang showers his opponent with a strong burst of water",
+          "damage": 12.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Kanna",
+      "element": "Water",
+      "isplayer": false,
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "Katara's and Sokka's grandmother, cute old laady, leadership 101",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Old Wisdom",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Kanna uses her wisdom to launch an attack of knowledge",
+          "damage": 7.0,
+          "pp": 25
+        },
+        {
+          "id": 2,
+          "name": "Gentle Hands",
+          "issuper": false,
+          "element": "Earth",
+          "description": "Kanna touches the ground with her gentle hands and moves the water beneath to reach her opponent",
+          "damage": 20.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Liquid Embrace",
+          "issuper": false,
+          "element": "Water",
+          "description": "Kanna traps her opponent in a water bubble",
+          "damage": 25.0,
+          "pp": 10
+        },
+        {
+          "id": 4,
+          "name": "Ice Spear",
+          "issuper": false,
+          "element": "Water",
+          "description": "Kanna throws a spear of ice directly at her opponent",
+          "damage": 26.0,
+          "pp": 8
+        }
+      ]
+    }
+  ],
+  "new moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 17.0,
+      "pp": 25
+    }
+  ]
+}

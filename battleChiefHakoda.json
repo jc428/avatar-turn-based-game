@@ -1,0 +1,115 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "small, bald, the Avatar",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air Blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 20.0,
+          "pp": 15
+        },
+        {
+          "id": 2,
+          "name": "Tornado Whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Spit Ball",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Aang spits on his opponent",
+          "damage": 5.0,
+          "pp": 30
+        },
+        {
+          "id": 4,
+          "name": "Dolphin Spray",
+          "issuper": false,
+          "element": "Water",
+          "description": "Aang showers his opponent with a strong burst of water",
+          "damage": 12.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Chief Hakoda",
+      "element": "Water",
+      "isplayer": false,
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "Katara's and Sokka's dad, great dad energy, probably where Sokka's dad jokes came from",
+      "moves": [
+        {
+          "id": 1,
+          "name": "OG Dad Joke",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Chief Hakoda makes a dad joke but it's better than Sokka's dad jokes because it's OG",
+          "damage": 8.0,
+          "pp": 25
+        },
+        {
+          "id": 2,
+          "name": "Ocean Motion",
+          "issuper": false,
+          "element": "Water",
+          "description": "Chief Hakoda pushes the ocean to create a powerful wall of water",
+          "damage": 24.0,
+          "pp": 19
+        },
+        {
+          "id": 3,
+          "name": "Rainbow",
+          "issuper": false,
+          "element": "Air",
+          "description": "Chief Hakoda creates a distracting rainbow with the mist in the air",
+          "damage": 15.0,
+          "pp": 25
+        },
+        {
+          "id": 4,
+          "name": "Water Trident",
+          "issuper": false,
+          "element": "Water",
+          "description": "Chief Hakoda creates a water trident the pierces through his opponent",
+          "damage": 27.0,
+          "pp": 9
+        }
+      ]
+    }
+  ],
+  "new moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 17.0,
+      "pp": 25
+    }
+  ]
+}

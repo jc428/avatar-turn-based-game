@@ -1,0 +1,115 @@
+{
+  "characters": [
+    {
+      "name": "Aang",
+      "isplayer": true,
+      "element": "Avatar",
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "small, bald, the Avatar",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Air Blast",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang shoots a powerful blast of air from his staff",
+          "damage": 20.0,
+          "pp": 15
+        },
+        {
+          "id": 2,
+          "name": "Tornado Whirl",
+          "issuper": false,
+          "element": "Air",
+          "description": "Aang spins a dazzling whirlwind at his opponent",
+          "damage": 10.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Spit Ball",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Aang spits on his opponent",
+          "damage": 5.0,
+          "pp": 30
+        },
+        {
+          "id": 4,
+          "name": "Dolphin Spray",
+          "issuper": false,
+          "element": "Water",
+          "description": "Aang showers his opponent with a strong burst of water",
+          "damage": 12.0,
+          "pp": 20
+        }
+      ]
+    },
+    {
+      "name": "Princess Yue",
+      "element": "Water",
+      "isplayer": false,
+      "stats": {
+        "health": 100.0,
+        "power": 1.0,
+        "speed": 1.0,
+        "evasiveness": 1.0
+      },
+      "description": "daughter of Chief Arnook, literally the moon, Sokka's first girlfriend",
+      "moves": [
+        {
+          "id": 1,
+          "name": "Moon Beam",
+          "issuper": false,
+          "element": "Normal",
+          "description": "Princess Yue shines a smile at her opponent so bright that her opponent loses their vision for a minute",
+          "damage": 7.0,
+          "pp": 25
+        },
+        {
+          "id": 2,
+          "name": "Water Balance",
+          "issuper": false,
+          "element": "Water",
+          "description": "Princess Yue extracts water from the atmosphere and shoots it at her opponent",
+          "damage": 20.0,
+          "pp": 20
+        },
+        {
+          "id": 3,
+          "name": "Moon Breeze",
+          "issuper": false,
+          "element": "Air",
+          "description": "Princess Yue blows a cold wind that chills and blows away her opponents",
+          "damage": 25.0,
+          "pp": 10
+        },
+        {
+          "id": 4,
+          "name": "Cold Dagger",
+          "issuper": false,
+          "element": "Water",
+          "description": "Princess Yue uses a family heirloom dagger to slash at her opponent",
+          "damage": 26.0,
+          "pp": 8
+        }
+      ]
+    }
+  ],
+  "new moves": [
+    {
+      "id": 5,
+      "name": "Fire breath",
+      "issuper": false,
+      "element": "Fire",
+      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
+      "damage": 17.0,
+      "pp": 25
+    }
+  ]
+}
