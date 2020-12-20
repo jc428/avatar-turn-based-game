@@ -20,6 +20,8 @@ let pause () =
   | _ -> ()
 
 let rec print_moves btl chr (moves:Characters.move list) =
+  (* sort moves before; in case a previously learned move is out of order *)
+  let moves = List.sort (fun (m1:Characters.move) m2 -> m1.id - m2.id) moves in
   match moves with
   | [] -> ()
   | h :: t -> begin
