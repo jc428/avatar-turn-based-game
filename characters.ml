@@ -1,6 +1,6 @@
 open Yojson.Basic.Util
 type name = string
-type element = Fire | Earth | Water | Air | Avatar | Bruh
+type element = Fire | Earth | Water | Air | Normal | Avatar | Bruh
 exception UnknownCharacter of name
 
 type description = string
@@ -44,6 +44,7 @@ let to_element = function
   | "Fire" -> Fire 
   | "Earth" -> Earth
   | "Water" -> Water 
+  | "Normal" -> Normal
   | "Avatar" -> Avatar
   | _ -> Bruh
 
