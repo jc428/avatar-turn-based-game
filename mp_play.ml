@@ -1,4 +1,5 @@
 open Mp_battle
+open Sp_play
 
 let pause () = 
   print_endline "\n\n Press anything to continue. ";
@@ -66,9 +67,13 @@ let winner battle pl1 pl2 pl3 pl4 =
 
 let print_battle_state battle pl1 pl2 pl3 pl4 = 
   print_string ("\n" ^ pl1 ^ "'s health: " ^ (health_str battle pl1));
+  Sp_play.make_hp_bar (int_of_float (float_of_string (health_str battle pl1)));
   print_string ("\n" ^ pl2 ^ "'s health: " ^ (health_str battle pl2));
+  Sp_play.make_hp_bar (int_of_float (float_of_string (health_str battle pl2)));
   print_string ("\n" ^ pl3 ^ "'s health: " ^ (health_str battle pl3));
-  print_string ("\n" ^ pl4 ^ "'s health: " ^ (health_str battle pl4) ^ "\n")
+  Sp_play.make_hp_bar (int_of_float (float_of_string (health_str battle pl3)));
+  print_string ("\n" ^ pl4 ^ "'s health: " ^ (health_str battle pl4));
+  Sp_play.make_hp_bar (int_of_float (float_of_string (health_str battle pl4)))
 
 (** [select_character lst str] returns the name of character with the id 
     identified by the user input*)

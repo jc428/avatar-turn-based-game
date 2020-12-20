@@ -16,7 +16,8 @@ let main () =
   try read "ascii-game-title.txt" with DoneWithAscii ->
     ANSITerminal.(print_string [blue]
                     "\n\nWelcome to the Avatar the Last Air Bender \
-                     - a text based game\n");
+                     - a text based game\nFull screen terminal for the best \
+                     experience :) \n");
     print_endline "Select the play mode: \n
                   1. Single Player: Travel through the Element Nations as Aang\n 
                   2. Multi Player: Battle against your friends as one of \

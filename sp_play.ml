@@ -3,6 +3,16 @@ open Episode
 
 let start_from_save () = ()
 
+let read_ascii filename =
+  let ic = open_in filename in
+  let rec process_line () =
+    let line = try input_line ic 
+      with End_of_file -> raise DoneWithAscii
+    in
+    print_endline line;
+    process_line ();
+  in process_line ()
+
 let pause () = 
   print_endline "\n\n Press anything to continue. ";
   print_string "|>>";
@@ -42,6 +52,24 @@ let health (battle: Battle.battle) (name : string) =
 let health_str battle name = 
   health battle name |> string_of_float
 
+let make_hp_bar hp : unit =
+  let rec make_hp_bar_helper num_bars acc = 
+    match num_bars with 
+    | num when num > 0 -> let new_acc = "|" ^ acc in 
+      make_hp_bar_helper (num_bars - 1) new_acc
+    | num when num <= 0 -> acc
+    | _ -> failwith "this should never happen"
+  in
+  let num_bars = 
+    (match hp / 5 with
+     | 0 -> 1
+     | not_zero -> not_zero)
+  in
+  match num_bars with
+  | n when n < 5 -> ANSITerminal.(print_string [red] (make_hp_bar_helper num_bars ""))
+  | n when n < 10 -> ANSITerminal.(print_string [yellow] (make_hp_bar_helper num_bars ""))
+  | _ -> ANSITerminal.(print_string [green] (make_hp_bar_helper num_bars ""))
+
 let print_battle_state battle ch1 ch2 = 
   let make_hp_bar hp : unit =
     let rec make_hp_bar_helper num_bars acc = 
@@ -51,7 +79,11 @@ let print_battle_state battle ch1 ch2 =
       | num when num <= 0 -> acc
       | _ -> failwith "this should never happen"
     in
-    let num_bars = hp / 5 in
+    let num_bars = 
+      (match hp / 5 with
+       | 0 -> 1
+       | not_zero -> not_zero)
+    in
     match num_bars with
     | n when n < 5 -> ANSITerminal.(print_string [red] (make_hp_bar_helper num_bars ""))
     | n when n < 10 -> ANSITerminal.(print_string [yellow] (make_hp_bar_helper num_bars ""))
@@ -111,13 +143,15 @@ let battle_intro player characters battle enemy ep =
   print_string ("\nPlaying as " ^ player ^
                 "\n" ^ (Characters.get_c_description characters player) ^
                 "\n\nAgainst " ^ enemy ^
-                "\n" ^ (Characters.get_c_description characters enemy));
-  print_enemy_line ep enemy 0;
-  player_response player ep;
-  print_enemy_line ep enemy 1;
-  pause ();
-  print_string ("\n\n Player starting health: " ^ (health_str battle player));
-  print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
+                "\n" ^ (Characters.get_c_description characters enemy) ^ "\n");
+  try read_ascii ("ascii-" ^ String.lowercase_ascii enemy ^ ".txt")
+  with DoneWithAscii ->
+    print_enemy_line ep enemy 0;
+    player_response player ep;
+    print_enemy_line ep enemy 1;
+    pause ();
+    print_string ("\n\n Player starting health: " ^ (health_str battle player));
+    print_string ("\n Opponent starting health: " ^ (health_str battle enemy))
 
 let rec start_episode f i is_from_save = 
   let ep = Episode.from_json f in
@@ -387,15 +421,5 @@ let start_sp () =
   start_sp_r ()
 
 let play_sp_game () =
-  let read filename =
-    let ic = open_in filename in
-    let rec process_line () =
-      let line = try input_line ic 
-        with End_of_file -> raise DoneWithAscii
-      in
-      print_endline line;
-      process_line ();
-    in process_line ()
-  in
-  try read "ascii-aang-non-battle.txt" with DoneWithAscii ->
+  try read_ascii "ascii-aang.txt" with DoneWithAscii ->
     start_sp ()
