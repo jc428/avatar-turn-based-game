@@ -86,7 +86,15 @@ let get_move_by_id_test
   test_name >:: (fun _ -> 
       assert_equal expected_output (get_move_by_id ch character_name id))
 
-let ms1 = from_json "MS1satisfactory"
+let get_new_moves_test
+    (test_name : string)
+    (ch : Characters.t)
+    (expected_output : move list ) : test = 
+  test_name >:: (fun _ -> 
+      assert_equal expected_output (get_new_moves ch))
+
+
+let ms1 = from_json "MS1multiplemoves"
 
 let characters_tests =
   [
@@ -111,9 +119,18 @@ let characters_tests =
         m_name = "Air blast";
         m_element = Air;
         m_description = "Aang shoots a powerful blast of air from his staff";
-        damage = 15.;
-        pp = 1;
-      }];
+        damage = 15.0;
+        pp = 10;
+      };
+       {
+         id = 2;
+         is_super =  false;
+         m_name = "Tornado whirl";
+         m_element = Air;
+         m_description = "Aang spins a dazzling whirlwind at his opponent";
+         damage = 10.0;
+         pp = 20;
+       }];
 
     get_moves_test "zuko moves" "Zuko" ms1 [{
         id = 1;
@@ -123,6 +140,26 @@ let characters_tests =
         m_description = "Zuko shoots a powerful blast of fire";
         damage = 15.0;
         pp = 10;
+      };
+       {
+         id = 2;
+         is_super =  false;
+         m_name = "Fire breath";
+         m_element = Fire;
+         m_description = "Zuko harnesses his inner dragon, unleashing a breath of fire";
+         damage = 8.0;
+         pp = 25;
+       };
+      ];
+
+    get_new_moves_test "Aang new moves" ms1 [{
+        id = 5;
+        is_super =  false;
+        m_name = "Fire breath";
+        m_element = Fire;
+        m_description = "Aang harnesses his inner dragon, unleashing a breath of fire";
+        damage = 8.0;
+        pp = 25;
       }];
     get_c_description_test "zuko desc" "Zuko" ms1 "DISGRACED PRINCE RAWRRR XD";
     get_c_description_test "aang desc" "Aang" ms1 "hes da   Avatar broo0o";
@@ -194,7 +231,7 @@ let update_moves_test
   test_name >:: (fun _ -> assert_equal expected_output
                     (update_moves battle name old_move_id new_move_id))
 
-(* let update_stats_test
+let update_stats_test
     (test_name : string)
     (battle : battle)
     (name : Characters.name)
@@ -202,8 +239,8 @@ let update_moves_test
     (mult : float)
     (s: t2 option)
     (expected_output : Characters.stats) : test =
-   test_name >:: (fun _ -> assert_equal expected_output
-                    (update_stats battle name stat mult)) *)
+  test_name >:: (fun _ -> assert_equal expected_output
+                    (update_stats battle name stat mult s))
 
 let get_enemy_moves_test
     (name : string)
@@ -220,7 +257,7 @@ let battle_tests =
         (Failure "name does not belong to player or enemy") 
         (fun () -> get_current_health ba "Borat"));
 
-    get_current_pp_test "initial pp of Aang move 1" ba "Aang" 1 1;
+    get_current_pp_test "initial pp of Aang move 1" ba "Aang" 1 10;
     "name does not exist" >:: 
     (fun _ -> assert_raises 
         (Failure "name does not belong to player or enemy") 
@@ -233,7 +270,7 @@ let battle_tests =
         (Failure "name does not belong to player or enemy") 
         (fun () -> set_new_health ba "Borat" 1));
 
-    set_new_pp_test "Aang uses move 1" ba "Aang" 1 0;
+    set_new_pp_test "Aang uses move 1" ba "Aang" 1 9;
     "name does not exist" >:: 
     (fun _ -> assert_raises 
         (Failure "name does not belong to player or enemy") 
@@ -241,15 +278,15 @@ let battle_tests =
 
     get_current_health_test "post-move health Aang" ba2 "Aang" 100.0;
     get_current_health_test "post-move health Zuko" ba2 "Zuko" 54.0;
-    get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 0;
+    get_current_pp_test "post-move pp of Aang move 1" ba2 "Aang" 1 9;
     "aang move 69 should not exist" >:: (fun _ -> 
         assert_equal
           (make_move ba3 "Aang" 69) 
           (IllegalInvalidMove));
-    "aang can't do move 1 cuz no pp" >:: (fun _ -> 
+    (* "aang can't do move 1 cuz no pp" >:: (fun _ -> 
         assert_equal
           (make_move ba3 "Aang" 1) 
-          (IllegalNoPP));
+          (IllegalNoPP)); *)
 
     (* update_moves_test "swap move 1 with 5" ba "Aang" 1 5  *)
 
@@ -263,7 +300,16 @@ let battle_tests =
         m_description = "Zuko shoots a powerful blast of fire";
         damage = 15.0;
         pp = 10;
-      }];
+      };
+       {
+         id = 2;
+         is_super =  false;
+         m_name = "Fire breath";
+         m_element = Fire;
+         m_description = "Zuko harnesses his inner dragon, unleashing a breath of fire";
+         damage = 8.0;
+         pp = 25;
+       }];
     get_enemy_moves_test "e moves after 1 used" ba4 [{
         id = 1;
         is_super =  false;
@@ -272,7 +318,16 @@ let battle_tests =
         m_description = "Zuko shoots a powerful blast of fire";
         damage = 15.0;
         pp = 9;
-      }]
+      };
+       {
+         id = 2;
+         is_super =  false;
+         m_name = "Fire breath";
+         m_element = Fire;
+         m_description = "Zuko harnesses his inner dragon, unleashing a breath of fire";
+         damage = 8.0;
+         pp = 25;
+       }]
   ]
 
 (* multiplayer battle test *)
@@ -323,28 +378,28 @@ let btl2 = mp_extract btl2_raw
 
 let mp_battle_tests = [
   mp_current_health_test "mp initial health Aang" btl "Aang" 100.0;
-  mp_current_health_test "mp initial health Zuko" btl "Zuko" 69.0;
+  mp_current_health_test "mp initial health Zuko" btl "Zuko" 100.0;
   "name does not exist" >:: 
   (fun _ -> assert_raises 
-      (Failure "name does not belong to player or enemy") 
+      (Mp_battle.PlayerNotFound("Borat"))  
       (fun () -> current_health btl "Borat"));
 
-  mp_current_pp_test "mp initial pp of Aang move 1" btl "Aang" 1 10;
+  mp_current_pp_test "mp initial pp of Aang move 1" btl "Aang" 1 15;
   "name does not exist" >:: 
   (fun _ -> assert_raises 
-      (Failure "name does not belong to player or enemy") 
+      (Mp_battle.PlayerNotFound("Borat"))  
       (fun () -> current_pp btl "Borat" 1));
 
   mp_new_health_test "mp Aang attacks Ty Lee w/ move 1" btl "Aang" 1 "Ty Lee" 85.0;
   "name does not exist" >:: 
   (fun _ -> assert_raises 
-      (Failure "name does not belong to player or enemy") 
+      (Mp_battle.PlayerNotFound("Borat")) 
       (fun () -> new_health btl "Borat" 1 "Boop"));
 
-  mp_current_pp_test "mp Aang pp after move 1 used once" btl2 "Aang" 1 9;
+  mp_current_pp_test "mp Aang pp after move 1 used once" btl2 "Aang" 1 14;
 
   mp_current_health_test "mp post-move health Aang" btl2 "Aang" 100.0;
-  mp_current_health_test "mp post-move health Ty Lee" btl2 "Zuko" 84.0;
+  mp_current_health_test "mp post-move health Ty Lee" btl2 "Ty Lee" 85.0;
   "mp aang move 69 should not exist" >:: (fun _ -> 
       assert_equal
         (mp_make_move btl2 "Aang" 69 "Ty Lee") 
@@ -354,7 +409,7 @@ let mp_battle_tests = [
 
 let suite =
   "test suite for final proj"  >::: List.flatten [
-    characters_tests;
+    characters_tests; 
     battle_tests;
     mp_battle_tests;
   ]
