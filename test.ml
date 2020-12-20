@@ -194,7 +194,7 @@ let update_moves_test
   test_name >:: (fun _ -> assert_equal expected_output
                     (update_moves battle name old_move_id new_move_id))
 
-let update_stats_test
+(* let update_stats_test
     (test_name : string)
     (battle : battle)
     (name : Characters.name)
@@ -202,8 +202,8 @@ let update_stats_test
     (mult : float)
     (s: t2 option)
     (expected_output : Characters.stats) : test =
-  test_name >:: (fun _ -> assert_equal expected_output
-                    (update_stats battle name stat mult s))
+   test_name >:: (fun _ -> assert_equal expected_output
+                    (update_stats battle name stat mult)) *)
 
 let get_enemy_moves_test
     (name : string)
