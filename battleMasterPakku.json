@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 18,
+      "name": "Tower of Ice",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Water",
+      "description": "Aang elevates himself with a tower of ice and attacks his opponent from above",
+      "damage": 26.0,
+      "pp": 17
     }
   ]
 }

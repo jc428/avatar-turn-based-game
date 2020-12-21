@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 26,
+      "name": "Volcano Blast",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang creates a mini volcano that erupts right in front of his opponent",
+      "damage": 29.0,
+      "pp": 10
     }
   ]
 }

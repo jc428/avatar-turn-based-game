@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 22,
+      "name": "Fan Dance",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang imitates a Kyoshi warrior, performing a combative dance to fight his enemy",
+      "damage": 22.0,
+      "pp": 20
     }
   ]
 }

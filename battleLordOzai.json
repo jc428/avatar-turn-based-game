@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 16,
+      "name": "Forehead Press of Tranquility",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Avatar",
+      "description": "Aang unleashes his inner chakras and strips his opponent of their bending, ending the fight",
+      "damage": 1000.0,
+      "pp": 1
     }
   ]
 }

@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 10,
+      "name": "Earth Crack",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang cracks the earth beneath his opponent, causing misstep and maybe a broken ankle",
+      "damage": 15.0,
+      "pp": 20
     }
   ]
 }
