@@ -1,6 +1,6 @@
 type name = string
 type id = int
-type element = Fire | Earth | Water | Air | Normal | Avatar | Bruh
+type element = Fire | Earth | Water | Air | Normal | Avatar 
 
 exception UnknownCharacter of name
 exception UnknownMove of id
@@ -423,6 +423,14 @@ let c_move_by_id name id : move =
 
 let c_move_description name id : description =
   (c_move_by_id name id).m_description
+
+let string_of_element = function
+  | Fire -> "Fire"
+  | Earth -> "Earth"
+  | Water -> "Water"
+  | Air -> "Air"
+  | Normal -> "Normal"
+  | Avatar -> "Avatar"
 
 let remove_character name (lst: t list) =
   List.filter (fun (i, c) -> c.c_name <> name) lst
