@@ -193,6 +193,31 @@ let update_stats battle name (stat : string) (mult : float) (s : t2 option) =
   | "evasiveness" -> {stats with evasiveness = stats.evasiveness *. mult }
   | _ -> failwith "Invalid stat"
 
+let battle_end_only_stats ba name stat mult s =
+  let check_valid_stat (stat : string) =
+    match stat with
+    | "health" -> true
+    | "power" -> true
+    | "speed" -> true
+    | "evasiveness" -> true
+    | _ -> false
+  in
+  if check_valid_stat stat = false then
+    IllegalStat
+  else
+  let new_stats = update_stats ba name stat mult s in
+  Legal {
+      characters = ba.characters;
+      player_health = new_stats.health;
+      enemy_health = ba.enemy_health;
+      player_moves = ba.player_moves;
+      enemy_moves = ba.enemy_moves;
+      player_power = new_stats.power;
+      player_speed = new_stats.speed;
+      player_evasiveness = new_stats.evasiveness;
+      enemy_element = ba.enemy_element
+    }
+
 let battle_end ba name old_move_id new_move_id stat mult 
     (s:Characters.t2 option): result =
   let check_valid_old_move (ba:battle) old_move_id : bool =
