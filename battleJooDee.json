@@ -104,12 +104,12 @@
   "new moves": [
     {
       "id": 5,
-      "name": "Fire Breath",
+      "name": "Cage",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang traps her opponent in an earthen cage",
+      "damage": 27.0,
+      "pp": 17
     }
   ]
 }

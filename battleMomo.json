@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 19,
+      "name": "Silly Dance",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Air",
+      "description": "Aang distracts his opponent with his funny antics and then gives them a jab of air in the face",
+      "damage": 20.0,
+      "pp": 15
     }
   ]
 }

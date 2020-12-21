@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 23,
+      "name": "Rock Wall Fall",
       "issuper": false,
-      "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "element": "Earth",
+      "description": "Aang creates a tall wall of rock and drops it on his opponents, trapping them",
+      "damage": 25.0,
+      "pp": 5
     }
   ]
 }

@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 17,
+      "name": "Meteor",
       "issuper": false,
       "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "description": "Aang summons a firey comet from the sky",
+      "damage": 30.0,
+      "pp": 5
     }
   ]
 }

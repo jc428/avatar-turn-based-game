@@ -103,13 +103,13 @@
   ],
   "new moves": [
     {
-      "id": 5,
-      "name": "Fire Breath",
+      "id": 6,
+      "name": "Fire Fists",
       "issuper": false,
       "element": "Fire",
-      "description": "Aang harnesses his inner dragon, unleashing a breath of fire",
-      "damage": 21.0,
-      "pp": 25
+      "description": "Aang pummels her opponent with burning punches",
+      "damage": 24.0,
+      "pp": 4
     }
   ]
 }
