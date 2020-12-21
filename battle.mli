@@ -61,7 +61,7 @@ val get_enemy_moves : battle -> Characters.move list
 val battle_end : battle -> Characters.name -> int -> int -> string -> float 
   -> Characters.t2 option -> result
 
-(* Given the user inputted info: new stat to upgrade and a multiplier for that
+(** Given the user inputted info: new stat to upgrade and a multiplier for that
 stat, [battle_end] returns a result variant containing a new state to be 
 initialized from a save json for subsequent battles. This version of the 
 function only takes in a stats update *)
