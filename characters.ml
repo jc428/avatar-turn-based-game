@@ -133,6 +133,15 @@ let get_move_by_id ch name id : move =
 let get_move_description ch name id : description =
   (get_move_by_id ch name id).m_description
 
+let string_of_element = function
+  | Fire -> "Fire"
+  | Earth -> "Earth"
+  | Water -> "Water"
+  | Air -> "Air"
+  | Normal -> "Normal"
+  | Avatar -> "Avatar"
+  | Bruh -> "impossible"
+
 type t2 = {
   stats : stats;
   moves : move list

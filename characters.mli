@@ -21,7 +21,7 @@ type stats = {
   evasiveness: float
 }
 
-type element = Fire | Earth | Water | Air | Normal | Avatar| Bruh
+type element = Fire | Earth | Water | Air | Normal | Avatar | Bruh
 
 type description = string
 
@@ -71,6 +71,9 @@ val get_move_by_id : t -> name -> int -> move
 
 (* [get_move_description] returns the decritpion of a move from a move id. *)
 val get_move_description : t -> name -> int -> description
+
+(* [string_of_element] returns the string representation of an element *)
+val string_of_element : element -> string
 
 (* [from_json_save] takes input of the JSON file name to load (DO NOT INCLUDE 
    '.json') and returns an instance of t*)

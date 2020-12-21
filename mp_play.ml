@@ -28,6 +28,8 @@ let rec print_moves btl chr (moves:Mp_character.move list) =
   | h :: t -> begin
       let pp = Mp_battle.current_pp btl chr h.id in
       print_string ("\n" ^ (string_of_int h.id) ^ ". " ^ (h.m_name) ^
+                    "\nElement: " ^ 
+                    (Mp_character.string_of_element h.m_element) ^
                     "\nDamage: " ^ (string_of_float h.damage) ^
                     " PP: " ^ (string_of_int pp)
                     ^ "\n" ^ h.m_description ^ "\n");
