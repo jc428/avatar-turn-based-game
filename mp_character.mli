@@ -87,7 +87,7 @@ val c_move_by_id : name -> int -> move
 (** [c_move_description] returns a description of a move from a move id. *)
 val c_move_description : name -> int -> description
 
-(* [string_of_element] returns the string representation of an element *)
+(** [string_of_element] returns the string representation of an element *)
 val string_of_element : element -> string
 
 (** [remove_character name lst] removes the character with name [name]
